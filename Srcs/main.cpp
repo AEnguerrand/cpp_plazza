@@ -5,12 +5,15 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:25:02 2017 Quentin Metge
-** Last update Mon Apr 17 19:26:20 2017 Quentin Metge
+** Last update Mon Apr 17 19:40:43 2017 Quentin Metge
 */
 
-int           main(int ac, char** av)
+#include "plazza.hpp"
+
+int                 main(int ac, char** av)
 {
-  (void)ac;
-  (void)av;
+  if (ac != 2)
+    return (EXIT_FAILURE);
+  plazza::Plazza    plazza(std::stoi(av[1]));
   return (0);
 }

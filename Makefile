@@ -21,6 +21,7 @@ CPPFLAGS  =		-Wall -Wextra -Werror -std=c++11
 CPPFLAGS	+=	-I./Srcs/															\
 
 SRC     	=		./Srcs/main.cpp 											\
+							./Srcs/plazza.cpp											\
 
 OBJ     	= $(SRC:.cpp=.o)
 
