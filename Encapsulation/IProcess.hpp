@@ -15,12 +15,22 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/wait.h>
 
 class IProcess
 {
  public:
+  enum class STATUS {
+    NOT_START,
+    RUN,
+    DEAD
+  };
+
+ public:
   virtual ~IProcess() {};
 
+  virtual void start() = 0;
+  virtual void wait() = 0;
   virtual bool isChild() const = 0;
 };
 

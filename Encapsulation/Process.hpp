@@ -16,12 +16,15 @@
 class Process : public IProcess
 {
  private:
-  pid_t         _pid;
+  pid_t         	_pid;
+  IProcess::STATUS 	_status;
 
  public:
   Process();
   virtual ~Process();
 
+  virtual void start();
+  virtual void wait();
   virtual bool isChild() const;
 };
 

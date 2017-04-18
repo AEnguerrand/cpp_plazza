@@ -12,12 +12,28 @@
 
 Process::Process()
 {
+  this->_status = IProcess::STATUS::NOT_START;
+  this->_pid = -1;
+}
+
+void Process::start()
+{
   this->_pid = fork();
+  this->_status = IProcess::STATUS::RUN;
+}
+
+void Process::wait()
+{
+  int status;
+
+  if (!this->isChild())
+    waitpid(this->_pid, &status, 0);
 }
 
 Process::~Process()
 {
-  if (this->_pid > 0)
+  this->_status = IProcess::STATUS::DEAD;
+  if (!this->isChild())
     kill(this->_pid, SIGKILL);
 }
 
