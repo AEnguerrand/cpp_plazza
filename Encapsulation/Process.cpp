@@ -18,7 +18,8 @@ Process::Process()
 
 void Process::start()
 {
-  this->_pid = fork();
+  if ((this->_pid = fork()) == -1)
+    throw Error("Process: Fail fork.");
   this->_status = IProcess::STATUS::RUN;
 }
 

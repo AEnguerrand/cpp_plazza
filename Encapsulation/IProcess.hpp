@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include "Error.hpp"
 
 class IProcess
 {
