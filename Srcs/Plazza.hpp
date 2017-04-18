@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:28 2017 Quentin Metge
-** Last update Tue Apr 18 12:45:01 2017 Quentin Metge
+** Last update Tue Apr 18 12:59:15 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -34,7 +34,7 @@ namespace plazza
     virtual ~Order(void);
 
   public:
-    ofstream    file;
+    std::ifstream    file;
     OrderType   type;
   };
 

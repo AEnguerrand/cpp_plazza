@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 18 12:45:30 2017 Quentin Metge
+** Last update Tue Apr 18 12:57:49 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -27,7 +27,7 @@ namespace plazza
       throw Error("Can't open: " + _fileName);
   }
 
-  Order::Order(void){
+  Order::~Order(void){
     this->file.close();
   }
 
