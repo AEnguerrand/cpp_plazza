@@ -8,7 +8,7 @@
 ** Last update Tue Apr 18 11:19:19 2017 Quentin Metge
 */
 
-#include "Plazza.hpp"
+#include "Plazzae.hpp"
 
 namespace plazza
 {
