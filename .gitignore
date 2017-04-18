@@ -6,3 +6,5 @@ cmake-build-debug/
 *.o
 #*#
 vgcore.*
+/plazza
+plazza

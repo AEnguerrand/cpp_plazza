@@ -25,7 +25,7 @@ CPPFLAGS +=	-I./Encapsulation/ 	\
 LDFLAGS = 	-lpthread
 
 SRCS = 	./Srcs/main.cpp 	\
-		./Srcs/plazza.cpp
+		./Srcs/Plazza.cpp
 
 SRCS +=	./Encapsulation/Mutex.cpp 		\
 		./Encapsulation/Thread.cpp		\
