@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 18 11:19:19 2017 Quentin Metge
+** Last update Tue Apr 18 12:45:30 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -16,16 +16,19 @@ namespace plazza
   /*****************/
   /*    Coplien    */
   /*****************/
-  Plazza::Plazza(void){
+  Plazza::Plazza(const int poolSize) : _poolSize(poolSize){
 
   }
 
-  Plazza::Plazza(const int threadPoolSize){
-    (void)threadPoolSize;
+  Order::Order(std::string _fileName, OrderType _type){
+    this->type = _type;
+    this->file.open(_fileName);
+    if (!this->file.is_open())
+      throw Error("Can't open: " + _fileName);
   }
 
-  Plazza::~Plazza(void){
-
+  Order::Order(void){
+    this->file.close();
   }
 
   /*****************/
@@ -36,7 +39,9 @@ namespace plazza
   /*****************/
   /*     Getter    */
   /*****************/
-
+  size_t          Plazza::getPoolSize(void) const{
+    return (this->_poolSize);
+  }
 
   /*****************/
   /*     Setter    */
