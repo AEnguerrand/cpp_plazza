@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:28 2017 Quentin Metge
-** Last update Tue Apr 18 12:59:15 2017 Quentin Metge
+** Last update Tue Apr 18 17:17:13 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -13,29 +13,35 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <vector>
 #include <list>
 #include "Error.hpp"
 
 namespace plazza
 {
 
-  enum class OrderType
+  enum class TokenType : int
   {
-    EMAIL_ADDRESS,
-    IP_ADDRESS,
-    PHONE_NUMBER
+    DEFAULT = 0,
+    ORDER = 1
   };
 
   class Order
   {
   public:
     Order(void){}
-    Order(std::string fileName, OrderType type);
+    Order(std::string fileName, std::string type);
+    Order(Order const& other);
+    Order const& operator=(Order const& other);
+
     virtual ~Order(void);
 
   public:
-    std::ifstream    file;
-    OrderType   type;
+    std::string       fileName;
+    std::ifstream     file;
+    std::string       type;
   };
 
   class Plazza
@@ -46,11 +52,17 @@ namespace plazza
     virtual ~Plazza(void){}
 
   public:
-    size_t      getPoolSize(void) const;
+    TokenType   getTypeOfToken(std::string token);
+    void        mainLoop(void);
+
+  public:
+    size_t                    getPoolSize(void) const;
+    std::vector<std::string>  getOrdersType(void) const;
 
   private:
-    size_t              _poolSize;
-    std::list<Order>    _orderList;
+    size_t                    _poolSize;
+    std::vector<std::string>  _ordersType;
+    std::list<Order>          _orderList;
   };
 
 }
