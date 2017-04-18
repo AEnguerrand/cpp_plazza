@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 18 17:59:48 2017 Quentin Metge
+** Last update Tue Apr 18 18:41:04 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -82,12 +82,18 @@ namespace plazza
           fileTab.push_back(token);
         }
         type = token;
-        if (fileTab.empty())
-          throw Error("Need file for this order: " + type + ".");
-        else if (type.empty())
-          throw Error("Need order for this file: " + fileTab[0] + ".");
-        for (size_t i = 0; i < fileTab.size(); i++){
-          this->_orderList.push_back(Order(fileTab[i], type));
+        if (!fileTab.empty() && !type.empty()){
+          if (fileTab.empty())
+            throw Error("Need file for this order: " + type + ".");
+          else if (type.empty())
+            throw Error("Need order for this file: " + fileTab[0] + ".");
+          if (std::find(this->_ordersType.begin(), this->_ordersType.end(), type) != this->_ordersType.end()){
+            for (size_t i = 0; i < fileTab.size(); i++){
+              this->_orderList.push_back(Order(fileTab[i], type));
+            }
+          }
+          else
+            throw Error("This order doesn't exist: " + type + ".");
         }
       }
     }
