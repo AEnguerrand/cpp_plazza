@@ -11,4 +11,17 @@
 #ifndef CPP_PLAZZA_IPROCESS_HPP
 #define CPP_PLAZZA_IPROCESS_HPP
 
+#include <iostream>
+#include <pthread.h>
+#include <unistd.h>
+#include <signal.h>
+
+class IProcess
+{
+ public:
+  virtual ~IProcess() {};
+
+  virtual pid_t getPid() const = 0;
+};
+
 #endif //CPP_PLAZZA_IPROCESS_HPP
