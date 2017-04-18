@@ -5,11 +5,11 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 11:17:11 2017 Antoine Dury
-** Last update Tue Apr 18 11:17:38 2017 Antoine Dury
+** Last update Tue Apr 18 13:05:32 2017 Antoine Dury
 */
 
 #ifndef ERROR_HPP
-# define ERROR_HPP
+#define ERROR_HPP
 
 #include <exception>
 

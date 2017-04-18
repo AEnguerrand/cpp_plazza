@@ -29,7 +29,8 @@ SRCS = 	./Srcs/main.cpp 	\
 
 SRCS +=	./Encapsulation/Mutex.cpp 		\
 		./Encapsulation/Thread.cpp		\
-		./Encapsulation/Process.cpp
+		./Encapsulation/Process.cpp		\
+		./Encapsulation/NamedPipe.cpp
 
 OBJ    = $(SRCS:.cpp=.o)
 
