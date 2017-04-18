@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 18 17:17:21 2017 Quentin Metge
+** Last update Tue Apr 18 17:59:48 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -37,14 +37,18 @@ namespace plazza
     if (this->file.is_open())
       this->file.close();
     this->file.open(this->fileName);
+    if (!this->file.is_open())
+      throw Error("Can't open: " + this->fileName + ".");
   }
 
-  Order const& Order::operator=(Order const& other){
+  Order const& Order::operator=(Order other){
     this->fileName = other.fileName;
     this->type = other.type;
     if (this->file.is_open())
       this->file.close();
     this->file.open(this->fileName);
+    if (!this->file.is_open())
+      throw Error("Can't open: " + this->fileName + ".");
     return (*this);
   }
 
@@ -74,14 +78,15 @@ namespace plazza
         std::stringstream lineStream(substr);
         std::vector<std::string>  fileTab;
         std::string               type;
-        while (lineStream >> token && this->getTypeOfToken(token) == TokenType::DEFAULT)
+        while (lineStream >> token && this->getTypeOfToken(token) == TokenType::DEFAULT){
           fileTab.push_back(token);
-        lineStream >> type;
+        }
+        type = token;
         if (fileTab.empty())
           throw Error("Need file for this order: " + type + ".");
         else if (type.empty())
           throw Error("Need order for this file: " + fileTab[0] + ".");
-        for (size_t i = 0; fileTab.size(); i++){
+        for (size_t i = 0; i < fileTab.size(); i++){
           this->_orderList.push_back(Order(fileTab[i], type));
         }
       }

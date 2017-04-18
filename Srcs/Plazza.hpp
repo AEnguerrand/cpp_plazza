@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:28 2017 Quentin Metge
-** Last update Tue Apr 18 17:17:13 2017 Quentin Metge
+** Last update Tue Apr 18 17:38:28 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -34,7 +34,7 @@ namespace plazza
     Order(void){}
     Order(std::string fileName, std::string type);
     Order(Order const& other);
-    Order const& operator=(Order const& other);
+    Order const& operator=(Order other);
 
     virtual ~Order(void);
 
