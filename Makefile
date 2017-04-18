@@ -8,27 +8,29 @@
 ## Last update Sat Jan 21 11:51:59 2017 Enguerrand Allamel
 ##
 
-OS := 	$(shell uname)
+OS				:=	$(shell uname)
 
-NAME    = plazza
+NAME			= 	plazza
 
-CC      = g++
+CC      	= 	g++
 
-RM      = rm -f
+RM      	= 	rm -f
 
-CPPFLAGS  += -W -Wall -Wextra -Werror -std=c++14 \
-							--pipe \
-							-I./Encapsulation/ \
-							-I./Srcs/
+CPPFLAGS  += 	-W -Wall -Wextra -Werror -std=c++11 	\
+							--pipe 																\
 
-LDFLAGS = -lpthread
+CPPFLAGS 	+=	-I./Encapsulation/ 	\
+							-I./Srcs/						\
 
-SRC = 		./Srcs/main.cpp \
-			./Srcs/plazza.cpp \
-			./Encapsulation/Mutex.cpp \
-			./Encapsulation/Thread.cpp
+LDFLAGS 	= 	-lpthread
 
-OBJ    = $(SRC:.cpp=.o)
+SRCS 			= 	./Srcs/main.cpp 							\
+							./Srcs/Plazza.cpp 						\
+
+SRCS				+=	./Encapsulation/Mutex.cpp 		\
+							./Encapsulation/Thread.cpp
+
+OBJ    = $(SRCS:.cpp=.o)
 
 
 all: $(NAME)
