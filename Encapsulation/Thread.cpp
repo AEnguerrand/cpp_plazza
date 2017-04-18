@@ -24,12 +24,12 @@ IThread::STATUS Thread::getStatus() const
 
 void Thread::start()
 {
-  pthread_create(&this->_pthread, NULL, this->_ptr_func, this->_data);
+  pthread_create(&this->_thread, NULL, this->_ptr_func, this->_data);
   this->_status = IThread::STATUS::RUN;
 }
 
 void Thread::wait()
 {
-  pthread_join(this->_pthread, NULL);
+  pthread_join(this->_thread, NULL);
   this->_status = IThread::STATUS::DEAD;
 }

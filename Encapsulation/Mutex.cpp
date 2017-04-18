@@ -12,22 +12,22 @@
 
 Mutex::Mutex()
 {
-  pthread_mutex_init(&(this->mutex), NULL);
+  pthread_mutex_init(&(this->_mutex), NULL);
 }
 
 void Mutex::lock()
 {
-  pthread_mutex_lock(&this->mutex);
+  pthread_mutex_lock(&this->_mutex);
 }
 
 bool Mutex::trylock()
 {
-  if (pthread_mutex_trylock(&this->mutex))
+  if (pthread_mutex_trylock(&this->_mutex))
     return (false);
   return (true);
 }
 
 void Mutex::unlock()
 {
-  pthread_mutex_unlock(&this->mutex);
+  pthread_mutex_unlock(&this->_mutex);
 }

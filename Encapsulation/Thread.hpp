@@ -16,7 +16,7 @@
 class Thread : public IThread
 {
  private:
-  pthread_t		_pthread;
+  pthread_t		_thread;
   IThread::STATUS 	_status;
   void			*(*_ptr_func)(void *);
   void 			*_data;

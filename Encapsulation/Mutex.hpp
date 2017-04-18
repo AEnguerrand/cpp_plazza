@@ -16,7 +16,7 @@
 class Mutex : public IMutex
 {
  private:
-  pthread_mutex_t mutex;
+  pthread_mutex_t _mutex;
 
  public:
   Mutex();
