@@ -12,16 +12,18 @@
 
 Process::Process()
 {
-  this->pid_ = fork();
+  this->_pid = fork();
 }
 
 Process::~Process()
 {
-  if (this->pid_ > 0)
-    kill(this->pid_, SIGKILL);
+  if (this->_pid > 0)
+    kill(this->_pid, SIGKILL);
 }
 
-pid_t Process::getPid() const
+bool Process::isChild() const
 {
-  return this->pid_;
+  if (this->_pid == 0)
+    return (true);
+  return (false);
 }

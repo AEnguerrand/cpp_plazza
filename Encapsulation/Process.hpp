@@ -16,13 +16,13 @@
 class Process : public IProcess
 {
  private:
-  pid_t         pid_;
+  pid_t         _pid;
 
  public:
   Process();
   virtual ~Process();
 
-  virtual pid_t getPid() const;
+  virtual bool isChild() const;
 };
 
 

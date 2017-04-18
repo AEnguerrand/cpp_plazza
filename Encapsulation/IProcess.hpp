@@ -21,7 +21,7 @@ class IProcess
  public:
   virtual ~IProcess() {};
 
-  virtual pid_t getPid() const = 0;
+  virtual bool isChild() const = 0;
 };
 
 #endif //CPP_PLAZZA_IPROCESS_HPP
