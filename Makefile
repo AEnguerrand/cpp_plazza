@@ -22,16 +22,15 @@ CPPFLAGS  += 	-W -Wall -Wextra -Werror -std=c++11 	\
 CPPFLAGS 	+=	-I./Encapsulation/ 	\
 							-I./Srcs/						\
 
-LDFLAGS 	= 	-lpthread
+LDFLAGS		=		-lpthread
 
 SRCS 			= 	./Srcs/main.cpp 							\
 							./Srcs/Plazza.cpp 						\
 
-SRCS				+=	./Encapsulation/Mutex.cpp 		\
+SRCS			+=	./Encapsulation/Mutex.cpp 		\
 							./Encapsulation/Thread.cpp
 
-OBJ    = $(SRCS:.cpp=.o)
-
+OBJ    		= 	$(SRCS:.cpp=.o)
 
 all: $(NAME)
 
