@@ -18,7 +18,7 @@ RM      = rm -f
 
 CPPFLAGS  += -W -Wall -Wextra -Werror -std=c++14 \
 							--pipe \
-							-I ./Encapsulation/ \
+							-I./Encapsulation/ \
 							-I./Srcs/
 
 LDFLAGS = -lpthread
