@@ -17,7 +17,8 @@ Mutex::Mutex()
 
 void Mutex::lock()
 {
-  pthread_mutex_lock(&this->_mutex);
+  if (pthread_mutex_lock(&this->_mutex) != 0)
+    throw Error("Mutex: Fail lock.");
 }
 
 bool Mutex::trylock()
