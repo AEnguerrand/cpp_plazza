@@ -31,10 +31,23 @@ void plazza::ManagerProcess::addOrder(std::list<Order> orders)
 
 void 		plazza::ManagerProcess::dispatch()
 {
-  size_t 	process_nb = this->_orders.size() / 5;
+  size_t 	process_nb = 1;
 
   for (size_t i = 0 ; i < process_nb ; i++)
     {
-      this->_processes.push_back(ProcessPlazza(this->_orders));
+      this->_processes.push_back(new ProcessPlazza(this->_orders));
     }
+  for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
+    {
+      (*it)->start();
+    }
+  for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
+    {
+      (*it)->start();
+    }
+  for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
+    {
+      delete (*it);
+    }
+  this->_processes.clear();
 }

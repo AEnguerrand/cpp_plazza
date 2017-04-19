@@ -30,24 +30,27 @@ plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders) :
 
 void plazza::ProcessPlazza::start()
 {
+  this->_process->start();
   if (this->_process->isChild())
     {
-      // REMOVE AFTER TEST
       for (auto it = this->_orders.begin(); it != this->_orders.end(); ++it)
 	{
 	  this->_threads.push_back(new Thread(&scrapper, static_cast<void *>(&(*it))));
 	}
-
       for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
 	{
 	  (*it)->start();
 	}
-      std::cout << "Process Plazza: All run" << std::endl;
       for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
 	{
 	  (*it)->wait();
 	}
-      // END
+      std::cout << "Process Plazza: All run" << std::endl;
+      exit(0);
+    }
+  else
+    {
+      this->_process->wait();
     }
 }
 

@@ -13,14 +13,14 @@
 
 #include <list>
 #include "ProcessPlazza.hpp"
-#include "Plazza.hpp"
+#include "Order.hpp"
 
 namespace plazza {
   class ManagerProcess
   {
    private:
     std::list<Order>		_orders;
-    std::list<ProcessPlazza>	_processes;
+    std::list<ProcessPlazza *>	_processes;
    public:
     ManagerProcess();
     virtual ~ManagerProcess();

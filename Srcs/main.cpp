@@ -8,7 +8,7 @@
 ** Last update Wed Apr 19 11:00:26 2017 Quentin Metge
 */
 
-#include "plazza.hpp"
+#include "Plazza.hpp"
 
 int                 main(int ac, char** av)
 {

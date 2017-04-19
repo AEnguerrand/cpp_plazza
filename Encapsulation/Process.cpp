@@ -18,16 +18,16 @@ Process::Process()
 
 void Process::start()
 {
+  this->_status = IProcess::STATUS::RUN;
   if ((this->_pid = fork()) == -1)
     throw Error("Process: Fail fork.");
-  this->_status = IProcess::STATUS::RUN;
 }
 
 void Process::wait()
 {
   int status;
 
-  if (!this->isChild())
+  if (this->isChild() != 0)
     waitpid(this->_pid, &status, 0);
 }
 

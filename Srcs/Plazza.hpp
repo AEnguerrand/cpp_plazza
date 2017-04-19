@@ -18,53 +18,11 @@
 #include <vector>
 #include <list>
 #include "Error.hpp"
+#include "Order.hpp"
+#include "ManagerProcess.hpp"
 
 namespace plazza
 {
-
-  enum class TokenType : int
-  {
-    DEFAULT = 0,
-    ORDER = 1
-  };
-
-  enum class FileCiphered : int
-  {
-    DEFAULT = 0,
-    NORMAL = 1,
-    CAESAR = 2,
-    XOR = 3
-  };
-
-  class File
-  {
-  public:
-    File(void){}
-    File(std::string _fileName);
-    File(File const& other);
-    File const& operator=(File other);
-    ~File(void);
-
-  public:
-    std::string       fileName;
-    std::ifstream     file;
-    FileCiphered      ciphered = FileCiphered::DEFAULT;
-  };
-
-  class Order
-  {
-  public:
-    Order(void){}
-    Order(std::string _fileName, std::string type);
-    ~Order(void){}
-
-  public:
-    void              display(void);
-
-  public:
-    File              file;
-    std::string       type;
-  };
 
   class Plazza
   {

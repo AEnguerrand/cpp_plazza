@@ -21,7 +21,8 @@ CPPFLAGS  += 	-W -Wall -Wextra -Werror -std=c++11 	\
 
 CPPFLAGS +=	-I./Encapsulation/ 	\
 			-I./Srcs/ \
-			-I./Process
+			-I./Process \
+			-I./ManagerProcess
 
 LDFLAGS = 	-lpthread
 
