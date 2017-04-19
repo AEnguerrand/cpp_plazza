@@ -12,8 +12,9 @@
 
 CondVar::CondVar()
 {
-  pthread_mutex_init(&(this->_mutex), NULL);
-  pthread_cond_init(&(this->_cond), NULL);
+  if ((pthread_mutex_init(&(this->_mutex), NULL) != 0) &&
+	  (pthread_cond_init(&(this->_cond), NULL) != 0))
+    throw Error("CondVar: Fail init.");
 }
 
 CondVar::~CondVar()
@@ -23,10 +24,12 @@ CondVar::~CondVar()
 
 void CondVar::wait()
 {
-  pthread_cond_wait(&(this->_cond), &(this->_mutex));
+  if (pthread_cond_wait(&(this->_cond), &(this->_mutex)) != 0)
+    throw Error("CondVar: Fail wait.");
 }
 
 void CondVar::wake()
 {
-  pthread_cond_broadcast(&(this->_cond));
+  if (pthread_cond_broadcast(&(this->_cond)) != 0)
+    throw Error("CondVar: Fail broadcast.");
 }
