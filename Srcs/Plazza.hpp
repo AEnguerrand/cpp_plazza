@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:28 2017 Quentin Metge
-** Last update Tue Apr 18 17:38:28 2017 Quentin Metge
+** Last update Wed Apr 19 10:56:08 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -28,19 +28,38 @@ namespace plazza
     ORDER = 1
   };
 
-  class Order
+  enum class FileCiphered : int
+  {
+    DEFAULT = 0,
+    NORMAL = 1,
+    CAESAR = 2,
+    XOR = 3
+  };
+
+  class File
   {
   public:
-    Order(void){}
-    Order(std::string fileName, std::string type);
-    Order(Order const& other);
-    Order const& operator=(Order other);
-
-    virtual ~Order(void);
+    File(void){}
+    File(std::string _fileName);
+    File(File const& other);
+    File const& operator=(File other);
+    ~File(void);
 
   public:
     std::string       fileName;
     std::ifstream     file;
+    FileCiphered      ciphered = FileCiphered::DEFAULT;
+  };
+
+  class Order
+  {
+  public:
+    Order(void){}
+    Order(std::string _fileName, std::string type);
+    ~Order(void){}
+
+  public:
+    File              file;
     std::string       type;
   };
 
@@ -49,11 +68,15 @@ namespace plazza
   public:
     Plazza(void){}
     Plazza(const int poolSize);
-    virtual ~Plazza(void){}
+    ~Plazza(void){}
 
   public:
     TokenType   getTypeOfToken(std::string token);
+    void        getNextLine(std::string buffer);
     void        mainLoop(void);
+
+  public:
+    void        displayOrderList(void);
 
   public:
     size_t                    getPoolSize(void) const;
