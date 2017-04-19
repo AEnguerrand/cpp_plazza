@@ -20,12 +20,19 @@ CPPFLAGS  += 	-W -Wall -Wextra -Werror -std=c++11 	\
 							--pipe
 
 CPPFLAGS +=	-I./Encapsulation/ 	\
-			-I./Srcs/
+			-I./Srcs/ \
+			-I./Process
 
 LDFLAGS = 	-lpthread
 
 SRCS = 	./Srcs/main.cpp 	\
 		./Srcs/Plazza.cpp
+
+SRCS +=	./Process/ThreadPool.cpp 		\
+		./Process/ThreadPoolWorker.cpp	\
+		./Process/ProcessPlazza.cpp
+
+SRCS += ./ManagerProcess/ManagerProcess.cpp
 
 SRCS +=	./Encapsulation/Mutex.cpp 		\
 		./Encapsulation/Thread.cpp		\
