@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Wed Apr 19 10:56:16 2017 Quentin Metge
+** Last update Wed Apr 19 16:52:21 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -64,6 +64,10 @@ namespace plazza
   /*****************/
   /*    Actions    */
   /*****************/
+  void                  Order::display(void){
+    std::cerr << "Order:\t" << this->file.fileName << "\t->\t" << this->type << std::endl;
+  }
+
   plazza::TokenType     Plazza::getTypeOfToken(std::string token){
     if (std::find(this->_ordersType.begin(), this->_ordersType.end(), token) != this->_ordersType.end())
       return (TokenType::ORDER);
@@ -101,18 +105,18 @@ namespace plazza
   }
 
   void                  Plazza::mainLoop(void){
-
     std::string         buffer;
 
     while (getline(std::cin, buffer)){
       this->getNextLine(buffer);
-    //this->displayOrderList();
+      //this->displayOrderList();
     }
   }
 
   void                  Plazza::displayOrderList(void){
-    for (auto it = this->_orderList.begin(); it != this->_orderList.end(); it++)
-      std::cout << (*it).file.fileName << " " << (*it).type << std::endl;
+    for (auto it = this->_orderList.begin(); it != this->_orderList.end(); it++){
+      (*it).display();
+    }
   }
 
   /*****************/
