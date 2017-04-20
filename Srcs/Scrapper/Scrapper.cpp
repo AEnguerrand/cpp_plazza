@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 20 16:30:10 2017 Quentin Metge
+** Last update Thu Apr 20 16:38:32 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -49,7 +49,7 @@ namespace plazza
   }
 
   bool                    Scrapper::scpNormal(void){
-    std::regex            regex(this->_order->regexp);
+    /*std::regex            regex(this->_order->regexp);
     std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
     std::sregex_iterator  end;
 
@@ -57,6 +57,15 @@ namespace plazza
       std::smatch match = *next;
       //std::cerr << match.str() << std::endl;
       next++;
+    }*/
+    std::string s(this->_buffer);
+    std::smatch m;
+    std::regex  e(this->_order->regexp);
+
+    while (std::regex_search (s,m,e)) {
+      for (auto x:m) std::cout << x << " ";
+      std::cout << std::endl;
+      s = m.suffix().str();
     }
     return (true);
   }
