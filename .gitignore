@@ -6,12 +6,9 @@ cmake-build-debug/
 *.o
 #*#
 vgcore.*
-/plazza
 plazza
 a.out
 <<<<<<< HEAD
 .DS_Store
-=======
-/index.htm
-/compagny.csv
->>>>>>> b78d4f2abceba412240c315a5d1b0b6ffb10bbe5
+index.htm
+compagny.csv
