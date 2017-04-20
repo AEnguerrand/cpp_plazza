@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Thu Apr 20 16:17:51 2017 Quentin Metge
+** Last update Thu Apr 20 17:15:45 2017 Antoine Dury
 */
 
 #include "Plazza.hpp"
@@ -31,7 +31,7 @@ namespace plazza
     else if (this->type == "EMAIL_ADDRESS")
       this->regexp = "[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.-]+";
     else if (this->type == "IP_ADDRESS")
-      this->regexp = "([1-9]?[0-9]?[0-9]\\.){3}[1-9]?[0-9]?[0-9]";
+      this->regexp = "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     else
       throw Error("This order is not known.");
   }
