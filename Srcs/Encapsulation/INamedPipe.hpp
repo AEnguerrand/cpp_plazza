@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:04:19 2017 Antoine Dury
-** Last update Thu Apr 20 14:47:03 2017 Antoine Dury
+** Last update Thu Apr 20 15:01:48 2017 Antoine Dury
 */
 
 #ifndef INAMEDPIPE_HPP
@@ -19,12 +19,6 @@
 #include <cstring>
 #include <stdlib.h>
 #include "Error.hpp"
-
-struct Test
-{
-  int nb;
-  char str[0];
-};
 
 class INamedPipe
 {
