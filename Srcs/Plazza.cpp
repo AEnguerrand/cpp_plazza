@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Wed Apr 19 16:52:21 2017 Quentin Metge
+** Last update Thu Apr 20 14:26:15 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -108,12 +108,11 @@ namespace plazza
     std::string         buffer;
     ManagerProcess	managerProcess;
 
-    while (getline(std::cin, buffer))
-      {
-	this->getNextLine(buffer);
-	this->displayOrderList();
-	std::cout << "START MANAGER" << std::endl;
-	managerProcess.addOrder(this->_orderList);
+    while (getline(std::cin, buffer)){
+    	this->getNextLine(buffer);
+    	this->displayOrderList();
+    	std::cout << "START MANAGER" << std::endl;
+    	managerProcess.addOrder(this->_orderList);
     }
   }
 
