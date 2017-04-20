@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:54:09 2017 Antoine Dury
-** Last update Thu Apr 20 14:48:41 2017 Antoine Dury
+** Last update Thu Apr 20 15:04:18 2017 Antoine Dury
 */
 
 #include "NamedPipe.hpp"
@@ -16,9 +16,7 @@ NamedPipe::NamedPipe(std::string name)
   this->_fifo = name;
 }
 
-NamedPipe::~NamedPipe(void)
-{
-}
+NamedPipe::~NamedPipe(void) {}
 
 void            NamedPipe::create(void)
 {
