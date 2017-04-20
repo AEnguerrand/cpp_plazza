@@ -54,17 +54,24 @@ void plazza::ProcessPlazza::start()
 
 void plazza::ProcessPlazza::processLoop()
 {
-  for (auto it = this->_orders.begin(); it != this->_orders.end(); ++it)
-    {
-      this->_threads.push_back(new Thread(&scrapper, static_cast<void *>(&(*it))));
-    }
-  for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
-    {
-      (*it)->start();
-    }
-  for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
-    {
-      (*it)->wait();
-    }
+  /*std::clock_t      c_start = std::clock();
+
+  while ((std::clock() - c_start) < (ONE_SEC * 5))
+    {*/
+      for (auto it = this->_orders.begin(); it != this->_orders.end(); ++it)
+	{
+	  this->_threads.push_back(new Thread(&scrapper, static_cast<void *>(&(*it))));
+	}
+      for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
+	{
+	  (*it)->start();
+	}
+      for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
+	{
+	  (*it)->wait();
+	  //this->_orders.pop_front();
+	  //c_start = std::clock();
+	}
+    //}
 }
 

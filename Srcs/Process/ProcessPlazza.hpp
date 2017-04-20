@@ -18,6 +18,8 @@
 #include "Order.hpp"
 #include "Scrapper.hpp"
 
+#define ONE_SEC        (1000000)
+
 namespace plazza
 {
   class ProcessPlazza
