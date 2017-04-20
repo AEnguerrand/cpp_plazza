@@ -106,12 +106,11 @@ namespace plazza
 
   void                  Plazza::mainLoop(void){
     std::string         buffer;
-    ManagerProcess	managerProcess;
+    ManagerProcess	managerProcess(this->getPoolSize());
 
     while (getline(std::cin, buffer)){
     	this->getNextLine(buffer);
     	this->displayOrderList();
-    	std::cout << "START MANAGER" << std::endl;
     	managerProcess.addOrder(this->_orderList);
     }
   }

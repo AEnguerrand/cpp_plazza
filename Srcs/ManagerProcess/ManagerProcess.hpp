@@ -11,6 +11,8 @@
 #ifndef CPP_PLAZZA_MANAGERPROCESS_HPP
 #define CPP_PLAZZA_MANAGERPROCESS_HPP
 
+#include <iterator>
+#include <cmath>
 #include <list>
 #include "ProcessPlazza.hpp"
 #include "Order.hpp"
@@ -21,8 +23,9 @@ namespace plazza {
    private:
     std::list<Order>		_orders;
     std::list<ProcessPlazza *>	_processes;
+    size_t 			_poolSize;
    public:
-    ManagerProcess();
+    ManagerProcess(size_t poolSize);
     virtual ~ManagerProcess();
 
     void	addOrder(std::list<Order> orders);

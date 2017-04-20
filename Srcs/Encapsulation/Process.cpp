@@ -27,7 +27,7 @@ void Process::wait()
 {
   int status;
 
-  if (this->isChild() != 0)
+  if (!this->isChild())
     waitpid(this->_pid, &status, 0);
 }
 

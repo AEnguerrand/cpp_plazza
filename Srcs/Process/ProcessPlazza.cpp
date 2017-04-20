@@ -19,7 +19,6 @@ static void		*scrapper(void *data)
   plazza::Order 	*order = static_cast<plazza::Order*>(data);
 
   order->display();
-  
   return (NULL);
 }
 
@@ -30,24 +29,20 @@ plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders) :
   std::cout << "CTOR Process Plazza" << std::endl;
 }
 
+plazza::ProcessPlazza::~ProcessPlazza()
+{
+  delete this->_process;
+  std::cout << "DTOR Process Plazza" << std::endl;
+}
+
 void plazza::ProcessPlazza::start()
 {
+  std::cout << "Process Plazza: Nb Orders: " << this->_orders.size() << std::endl;
+
   this->_process->start();
   if (this->_process->isChild())
     {
-      for (auto it = this->_orders.begin(); it != this->_orders.end(); ++it)
-	{
-	  this->_threads.push_back(new Thread(&scrapper, static_cast<void *>(&(*it))));
-	}
-      for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
-	{
-	  (*it)->start();
-	}
-      for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
-	{
-	  (*it)->wait();
-	}
-      std::cout << "Process Plazza: All run" << std::endl;
+      this->processLoop();
       exit(0);
     }
   else
@@ -56,8 +51,19 @@ void plazza::ProcessPlazza::start()
     }
 }
 
-plazza::ProcessPlazza::~ProcessPlazza()
+void plazza::ProcessPlazza::processLoop()
 {
-  delete this->_process;
-  std::cout << "DTOR Process Plazza" << std::endl;
+  for (auto it = this->_orders.begin(); it != this->_orders.end(); ++it)
+    {
+      this->_threads.push_back(new Thread(&scrapper, static_cast<void *>(&(*it))));
+    }
+  for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
+    {
+      (*it)->start();
+    }
+  for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
+    {
+      (*it)->wait();
+    }
 }
+
