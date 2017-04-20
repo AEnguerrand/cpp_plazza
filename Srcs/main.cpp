@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:25:02 2017 Quentin Metge
-** Last update Tue Apr 18 11:19:45 2017 Antoine Dury
+** Last update Wed Apr 19 11:00:26 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -13,8 +13,10 @@
 int                 main(int ac, char** av)
 {
   try {
-    if (ac != 2)
+    if (ac != 2){
+      std::cerr << "Usage : " + std::string(av[0]) + " <Number of threads per process>" << std::endl;
       return (EXIT_FAILURE);
+    }
     plazza::Plazza    plazza(std::stoi(av[1]));
   }
   catch (std::exception const& e) {

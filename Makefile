@@ -10,30 +10,38 @@
 
 OS :=	$(shell uname)
 
-NAME = 	plazza
+NAME 			= 		plazza
 
-CC      = 	g++
+CC      	= 		g++
 
-RM      = 	rm -f
+RM      	= 		rm -f
 
-CPPFLAGS  += 	-W -Wall -Wextra -Werror -std=c++11 	\
-							--pipe
+CPPFLAGS  += 		-W -Wall -Wextra -Werror -std=c++11 	\
+								--pipe
 
-CPPFLAGS +=	-I./Encapsulation/ 	\
-			-I./Srcs/
+CPPFLAGS 	+=		-I./Srcs/ 							\
+								-I./Srcs/Encapsulation 	\
+								-I./Srcs/Process 				\
+								-I./Srcs/ManagerProcess
 
-LDFLAGS = 	-lpthread
+LDFLAGS 	= 		-lpthread
 
-SRCS = 	./Srcs/main.cpp 	\
-		./Srcs/Plazza.cpp
+SRCS 			= 		./Srcs/main.cpp 	\
+								./Srcs/Plazza.cpp
 
-SRCS +=	./Encapsulation/Mutex.cpp 		\
-		./Encapsulation/Thread.cpp		\
-		./Encapsulation/Process.cpp		\
-		./Encapsulation/NamedPipe.cpp	\
-		./Encapsulation/CondVar.cpp
+SRCS 			+=		./Srcs/Process/ThreadPool.cpp 				\
+								./Srcs/Process/ThreadPoolWorker.cpp		\
+								./Srcs/Process/ProcessPlazza.cpp
 
-OBJ    = $(SRCS:.cpp=.o)
+SRCS 			+= 		./Srcs/ManagerProcess/ManagerProcess.cpp
+
+SRCS 			+=		./Srcs/Encapsulation/Mutex.cpp 			\
+								./Srcs/Encapsulation/Thread.cpp			\
+								./Srcs/Encapsulation/Process.cpp		\
+								./Srcs/Encapsulation/NamedPipe.cpp	\
+								./Srcs/Encapsulation/CondVar.cpp
+
+OBJ    		= 		$(SRCS:.cpp=.o)
 
 
 all: $(NAME)

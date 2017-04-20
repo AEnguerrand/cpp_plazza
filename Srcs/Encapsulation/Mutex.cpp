@@ -12,12 +12,14 @@
 
 Mutex::Mutex()
 {
-  pthread_mutex_init(&(this->_mutex), NULL);
+  if (pthread_mutex_init(&(this->_mutex), NULL) != 0)
+    throw Error("Mutex: Fail init.");
 }
 
 void Mutex::lock()
 {
-  pthread_mutex_lock(&this->_mutex);
+  if (pthread_mutex_lock(&this->_mutex) != 0)
+    throw Error("Mutex: Fail lock.");
 }
 
 bool Mutex::trylock()
@@ -29,5 +31,6 @@ bool Mutex::trylock()
 
 void Mutex::unlock()
 {
-  pthread_mutex_unlock(&this->_mutex);
+  if (pthread_mutex_unlock(&this->_mutex) != 0)
+    throw Error("Mutex: Fail unlock.");
 }

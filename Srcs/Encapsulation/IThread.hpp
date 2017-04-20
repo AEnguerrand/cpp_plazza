@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <pthread.h>
+#include "Error.hpp"
 
 class IThread
 {

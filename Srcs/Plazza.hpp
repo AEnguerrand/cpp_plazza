@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:28 2017 Quentin Metge
-** Last update Tue Apr 18 12:59:15 2017 Quentin Metge
+** Last update Wed Apr 19 16:46:36 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -13,44 +13,40 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <algorithm>
+#include <vector>
 #include <list>
 #include "Error.hpp"
+#include "Order.hpp"
+#include "ManagerProcess.hpp"
 
 namespace plazza
 {
-
-  enum class OrderType
-  {
-    EMAIL_ADDRESS,
-    IP_ADDRESS,
-    PHONE_NUMBER
-  };
-
-  class Order
-  {
-  public:
-    Order(void){}
-    Order(std::string fileName, OrderType type);
-    virtual ~Order(void);
-
-  public:
-    std::ifstream    file;
-    OrderType   type;
-  };
 
   class Plazza
   {
   public:
     Plazza(void){}
     Plazza(const int poolSize);
-    virtual ~Plazza(void){}
+    ~Plazza(void){}
 
   public:
-    size_t      getPoolSize(void) const;
+    TokenType   getTypeOfToken(std::string token);
+    void        getNextLine(std::string buffer);
+    void        mainLoop(void);
+
+  public:
+    void        displayOrderList(void);
+
+  public:
+    size_t                    getPoolSize(void) const;
+    std::vector<std::string>  getOrdersType(void) const;
 
   private:
-    size_t              _poolSize;
-    std::list<Order>    _orderList;
+    size_t                    _poolSize;
+    std::vector<std::string>  _ordersType;
+    std::list<Order>          _orderList;
   };
 
 }
