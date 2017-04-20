@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 23:29:34 2017 Enguerrand Allamel
-** Last update Wed Apr 19 23:29:34 2017 Enguerrand Allamel
+** Last update Thu Apr 20 15:49:33 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_ORDER_HPP
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "Error.hpp"
 
 namespace plazza
 {
@@ -21,14 +22,6 @@ namespace plazza
   {
     DEFAULT = 0,
     ORDER = 1
-  };
-
-  enum class FileCiphered : int
-  {
-    DEFAULT = 0,
-    NORMAL = 1,
-    CAESAR = 2,
-    XOR = 3
   };
 
   class File
@@ -41,9 +34,8 @@ namespace plazza
     ~File(void);
 
    public:
-    std::string       fileName;
-    std::ifstream     file;
-    FileCiphered      ciphered = FileCiphered::DEFAULT;
+    std::string       name;
+    std::ifstream     ss;
   };
 
   class Order
@@ -59,6 +51,7 @@ namespace plazza
    public:
     File              file;
     std::string       type;
+    std::string       regexp;
   };
 }
 

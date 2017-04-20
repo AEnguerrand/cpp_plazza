@@ -5,46 +5,41 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:54:09 2017 Antoine Dury
-** Last update Tue Apr 18 16:21:26 2017 Antoine Dury
+** Last update Thu Apr 20 15:04:18 2017 Antoine Dury
 */
 
 #include "NamedPipe.hpp"
 
 NamedPipe::NamedPipe(std::string name)
 {
-  name = "/tmp/" + name;
-  this->_name = name;
+  name = "/tmp/" + name + ".fifo";
+  this->_fifo = name;
 }
 
-NamedPipe::~NamedPipe(void)
-{
-}
+NamedPipe::~NamedPipe(void) {}
 
-void        NamedPipe::createNP(void)
+void            NamedPipe::create(void)
 {
-  if (mkfifo(this->_name.c_str(), 0644) != 0)
+  if (mkfifo(this->_fifo.c_str(), 0644) != 0)
     throw Error("Unable to create a named pipe.");
 }
 
-void        NamedPipe::writeNP(std::string str)
+void            NamedPipe::write(void *data, size_t size)
 {
-  int       fd;
+  std::fstream  file;
 
-  if ((fd = open(this->_name.c_str(), O_WRONLY)) == -1)
-    throw Error("Unable to open a named pipe.");
-  write(fd, str.c_str(), strlen(str.c_str()));
-  close(fd);
+  file.open(this->_fifo, std::ios::out);
+  file.write((char*)data, size);
+  file.close();
 }
 
-std::string NamedPipe::readNP(void)
+void            *NamedPipe::read(void *data, size_t size)
 {
-  int       fd;
-  char      str[256];
+  std::fstream  file;
 
-  if ((fd = open(this->_name.c_str(), O_RDONLY)) == -1)
-    throw Error("Unable to open a named pipe.");
-  read(fd, str, 256);
-  printf("%s\n", str);
-  close(fd);
-  return (std::string(str));
+  file.open(this->_fifo, std::ios::in);
+  file.read((char*)data, size);
+  file.close();
+  unlink(this->_fifo.c_str());
+  return (data);
 }

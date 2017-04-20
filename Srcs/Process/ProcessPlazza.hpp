@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:49:39 2017 Enguerrand Allamel
-** Last update Wed Apr 19 17:49:39 2017 Enguerrand Allamel
+** Last update Thu Apr 20 16:04:55 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_PROCESSPLAZZA_HPP
@@ -16,6 +16,7 @@
 #include "Thread.hpp"
 #include "Process.hpp"
 #include "Order.hpp"
+#include "Scrapper.hpp"
 
 namespace plazza
 {

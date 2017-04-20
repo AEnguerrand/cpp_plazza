@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:28:06 2017 Antoine Dury
-** Last update Tue Apr 18 15:23:20 2017 Antoine Dury
+** Last update Thu Apr 20 14:47:09 2017 Antoine Dury
 */
 
 #ifndef NAMEDPIPE_HPP
@@ -19,12 +19,12 @@ class NamedPipe : public INamedPipe
     NamedPipe(std::string name);
     virtual ~NamedPipe(void);
 
-    void        createNP(void);
-    virtual void        writeNP(std::string str);
-    virtual std::string readNP(void);
+    virtual void        create(void);
+    virtual void        write(void*, size_t);
+    virtual void        *read(void*, size_t);
 
   private:
-    std::string         _name;
+    std::string         _fifo;
 };
 
 #endif

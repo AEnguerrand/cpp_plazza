@@ -22,6 +22,7 @@ CPPFLAGS  += 		-W -Wall -Wextra -Werror -std=c++11 	\
 CPPFLAGS 	+=		-I./Srcs/ 							\
 								-I./Srcs/Encapsulation 	\
 								-I./Srcs/Process 				\
+								-I./Srcs/Scrapper 			\
 								-I./Srcs/ManagerProcess
 
 LDFLAGS 	= 		-lpthread
@@ -40,6 +41,8 @@ SRCS 			+=		./Srcs/Encapsulation/Mutex.cpp 			\
 								./Srcs/Encapsulation/Process.cpp		\
 								./Srcs/Encapsulation/NamedPipe.cpp	\
 								./Srcs/Encapsulation/CondVar.cpp
+
+SRCS			+=		./Srcs/Scrapper/Scrapper.cpp
 
 OBJ    		= 		$(SRCS:.cpp=.o)
 
