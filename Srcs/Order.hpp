@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 23:29:34 2017 Enguerrand Allamel
-** Last update Thu Apr 20 15:42:39 2017 Quentin Metge
+** Last update Thu Apr 20 15:49:33 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_ORDER_HPP
@@ -51,6 +51,7 @@ namespace plazza
    public:
     File              file;
     std::string       type;
+    std::string       regexp;
   };
 }
 

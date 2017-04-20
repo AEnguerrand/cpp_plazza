@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Thu Apr 20 15:44:51 2017 Quentin Metge
+** Last update Thu Apr 20 16:10:42 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -20,7 +20,8 @@ namespace plazza
   class Scrapper
   {
   public:
-    Scrapper(Order const& order);
+    Scrapper(void){};
+    Scrapper(Order* order);
     virtual ~Scrapper(void);
 
   public:
@@ -32,7 +33,7 @@ namespace plazza
     bool          scpCaesar(void);
 
   private:
-    Order         _order;
+    Order*        _order;
     std::string   _buffer = "";
 
   private:
