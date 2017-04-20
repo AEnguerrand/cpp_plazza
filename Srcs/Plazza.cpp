@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Thu Apr 20 14:26:15 2017 Quentin Metge
+** Last update Thu Apr 20 15:03:16 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -42,7 +42,6 @@ namespace plazza
     this->file.open(this->fileName);
     if (!this->file.is_open())
       throw Error("Can't open: " + this->fileName + ".");
-    this->ciphered = other.ciphered;
   }
 
   File const&         File::operator=(File other){
@@ -52,7 +51,6 @@ namespace plazza
     this->file.open(this->fileName);
     if (!this->file.is_open())
       throw Error("Can't open: " + this->fileName + ".");
-    this->ciphered = other.ciphered;
     return (*this);
   }
 
