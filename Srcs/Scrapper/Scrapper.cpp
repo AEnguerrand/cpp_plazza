@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 20 16:41:51 2017 Quentin Metge
+** Last update Thu Apr 20 16:42:42 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -67,7 +67,7 @@ namespace plazza
       std::cout << std::endl;
       s = m.suffix().str();
     }*/
-    return (true);
+    return (false);
   }
 
   bool                    Scrapper::scpXor(void){
