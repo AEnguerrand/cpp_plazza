@@ -10,7 +10,8 @@
 
 #include "ManagerProcess.hpp"
 
-plazza::ManagerProcess::ManagerProcess()
+plazza::ManagerProcess::ManagerProcess(size_t poolSize) :
+	_poolSize(poolSize)
 {
   std::cout << "CTOR ManagerProcess" << std::endl;
 }
@@ -31,15 +32,19 @@ void plazza::ManagerProcess::addOrder(std::list<Order> orders)
 
 void 		plazza::ManagerProcess::dispatch()
 {
-  size_t 	process_nb = 1;
+  size_t 	process_nb = 1 + std::ceil(this->_orders.size() / this->_poolSize);
 
+  std::cout << "Nb Process: " << process_nb << std::endl;
+  auto itOrderF = this->_orders.begin();
+  auto itOrderL = this->_orders.begin();
+  for (size_t i = 0; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
   for (size_t i = 0 ; i < process_nb ; i++)
     {
-      this->_processes.push_back(new ProcessPlazza(this->_orders));
-    }
-  for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
-    {
-      (*it)->start();
+      std::list<Order> process_orders;
+      process_orders.insert(process_orders.begin(), itOrderF, itOrderL);
+      this->_processes.push_back(new ProcessPlazza(process_orders));
+      itOrderF = itOrderL;
+      for (size_t i = 0 ; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
     }
   for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
     {
@@ -50,4 +55,5 @@ void 		plazza::ManagerProcess::dispatch()
       delete (*it);
     }
   this->_processes.clear();
+  this->_orders.clear();
 }

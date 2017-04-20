@@ -31,6 +31,7 @@ namespace plazza
     virtual ~ProcessPlazza();
 
     void	start();
+    void 	processLoop();
   };
 }
 

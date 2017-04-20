@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 20 17:02:11 2017 Quentin Metge
+** Last update Thu Apr 20 17:19:17 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -52,7 +52,7 @@ namespace plazza
 
     std::cerr << "-> Normal" << std::endl;
     try{
-      std::regex          e(this->_order->regexp);
+      /*std::regex          e(this->_order->regexp);
       std::string         s(this->_buffer);
       std::smatch         m;
 
@@ -62,7 +62,17 @@ namespace plazza
           test = false;
         }
         s = m.suffix().str();
-      }
+      }*/
+      std::regex            regex(this->_order->regexp);
+      std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
+      std::sregex_iterator  end;
+
+      while (next != end)
+        {
+          std::smatch match = *next;
+          std::cout << match.str() << std::endl;
+          next++;
+        }
     }
     catch(std::exception const& e){
       throw Error("Regexp.");
