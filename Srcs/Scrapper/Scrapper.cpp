@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 20 16:43:08 2017 Quentin Metge
+** Last update Thu Apr 20 16:44:41 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -23,7 +23,6 @@ namespace plazza
     this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
     this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
     this->initBuffer();
-    //std::cout << this->_buffer << std::endl;
     for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
       cyphered = this->_scrapperFct[i]();
     }
@@ -43,7 +42,7 @@ namespace plazza
     }
     std::string line;
     while (getline(this->_order->file.ss, line)){
-      this->_buffer += line;
+      this->_buffer += line + " ";
     }
     this->_order->file.ss.close();
   }
