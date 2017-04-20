@@ -5,14 +5,13 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:28 2017 Quentin Metge
-** Last update Wed Apr 19 16:46:36 2017 Quentin Metge
+** Last update Thu Apr 20 15:40:02 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
 # define PLAZZA_HPP_
 
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <algorithm>
 #include <vector>

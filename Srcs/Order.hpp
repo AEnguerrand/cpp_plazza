@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 23:29:34 2017 Enguerrand Allamel
-** Last update Thu Apr 20 15:03:12 2017 Quentin Metge
+** Last update Thu Apr 20 15:42:39 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_ORDER_HPP
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "Error.hpp"
 
 namespace plazza
 {
@@ -33,8 +34,8 @@ namespace plazza
     ~File(void);
 
    public:
-    std::string       fileName;
-    std::ifstream     file;
+    std::string       name;
+    std::ifstream     ss;
   };
 
   class Order

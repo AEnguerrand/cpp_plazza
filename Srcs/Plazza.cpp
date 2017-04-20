@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Thu Apr 20 15:03:16 2017 Quentin Metge
+** Last update Thu Apr 20 15:45:09 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -29,41 +29,41 @@ namespace plazza
   }
 
   File::File(std::string _fileName){
-    this->fileName = _fileName;
-    this->file.open(this->fileName);
-    if (!this->file.is_open())
-      throw Error("Can't open: " + this->fileName + ".");
+    this->name = _fileName;
+    this->ss.open(this->name);
+    if (!this->ss.is_open())
+      throw Error("Can't open: " + this->name + ".");
   }
 
   File::File(File const& other){
-    this->fileName = other.fileName;
-    if (this->file.is_open())
-      this->file.close();
-    this->file.open(this->fileName);
-    if (!this->file.is_open())
-      throw Error("Can't open: " + this->fileName + ".");
+    this->name = other.name;
+    if (this->ss.is_open())
+      this->ss.close();
+    this->ss.open(this->name);
+    if (!this->ss.is_open())
+      throw Error("Can't open: " + this->name + ".");
   }
 
   File const&         File::operator=(File other){
-    this->fileName = other.fileName;
-    if (this->file.is_open())
-      this->file.close();
-    this->file.open(this->fileName);
-    if (!this->file.is_open())
-      throw Error("Can't open: " + this->fileName + ".");
+    this->name = other.name;
+    if (this->ss.is_open())
+      this->ss.close();
+    this->ss.open(this->name);
+    if (!this->ss.is_open())
+      throw Error("Can't open: " + this->name + ".");
     return (*this);
   }
 
   File::~File(void){
-    if (!this->file.is_open())
-      this->file.close();
+    if (!this->ss.is_open())
+      this->ss.close();
   }
 
   /*****************/
   /*    Actions    */
   /*****************/
   void                  Order::display(void){
-    std::cerr << "Order:\t" << this->file.fileName << "\t->\t" << this->type << std::endl;
+    std::cerr << "Order:\t" << this->file.name << "\t->\t" << this->type << std::endl;
   }
 
   plazza::TokenType     Plazza::getTypeOfToken(std::string token){

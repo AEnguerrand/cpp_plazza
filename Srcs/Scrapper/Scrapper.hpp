@@ -5,12 +5,13 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Thu Apr 20 14:59:29 2017 Quentin Metge
+** Last update Thu Apr 20 15:44:51 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
 # define SCRAPPER_HPP
 
+#include <regex>
 #include "Order.hpp"
 
 namespace plazza
@@ -22,8 +23,20 @@ namespace plazza
     Scrapper(Order const& order);
     virtual ~Scrapper(void);
 
+  public:
+    void          initBuffer(void);
+
+  public:
+    bool          scpNormal(void);
+    bool          scpXor(void);
+    bool          scpCaesar(void);
+
   private:
-    Order   _order;
+    Order         _order;
+    std::string   _buffer = "";
+
+  private:
+    std::vector<std::function<bool (void)>> _scrapperFct;
   };
 
 }
