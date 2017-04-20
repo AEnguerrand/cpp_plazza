@@ -14,10 +14,12 @@
  * Function Scrapper
  */
 
-static void	*scrapper(void *data)
+static void		*scrapper(void *data)
 {
-  (void)data;
-  std::cout << "Scrapper CALL IS GOOD" << std::endl;
+  plazza::Order 	*order = static_cast<plazza::Order *>(data);
+
+  order->display();
+  //std::cout << "Scrapper CALL IS GOOD" << std::endl;
   return (NULL);
 }
 
