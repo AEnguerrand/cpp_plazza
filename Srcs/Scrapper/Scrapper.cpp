@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 11:00:42 2017 Quentin Metge
+** Last update Fri Apr 21 11:01:45 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -78,11 +78,9 @@ namespace plazza
   {
     std::string ret = str;
 
-    std::cerr << "Test cyphered -> IN" << std::endl;
     for (size_t i = 0; i < ret.size(); i++){
       ret[i] = ret[i] ^ key[i % key.size()];
     }
-    std::cerr << "Test cyphered -> XOR" << std::endl;
     return (ret);
   }
 
@@ -110,7 +108,6 @@ namespace plazza
             test = false;
             next++;
           }
-          std::cerr << "Test cyphered -> OUT" << std::endl;
         }
       }
     }
