@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 20 18:05:59 2017 Quentin Metge
+** Last update Fri Apr 21 10:24:24 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -48,7 +48,7 @@ namespace plazza
   }
 
   bool                    Scrapper::scpNormal(void){
-    bool                test = true;
+    bool                  test = true;
 
     std::cerr << "-> Normal" << std::endl;
     try{
@@ -59,6 +59,7 @@ namespace plazza
       while (next != end){
         std::smatch match = *next;
         std::cout << match.str() << std::endl;
+        test = false;
         next++;
       }
     }
@@ -66,17 +67,68 @@ namespace plazza
       std::cerr << "Error : Regexp." << std::endl;
       return (true);
     }
+    if (test == false)
+      std::cerr << "OK" << std::endl;
+    else
+      std::cerr << "KO" << std::endl;
     return (test);
   }
 
+  std::string             Scrapper::decryptXOR(const std::string& str, const std::string& key)
+  {
+    std::string ret = str;
+
+    for (size_t i = 0; ret[i]; i++)
+      ret[i] = ret[i] ^ key[i % key.size()];
+    return (ret);
+  }
+
   bool                    Scrapper::scpXor(void){
-    std::cerr << "-> Xor" << std::endl;
-    return (true);
+    bool                  test = true;
+    std::string           key = "";
+    std::string           buffer = "";
+    std::regex            regex(this->_order->regexp);
+
+    std::cerr << "-> Xor: ";
+    try{
+      key[0] = 0;
+      key[1] = 0;
+      for (int i1 = 0; i1 <= 255; i1++){
+        for (int i2 = 0; i2 <= 255; i2++){
+          key[0] = i1;
+          key[1] = i2;
+          buffer = this->decryptXOR(this->_buffer, key);
+          std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
+          std::sregex_iterator  end;
+
+          while (next != end){
+            std::smatch match = *next;
+            std::cout << match.str() << std::endl;
+            test = false;
+            next++;
+          }
+        }
+      }
+    }
+    catch(std::exception const& e){
+      std::cerr << "Error : Regexp." << std::endl;
+      return (true);
+    }
+    if (test == false)
+      std::cerr << "OK" << std::endl;
+    else
+      std::cerr << "KO" << std::endl;
+    return (test);
   }
 
   bool                    Scrapper::scpCaesar(void){
+    bool                  test = true;
     std::cerr << "-> Caesar" << std::endl;
-    return (true);
+    if (test == false)
+      std::cerr << "OK" << std::endl;
+    else
+      std::cerr << "KO" << std::endl;
+    return (test);
   }
 
   /*****************/
