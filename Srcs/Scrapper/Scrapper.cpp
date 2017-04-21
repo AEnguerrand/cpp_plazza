@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 10:24:24 2017 Quentin Metge
+** Last update Fri Apr 21 10:42:05 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -50,7 +50,7 @@ namespace plazza
   bool                    Scrapper::scpNormal(void){
     bool                  test = true;
 
-    std::cerr << "-> Normal" << std::endl;
+    std::cerr << "-> Normal: ";
     try{
       std::regex            regex(this->_order->regexp);
       std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
@@ -87,7 +87,6 @@ namespace plazza
     bool                  test = true;
     std::string           key = "";
     std::string           buffer = "";
-    std::regex            regex(this->_order->regexp);
 
     std::cerr << "-> Xor: ";
     try{
@@ -95,9 +94,11 @@ namespace plazza
       key[1] = 0;
       for (int i1 = 0; i1 <= 255; i1++){
         for (int i2 = 0; i2 <= 255; i2++){
+          std::cerr << "Test cyphered -> IN" << std::endl;
           key[0] = i1;
           key[1] = i2;
           buffer = this->decryptXOR(this->_buffer, key);
+          std::regex            regex(this->_order->regexp);
           std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
           std::sregex_iterator  end;
 
@@ -107,6 +108,7 @@ namespace plazza
             test = false;
             next++;
           }
+          std::cerr << "Test cyphered -> OUT" << std::endl;
         }
       }
     }
@@ -123,7 +125,7 @@ namespace plazza
 
   bool                    Scrapper::scpCaesar(void){
     bool                  test = true;
-    std::cerr << "-> Caesar" << std::endl;
+    std::cerr << "-> Caesar: ";
     if (test == false)
       std::cerr << "OK" << std::endl;
     else
