@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 11:01:45 2017 Quentin Metge
+** Last update Fri Apr 21 11:11:27 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -115,8 +115,10 @@ namespace plazza
       std::cerr << "Error : Regexp." << std::endl;
       return (true);
     }
-    if (test == false)
+    if (test == false){
       std::cerr << "OK" << std::endl;
+      std::cerr << "Key = " << key << std:endl;
+    }
     else
       std::cerr << "KO" << std::endl;
     return (test);
