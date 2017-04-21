@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 13:04:20 2017 Quentin Metge
+** Last update Fri Apr 21 13:06:42 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -20,8 +20,8 @@ namespace plazza
     bool        cyphered = true;
 
     this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
-    this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
     this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
+    this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
     this->initBuffer();
     for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
       cyphered = this->_scrapperFct[i]();
