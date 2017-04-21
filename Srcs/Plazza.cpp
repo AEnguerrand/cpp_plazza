@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Fri Apr 21 11:08:46 2017 Quentin Metge
+** Last update Fri Apr 21 11:19:46 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -29,7 +29,7 @@ namespace plazza
     if (this->type == "PHONE_NUMBER")
       this->regexp = "([0-9][0-9] ?){5}";
     else if (this->type == "EMAIL_ADDRESS")
-      this->regexp = "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+";
+      this->regexp = "[a-zA-Z0-9_.-]+ ’@’ [a-zA-Z0-9_.-]+";//"(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+";
     else if (this->type == "IP_ADDRESS")
       this->regexp = "([1-9]?[0-9]?[0-9]\\.){3}[1-9]?[0-9]?[0-9]";
     else
