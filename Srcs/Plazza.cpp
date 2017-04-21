@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Fri Apr 21 11:26:07 2017 Quentin Metge
+** Last update Fri Apr 21 11:32:31 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -102,17 +102,20 @@ namespace plazza
         if (std::find(this->_ordersType.begin(), this->_ordersType.end(), type) != this->_ordersType.end()){
           for (size_t i = 0; i < fileTab.size(); i++){
             Order       order;
+            bool        error = false;
             try{
               order = Order(fileTab[i], type);
             }
             catch (std::exception const& e){
               std::cerr << "Error : " << e.what() << std::endl;
+              error = true;
             }
-            this->_orderList.push_back(order);
+            if (!error)
+              this->_orderList.push_back(order);
           }
         }
         else
-          throw Error("This order doesn't exist: " + type + ".");
+          std::cerr << "Error : This order doesn't exist: " << type << "." << std::endl;
       }
     }
   }
