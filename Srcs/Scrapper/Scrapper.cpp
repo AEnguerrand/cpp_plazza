@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 11:22:14 2017 Quentin Metge
+** Last update Fri Apr 21 13:04:20 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -124,11 +124,47 @@ namespace plazza
     return (test);
   }
 
+  std::string             Scrapper::decryptCaesar(const std::string& str, const std::string& key)
+  {
+    std::string   ret = str;
+
+    for (size_t i = 0; i < ret.size(); i++){
+      ret[i] -= key[0];
+    }
+    return (ret);
+  }
+
   bool                    Scrapper::scpCaesar(void){
     bool                  test = true;
+    std::string           key = "0";
+    std::string           buffer = "";
+
     std::cerr << "-> Caesar: ";
-    if (test == false)
+    try{
+      key[0] = 0;
+      for (int i = 0; i < 256 && test; i++){
+        key[0] = i;
+        buffer = this->decryptCaesar(this->_buffer, key);
+        std::regex            regex(this->_order->regexp);
+        std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
+        std::sregex_iterator  end;
+
+        while (next != end){
+          std::smatch match = *next;
+          std::cout << match.str() << std::endl;
+          test = false;
+          next++;
+        }
+      }
+    }
+    catch(std::exception const& e){
+      std::cerr << "Error : Regexp." << std::endl;
+      return (true);
+    }
+    if (test == false){
       std::cerr << "OK" << std::endl;
+      std::cerr << "Key = " << key << std::endl;
+    }
     else
       std::cerr << "KO" << std::endl;
     return (test);

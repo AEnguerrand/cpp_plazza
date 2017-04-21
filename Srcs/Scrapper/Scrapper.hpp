@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Fri Apr 21 10:21:50 2017 Quentin Metge
+** Last update Fri Apr 21 12:05:14 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -34,6 +34,7 @@ namespace plazza
 
   public:
     std::string   decryptXOR(const std::string& str, const std::string& key);
+    std::string   decryptCaesar(const std::string& str, const std::string& key);
 
   private:
     Order*        _order;
