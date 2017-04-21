@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 10:44:33 2017 Quentin Metge
+** Last update Fri Apr 21 10:46:22 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -78,7 +78,7 @@ namespace plazza
   {
     std::string ret = str;
 
-    for (size_t i = 0; ret[i]; i++)
+    for (size_t i = 0; ret[i] && i < ret.size(); i++)
       ret[i] = ret[i] ^ key[i % key.size()];
     return (ret);
   }
