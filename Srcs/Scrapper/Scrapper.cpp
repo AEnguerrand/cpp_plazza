@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 11:12:24 2017 Quentin Metge
+** Last update Fri Apr 21 11:22:14 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -93,8 +93,8 @@ namespace plazza
     try{
       key[0] = 0;
       key[1] = 0;
-      for (int i1 = 0; i1 < 256; i1++){
-        for (int i2 = 0; i2 < 256; i2++){
+      for (int i1 = 0; i1 < 256 && test; i1++){
+        for (int i2 = 0; i2 < 256 && test; i2++){
           key[0] = i1;
           key[1] = i2;
           buffer = this->decryptXOR(this->_buffer, key);
@@ -104,7 +104,6 @@ namespace plazza
 
           while (next != end){
             std::smatch match = *next;
-            std::cerr << "Key = " << key << std::endl;
             std::cout << match.str() << std::endl;
             test = false;
             next++;
@@ -118,6 +117,7 @@ namespace plazza
     }
     if (test == false){
       std::cerr << "OK" << std::endl;
+      std::cerr << "Key = " << key << std::endl;
     }
     else
       std::cerr << "KO" << std::endl;
