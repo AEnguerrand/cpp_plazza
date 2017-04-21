@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 10:51:04 2017 Quentin Metge
+** Last update Fri Apr 21 11:00:42 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -78,27 +78,28 @@ namespace plazza
   {
     std::string ret = str;
 
-    for (size_t i = 0; i < ret.size(); i++)
+    std::cerr << "Test cyphered -> IN" << std::endl;
+    for (size_t i = 0; i < ret.size(); i++){
       ret[i] = ret[i] ^ key[i % key.size()];
+    }
+    std::cerr << "Test cyphered -> XOR" << std::endl;
     return (ret);
   }
 
   bool                    Scrapper::scpXor(void){
     bool                  test = true;
-    std::string           key = "";
+    std::string           key = "00";
     std::string           buffer = "";
 
     std::cerr << "-> Xor: ";
     try{
       key[0] = 0;
       key[1] = 0;
-      for (int i1 = 0; i1 <= 255; i1++){
-        for (int i2 = 0; i2 <= 255; i2++){
+      for (int i1 = 0; i1 < 256; i1++){
+        for (int i2 = 0; i2 < 256; i2++){
           key[0] = i1;
           key[1] = i2;
-          std::cerr << "Test cyphered -> IN" << std::endl;
           buffer = this->decryptXOR(this->_buffer, key);
-          std::cerr << "Test cyphered -> XOR" << std::endl;
           std::regex            regex(this->_order->regexp);
           std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
           std::sregex_iterator  end;
