@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 13:06:42 2017 Quentin Metge
+** Last update Fri Apr 21 13:23:51 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -48,7 +48,6 @@ namespace plazza
   }
 
   bool                    Scrapper::scpNormal(void){
-    bool                  test = true;
 
     std::cerr << "-> Normal: ";
     try{
@@ -59,7 +58,6 @@ namespace plazza
       while (next != end){
         std::smatch match = *next;
         std::cout << match.str() << std::endl;
-        test = false;
         next++;
       }
     }
@@ -67,11 +65,7 @@ namespace plazza
       std::cerr << "Error : Regexp." << std::endl;
       return (true);
     }
-    if (test == false)
-      std::cerr << "OK" << std::endl;
-    else
-      std::cerr << "KO" << std::endl;
-    return (test);
+    return (true);
   }
 
   std::string             Scrapper::decryptXOR(const std::string& str, const std::string& key)
@@ -85,7 +79,6 @@ namespace plazza
   }
 
   bool                    Scrapper::scpXor(void){
-    bool                  test = true;
     std::string           key = "00";
     std::string           buffer = "";
 
@@ -93,8 +86,8 @@ namespace plazza
     try{
       key[0] = 0;
       key[1] = 0;
-      for (int i1 = 0; i1 < 256 && test; i1++){
-        for (int i2 = 0; i2 < 256 && test; i2++){
+      for (int i1 = 0; i1 < 256; i1++){
+        for (int i2 = 0; i2 < 256; i2++){
           key[0] = i1;
           key[1] = i2;
           buffer = this->decryptXOR(this->_buffer, key);
@@ -105,7 +98,6 @@ namespace plazza
           while (next != end){
             std::smatch match = *next;
             std::cout << match.str() << std::endl;
-            test = false;
             next++;
           }
         }
@@ -115,13 +107,7 @@ namespace plazza
       std::cerr << "Error : Regexp." << std::endl;
       return (true);
     }
-    if (test == false){
-      std::cerr << "OK" << std::endl;
-      std::cerr << "Key = " << key << std::endl;
-    }
-    else
-      std::cerr << "KO" << std::endl;
-    return (test);
+    return (true);
   }
 
   std::string             Scrapper::decryptCaesar(const std::string& str, const std::string& key)
@@ -135,14 +121,13 @@ namespace plazza
   }
 
   bool                    Scrapper::scpCaesar(void){
-    bool                  test = true;
     std::string           key = "0";
     std::string           buffer = "";
 
     std::cerr << "-> Caesar: ";
     try{
       key[0] = 0;
-      for (int i = 0; i < 256 && test; i++){
+      for (int i = 0; i < 256; i++){
         key[0] = i;
         buffer = this->decryptCaesar(this->_buffer, key);
         std::regex            regex(this->_order->regexp);
@@ -152,7 +137,6 @@ namespace plazza
         while (next != end){
           std::smatch match = *next;
           std::cout << match.str() << std::endl;
-          test = false;
           next++;
         }
       }
@@ -161,13 +145,7 @@ namespace plazza
       std::cerr << "Error : Regexp." << std::endl;
       return (true);
     }
-    if (test == false){
-      std::cerr << "OK" << std::endl;
-      std::cerr << "Key = " << key << std::endl;
-    }
-    else
-      std::cerr << "KO" << std::endl;
-    return (test);
+    return (true);
   }
 
   /*****************/
