@@ -23,6 +23,8 @@ class ThreadPool
  public:
   ThreadPool(size_t nbWorker);
   virtual ~ThreadPool();
+
+  void 		display();
 };
 
 
