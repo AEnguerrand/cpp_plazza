@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:30:25 2017 Enguerrand Allamel
-** Last update Tue Apr 25 14:56:24 2017 Quentin Metge
+** Last update Tue Apr 25 14:57:52 2017 Quentin Metge
 */
 
 #include "ManagerProcess.hpp"
@@ -58,6 +58,6 @@ void 		plazza::ManagerProcess::dispatch()
   this->_orders.clear();
 }
 
-std::list<Order> 		plazza::getOrders(void) const{
+std::list<Order> 		plazza::ManagerProcess::getOrders(void) const{
 	return (this->_orders);
 }
