@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 25 10:56:37 2017 Quentin Metge
+** Last update Tue Apr 25 11:34:04 2017 Quentin Metge
 */
 
 #include <cstring>
@@ -56,6 +56,7 @@ namespace plazza
           for (size_t i = 0; i < fileTab.size(); i++){
             Order       order;
 
+            memset(&order, 0, sizeof(struct Order));
             strcpy(order.fileName, fileTab[i].c_str());
             strcpy(order.type, type.c_str());
             if (std::string(order.type) == "PHONE_NUMBER")
@@ -77,8 +78,10 @@ namespace plazza
 
   void                  Plazza::mainLoop(void){
     std::string         buffer;
-    ManagerProcess	managerProcess(this->getPoolSize());
+    ManagerProcess      managerProcess(this->getPoolSize());
+    //IThread             thread = Thread(, &managerProcess);
 
+    //thread.start();
     while (getline(std::cin, buffer)){
     	this->getNextLine(buffer);
     	//this->displayOrderList();
