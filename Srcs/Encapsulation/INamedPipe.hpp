@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:04:19 2017 Antoine Dury
-** Last update Thu Apr 20 15:01:48 2017 Antoine Dury
+** Last update Tue Apr 25 11:37:21 2017 Antoine Dury
 */
 
 #ifndef INAMEDPIPE_HPP
@@ -14,10 +14,8 @@
 #include <iostream>
 #include <fstream>
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
 #include <cstring>
-#include <stdlib.h>
 #include "Error.hpp"
 
 class INamedPipe
@@ -27,7 +25,7 @@ class INamedPipe
 
     virtual void        create(void) = 0;
     virtual void        write(void*, size_t) = 0;
-    virtual void        *read(void*, size_t) = 0;
+    virtual void        read(void*, size_t) = 0;
 };
 
 #endif

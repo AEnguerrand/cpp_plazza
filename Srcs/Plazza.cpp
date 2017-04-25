@@ -5,10 +5,9 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 25 11:34:04 2017 Quentin Metge
+** Last update Tue Apr 25 11:54:14 2017 Antoine Dury
 */
 
-#include <cstring>
 #include "Plazza.hpp"
 
 namespace plazza
@@ -79,15 +78,16 @@ namespace plazza
   void                  Plazza::mainLoop(void){
     std::string         buffer;
     ManagerProcess      managerProcess(this->getPoolSize());
-    //IThread             thread = Thread(, &managerProcess);
+    IThread             *thread = new Thread(&createDisplay, &managerProcess);
 
-    //thread.start();
+    thread->start();
     while (getline(std::cin, buffer)){
     	this->getNextLine(buffer);
     	//this->displayOrderList();
     	managerProcess.addOrder(this->_orderList);
       this->_orderList.clear();
     }
+    delete thread;
   }
 
   void                  Plazza::displayOrderList(void){
