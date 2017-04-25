@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 25 10:36:06 2017 Quentin Metge
+** Last update Tue Apr 25 10:56:37 2017 Quentin Metge
 */
 
 #include <cstring>
@@ -81,8 +81,9 @@ namespace plazza
 
     while (getline(std::cin, buffer)){
     	this->getNextLine(buffer);
-    	this->displayOrderList();
+    	//this->displayOrderList();
     	managerProcess.addOrder(this->_orderList);
+      this->_orderList.clear();
     }
   }
 
