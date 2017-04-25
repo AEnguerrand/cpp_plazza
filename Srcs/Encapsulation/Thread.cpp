@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Mon Apr 10 11:36:07 2017 Enguerrand Allamel
-** Last update Mon Apr 10 11:36:07 2017 Enguerrand Allamel
+** Last update Tue Apr 25 10:20:28 2017 Antoine Dury
 */
 
 #include "Thread.hpp"

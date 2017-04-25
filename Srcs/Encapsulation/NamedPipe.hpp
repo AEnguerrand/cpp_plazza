@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:28:06 2017 Antoine Dury
-** Last update Thu Apr 20 14:47:09 2017 Antoine Dury
+** Last update Tue Apr 25 10:22:01 2017 Antoine Dury
 */
 
 #ifndef NAMEDPIPE_HPP
@@ -23,8 +23,17 @@ class NamedPipe : public INamedPipe
     virtual void        write(void*, size_t);
     virtual void        *read(void*, size_t);
 
+    const std::string&  getFifo(void) const;
+    void                *getData(void) const;
+    size_t              getSize(void) const;
+
   private:
     std::string         _fifo;
+    void                *_data;
+    size_t              _size;
 };
+
+std::fstream&           operator<<(std::fstream&, const NamedPipe&);
+std::fstream&           operator>>(std::fstream& fs, const NamedPipe& np);
 
 #endif
