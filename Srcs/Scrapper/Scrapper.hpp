@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Fri Apr 21 12:05:14 2017 Quentin Metge
+** Last update Tue Apr 25 10:39:04 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -22,10 +22,10 @@ namespace plazza
   public:
     Scrapper(void){};
     Scrapper(Order* order);
-    virtual ~Scrapper(void);
+    virtual ~Scrapper(void){};
 
   public:
-    void          initBuffer(void);
+    bool          initBuffer(void);
 
   public:
     bool          scpNormal(void);

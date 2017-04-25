@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 21 13:57:39 2017 Quentin Metge
+** Last update Tue Apr 25 10:39:07 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -19,32 +19,33 @@ namespace plazza
   Scrapper::Scrapper(Order* order) : _order(order){
     bool        cyphered = true;
 
-    this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
-    this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
-    this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
-    this->initBuffer();
-    for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
-      cyphered = this->_scrapperFct[i]();
+    if (this->initBuffer()){
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
+      for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
+        cyphered = this->_scrapperFct[i]();
+      }
     }
-  }
-
-  Scrapper::~Scrapper(void){
-
   }
 
   /*****************/
   /*    Actions    */
   /*****************/
-  void          Scrapper::initBuffer(void){
-    if (!this->_order->file.ss.is_open()){
-      std::cerr << "Unable to open file " << this->_order->file.name << "." << std::endl;
-      return ;
+  bool                    Scrapper::initBuffer(void){
+    std::ifstream         ss;
+
+    ss.open(this->_order->fileName);
+    if (!ss.is_open()){
+      std::cerr << "Unable to open file " << this->_order->fileName << "." << std::endl;
+      return false;
     }
-    std::string line;
-    while (getline(this->_order->file.ss, line)){
+    std::string           line;
+    while (getline(ss, line)){
       this->_buffer += line + " ";
     }
-    this->_order->file.ss.close();
+    ss.close();
+    return true;
   }
 
   bool                    Scrapper::scpNormal(void){

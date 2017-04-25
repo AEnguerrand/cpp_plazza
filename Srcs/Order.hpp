@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 23:29:34 2017 Enguerrand Allamel
-** Last update Thu Apr 20 15:49:33 2017 Quentin Metge
+** Last update Tue Apr 25 10:23:34 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_ORDER_HPP
@@ -16,6 +16,8 @@
 #include <sstream>
 #include "Error.hpp"
 
+#define BUFFER_SIZE (512)
+
 namespace plazza
 {
   enum class TokenType : int
@@ -24,34 +26,12 @@ namespace plazza
     ORDER = 1
   };
 
-  class File
+  struct Order
   {
    public:
-    File(void){}
-    File(std::string _fileName);
-    File(File const& other);
-    File const& operator=(File other);
-    ~File(void);
-
-   public:
-    std::string       name;
-    std::ifstream     ss;
-  };
-
-  class Order
-  {
-   public:
-    Order(void){}
-    Order(std::string _fileName, std::string type);
-    ~Order(void){}
-
-   public:
-    void              display(void);
-
-   public:
-    File              file;
-    std::string       type;
-    std::string       regexp;
+    char              fileName[BUFFER_SIZE];
+    char              type[BUFFER_SIZE];
+    char              regexp[BUFFER_SIZE];
   };
 }
 

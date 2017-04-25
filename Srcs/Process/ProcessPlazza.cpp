@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:49:39 2017 Enguerrand Allamel
-** Last update Thu Apr 20 16:11:34 2017 Quentin Metge
+** Last update Tue Apr 25 10:36:46 2017 Quentin Metge
 */
 
 #include "ProcessPlazza.hpp"
@@ -18,7 +18,6 @@ static void		*scrapper(void *data)
 {
   plazza::Order 	*order = static_cast<plazza::Order*>(data);
 
-  order->display();
   plazza::Scrapper    scrapper(order);
   return (NULL);
 }
@@ -74,4 +73,3 @@ void plazza::ProcessPlazza::processLoop()
 	}
     //}
 }
-

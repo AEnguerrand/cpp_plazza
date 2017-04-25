@@ -5,9 +5,10 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Fri Apr 21 11:32:31 2017 Quentin Metge
+** Last update Tue Apr 25 10:36:06 2017 Quentin Metge
 */
 
+#include <cstring>
 #include "Plazza.hpp"
 
 namespace plazza
@@ -23,57 +24,9 @@ namespace plazza
     this->mainLoop();
   }
 
-  Order::Order(std::string _fileName, std::string _type){
-    this->file = File(_fileName);
-    this->type = _type;
-    if (this->type == "PHONE_NUMBER")
-      this->regexp = "([0-9][0-9] ?){5}";
-    else if (this->type == "EMAIL_ADDRESS")
-      this->regexp = "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+";
-    else if (this->type == "IP_ADDRESS")
-      this->regexp = "([1-9]?[0-9]?[0-9]\\.){3}[1-9]?[0-9]?[0-9]";
-    else
-      throw Error("This order is not known.");
-  }
-
-  File::File(std::string _fileName){
-    this->name = _fileName;
-    this->ss.open(this->name);
-    if (!this->ss.is_open())
-      throw Error("Can't open: " + this->name + ".");
-  }
-
-  File::File(File const& other){
-    this->name = other.name;
-    if (this->ss.is_open())
-      this->ss.close();
-    this->ss.open(this->name);
-    if (!this->ss.is_open())
-      throw Error("Can't open: " + this->name + ".");
-  }
-
-  File const&         File::operator=(File other){
-    this->name = other.name;
-    if (this->ss.is_open())
-      this->ss.close();
-    this->ss.open(this->name);
-    if (!this->ss.is_open())
-      throw Error("Can't open: " + this->name + ".");
-    return (*this);
-  }
-
-  File::~File(void){
-    if (!this->ss.is_open())
-      this->ss.close();
-  }
-
   /*****************/
   /*    Actions    */
   /*****************/
-  void                  Order::display(void){
-    std::cerr << "Order:\t" << this->file.name << "\t->\t" << this->type << std::endl;
-  }
-
   plazza::TokenType     Plazza::getTypeOfToken(std::string token){
     if (std::find(this->_ordersType.begin(), this->_ordersType.end(), token) != this->_ordersType.end())
       return (TokenType::ORDER);
@@ -102,16 +55,18 @@ namespace plazza
         if (std::find(this->_ordersType.begin(), this->_ordersType.end(), type) != this->_ordersType.end()){
           for (size_t i = 0; i < fileTab.size(); i++){
             Order       order;
-            bool        error = false;
-            try{
-              order = Order(fileTab[i], type);
-            }
-            catch (std::exception const& e){
-              std::cerr << "Error : " << e.what() << std::endl;
-              error = true;
-            }
-            if (!error)
-              this->_orderList.push_back(order);
+
+            strcpy(order.fileName, fileTab[i].c_str());
+            strcpy(order.type, type.c_str());
+            if (std::string(order.type) == "PHONE_NUMBER")
+              strcpy(order.regexp, "([0-9][0-9] ?){5}");
+            else if (std::string(order.type) == "EMAIL_ADDRESS")
+              strcpy(order.regexp, "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+            else if (std::string(order.type) == "IP_ADDRESS")
+              strcpy(order.regexp, "([1-9]?[0-9]?[0-9]\\.){3}[1-9]?[0-9]?[0-9]");
+            else
+              throw Error("This order is not known.");
+            this->_orderList.push_back(order);
           }
         }
         else
@@ -133,7 +88,7 @@ namespace plazza
 
   void                  Plazza::displayOrderList(void){
     for (auto it = this->_orderList.begin(); it != this->_orderList.end(); it++){
-      (*it).display();
+       std::cerr << "Order:\t" << (*it).fileName << "\t->\t" << (*it).type << std::endl;
     }
   }
 
