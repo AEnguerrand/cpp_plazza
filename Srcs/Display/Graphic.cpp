@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Wed Apr 26 16:31:18 2017 Antoine Dury
+** Last update Wed Apr 26 16:40:19 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
