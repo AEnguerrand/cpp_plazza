@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:54:09 2017 Antoine Dury
-** Last update Wed Apr 26 23:05:33 2017 Antoine Dury
+** Last update Wed Apr 26 23:06:21 2017 Antoine Dury
 */
 
 #include "NamedPipe.hpp"
