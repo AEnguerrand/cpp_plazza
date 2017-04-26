@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Wed Apr 26 15:42:06 2017 Quentin Metge
+** Last update Wed Apr 26 16:20:46 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -32,6 +32,10 @@ namespace plazza
   /*****************/
   /*    Actions    */
   /*****************/
+  void                    Scrapper::dispResult(std::string const& str){
+    std::cout << str << std::endl;
+  }
+
   void                    Scrapper::dispMatch(std::string const& buffer){
     if (std::string(this->_order->type) == "IP_ADDRESS"){
       this->dispIp(buffer);
