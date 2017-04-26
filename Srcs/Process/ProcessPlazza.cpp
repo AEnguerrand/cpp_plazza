@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:49:39 2017 Enguerrand Allamel
-** Last update Tue Apr 25 10:36:46 2017 Quentin Metge
+** Last update Wed Apr 26 16:10:20 2017 Antoine Dury
 */
 
 #include "ProcessPlazza.hpp"
@@ -76,7 +76,6 @@ void plazza::ProcessPlazza::processLoop()
       std::cout << "--END--" << std::endl;
       c_start = std::clock();
       while (this->_orders.size() == 0 && ((std::clock() - c_start) < (ONE_SEC * 5)));
-      std::cout << "--END WAIT--" << std::endl;
       if (this->_orders.size() == 0)
 	end = false;
 

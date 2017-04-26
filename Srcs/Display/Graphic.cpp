@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Tue Apr 25 14:08:11 2017 Antoine Dury
+** Last update Wed Apr 26 16:10:51 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
@@ -17,6 +17,5 @@ Graphic::~Graphic() {}
 void *createDisplay(void *data)
 {
   (void)data;
-  std::cerr << "createDisplay GRAPHIC called" << std::endl;
   return (NULL);
 }

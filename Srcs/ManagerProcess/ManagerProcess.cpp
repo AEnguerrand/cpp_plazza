@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:30:25 2017 Enguerrand Allamel
-** Last update Tue Apr 25 14:58:52 2017 Quentin Metge
+** Last update Wed Apr 26 16:10:07 2017 Antoine Dury
 */
 
 #include "ManagerProcess.hpp"
@@ -13,12 +13,10 @@
 plazza::ManagerProcess::ManagerProcess(size_t poolSize) :
 	_poolSize(poolSize)
 {
-  std::cout << "CTOR ManagerProcess" << std::endl;
 }
 
 plazza::ManagerProcess::~ManagerProcess()
 {
-  std::cout << "DTOR ManagerProcess" << std::endl;
 }
 
 void plazza::ManagerProcess::addOrder(std::list<Order> orders)
