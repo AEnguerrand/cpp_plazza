@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:54:09 2017 Antoine Dury
-** Last update Wed Apr 26 23:06:21 2017 Antoine Dury
+** Last update Wed Apr 26 23:29:51 2017 Antoine Dury
 */
 
 #include "NamedPipe.hpp"
@@ -34,6 +34,7 @@ void                NamedPipe::create(std::string action)
 void                NamedPipe::writeNP(void *data, size_t size)
 {
   write(this->_fd, reinterpret_cast<char*>(data), size);
+  write(this->_fd, "\n", (1 * sizeof(char)));
 }
 
 void                NamedPipe::readNP(void *data, size_t size)
