@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Wed Apr 26 11:09:26 2017 Quentin Metge
+** Last update Wed Apr 26 13:39:45 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -32,6 +32,23 @@ namespace plazza
   /*****************/
   /*    Actions    */
   /*****************/
+  void                    Scrapper::dispMatch(void){
+    if (std::string(this->_order->type) == "IP_ADDRESS"){
+      this->dispIp();
+    }
+    /*else{
+      std::regex            regex(this->_order->regexp);
+      std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
+      std::sregex_iterator  end;
+
+      while (next != end){
+        std::smatch match = *next;
+        std::cout << match.str() << std::endl;
+        next++;
+      }
+    }*/
+  }
+
   bool                    Scrapper::initBuffer(void){
     std::ifstream         ss;
 
@@ -49,17 +66,8 @@ namespace plazza
   }
 
   bool                    Scrapper::scpNormal(void){
-
     try{
-      std::regex            regex(this->_order->regexp);
-      std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
-      std::sregex_iterator  end;
-
-      while (next != end){
-        std::smatch match = *next;
-        std::cout << match.str() << std::endl;
-        next++;
-      }
+      this->dispMatch();
     }
     catch(std::exception const& e){
       std::cerr << "Error : Regexp." << std::endl;
@@ -90,15 +98,7 @@ namespace plazza
           key[0] = i1;
           key[1] = i2;
           buffer = this->decryptXOR(this->_buffer, key);
-          std::regex            regex(this->_order->regexp);
-          std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
-          std::sregex_iterator  end;
-
-          while (next != end){
-            std::smatch match = *next;
-            std::cout << match.str() << std::endl;
-            next++;
-          }
+          this->dispMatch();
         }
       }
     }
@@ -128,15 +128,7 @@ namespace plazza
       for (int i = 0; i < 256; i++){
         key[0] = i;
         buffer = this->decryptCaesar(this->_buffer, key);
-        std::regex            regex(this->_order->regexp);
-        std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
-        std::sregex_iterator  end;
-
-        while (next != end){
-          std::smatch match = *next;
-          std::cout << match.str() << std::endl;
-          next++;
-        }
+        this->dispMatch();
       }
     }
     catch(std::exception const& e){

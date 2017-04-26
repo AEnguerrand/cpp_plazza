@@ -5,13 +5,14 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Tue Apr 25 10:39:04 2017 Quentin Metge
+** Last update Wed Apr 26 12:14:38 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
 # define SCRAPPER_HPP
 
 #include <regex>
+#include <cctype>
 #include "Order.hpp"
 
 namespace plazza
@@ -26,6 +27,11 @@ namespace plazza
 
   public:
     bool          initBuffer(void);
+    void          dispMatch(void);
+
+  public:
+    void          dispIp(void);
+    std::string   nb255(size_t& i);
 
   public:
     bool          scpNormal(void);

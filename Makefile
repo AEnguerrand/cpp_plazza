@@ -46,7 +46,8 @@ SRCS 			+=		./Srcs/Encapsulation/Mutex.cpp 			\
 								./Srcs/Encapsulation/NamedPipe.cpp	\
 								./Srcs/Encapsulation/CondVar.cpp
 
-SRCS			+=		./Srcs/Scrapper/Scrapper.cpp
+SRCS			+=		./Srcs/Scrapper/Scrapper.cpp				\
+								./Srcs/Scrapper/Ip.cpp
 
 SRCS_TXT 	= 		./Srcs/Display/Text.cpp
 
