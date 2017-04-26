@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Wed Apr 26 13:58:10 2017 Quentin Metge
-** Last update Wed Apr 26 16:21:30 2017 Quentin Metge
+** Last update Wed Apr 26 22:23:57 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -19,7 +19,7 @@ namespace plazza
     for (int j = 0; j < 2 && buffer[i]; ++j){
       if (!isdigit(buffer[i]))
         return ("");
-      test = test + buffer[i];
+      test += buffer[i];
       ++i;
     }
     return (test);
@@ -36,15 +36,13 @@ namespace plazza
           if (tmp == "")
             test = false;
           res = res + tmp;
-          while (j != 4 && test && (buffer[i] == ' ' || buffer[i] == '\t') && buffer[i]){
+          if (test && buffer[i] && j < 4 && buffer[i] == ' '){
             res = res + buffer[i];
             ++i;
           }
         }
         if (test && (i == buffer.size() || buffer[i] == ' ' || buffer[i] == '\t' || buffer[i] == '\n'))
           this->dispResult(res);
-        else
-          ++i;
       }
       else
         ++i;
