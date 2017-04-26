@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Wed Apr 26 11:53:48 2017 Quentin Metge
-** Last update Wed Apr 26 13:33:51 2017 Quentin Metge
+** Last update Wed Apr 26 14:51:41 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -13,11 +13,11 @@
 namespace plazza
 {
 
-  std::string             Scrapper::nb255(size_t& i){
+  std::string             Scrapper::nb255(std::string const& buffer, size_t& i){
     std::string           test = "";
 
-    for (int j = 0; j < 3 && isdigit(this->_buffer[i]) && i < this->_buffer.size(); j++){
-        test += this->_buffer[i];
+    for (int j = 0; j < 3 && isdigit(buffer[i]) && i < buffer.size(); j++){
+        test = test + buffer[i];
         ++i;
     }
     if (test != "" && std::stoi(test) <= 255)
@@ -25,28 +25,28 @@ namespace plazza
     return ("");
   }
 
-  void                    Scrapper::dispIp(void){
-    for (size_t i = 0; i < this->_buffer.size();){
+  void                    Scrapper::dispIp(std::string const& buffer){
+    for (size_t i = 0; i < buffer.size();){
       bool                test = true;
       std::string         res = "";
 
-      if ((i == 0 || this->_buffer[i - 1] == ' ' || this->_buffer[i - 1] == '\t' || this->_buffer[i - 1] == '\n') && isdigit(this->_buffer[i]))
-        res = res + this->nb255(i);
+      if ((i == 0 || buffer[i - 1] == ' ' || buffer[i - 1] == '\t' || buffer[i - 1] == '\n') && isdigit(buffer[i]))
+        res = res + this->nb255(buffer, i);
       else
         test = false;
       for (int j = 0; j < 3; ++j){
-        if (res != "" && this->_buffer[i] == '.'){
+        if (res != "" && buffer[i] == '.'){
           ++i;
           res = res + ".";
         }
         else
           test = false;
-        if (res != "" && isdigit(this->_buffer[i]))
-          res = res + this->nb255(i);
+        if (res != "" && isdigit(buffer[i]))
+          res = res + this->nb255(buffer, i);
         else
           test = false;
       }
-      if (test && (i == 0 || this->_buffer[i] == ' ' || this->_buffer[i] == '\t' || this->_buffer[i] == '\n'))
+      if (test && (i == buffer.size() || buffer[i] == ' ' || buffer[i] == '\t' || buffer[i] == '\n'))
         std::cout << res << std::endl;
       else
         ++i;

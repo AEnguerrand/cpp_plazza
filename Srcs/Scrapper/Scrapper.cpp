@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Wed Apr 26 13:42:06 2017 Quentin Metge
+** Last update Wed Apr 26 15:42:06 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -32,11 +32,14 @@ namespace plazza
   /*****************/
   /*    Actions    */
   /*****************/
-  void                    Scrapper::dispMatch(void){
+  void                    Scrapper::dispMatch(std::string const& buffer){
     if (std::string(this->_order->type) == "IP_ADDRESS"){
-      this->dispIp();
+      this->dispIp(buffer);
     }
-    else{
+    else if (std::string(this->_order->type) == "PHONE_NUMBER"){
+      this->dispPhone(buffer);
+    }
+    /*else{
       std::regex            regex(this->_order->regexp);
       std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
       std::sregex_iterator  end;
@@ -46,7 +49,7 @@ namespace plazza
         std::cout << match.str() << std::endl;
         next++;
       }
-    }
+    }*/
   }
 
   bool                    Scrapper::initBuffer(void){
@@ -67,7 +70,7 @@ namespace plazza
 
   bool                    Scrapper::scpNormal(void){
     try{
-      this->dispMatch();
+      this->dispMatch(this->_buffer);
     }
     catch(std::exception const& e){
       std::cerr << "Error : Regexp." << std::endl;
@@ -98,7 +101,7 @@ namespace plazza
           key[0] = i1;
           key[1] = i2;
           buffer = this->decryptXOR(this->_buffer, key);
-          this->dispMatch();
+          this->dispMatch(buffer);
         }
       }
     }
@@ -124,11 +127,10 @@ namespace plazza
     std::string           buffer = "";
 
     try{
-      key[0] = 0;
-      for (int i = 0; i < 256; i++){
+      for (int i = 1; i <= 255; i++){
         key[0] = i;
         buffer = this->decryptCaesar(this->_buffer, key);
-        this->dispMatch();
+        this->dispMatch(buffer);
       }
     }
     catch(std::exception const& e){

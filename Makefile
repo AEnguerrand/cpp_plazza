@@ -47,6 +47,7 @@ SRCS 			+=		./Srcs/Encapsulation/Mutex.cpp 			\
 								./Srcs/Encapsulation/CondVar.cpp
 
 SRCS			+=		./Srcs/Scrapper/Scrapper.cpp				\
+								./Srcs/Scrapper/Phone.cpp						\
 								./Srcs/Scrapper/Ip.cpp
 
 SRCS_TXT 	= 		./Srcs/Display/Text.cpp

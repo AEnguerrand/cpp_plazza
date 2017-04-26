@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Wed Apr 26 12:14:38 2017 Quentin Metge
+** Last update Wed Apr 26 14:21:31 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -27,11 +27,15 @@ namespace plazza
 
   public:
     bool          initBuffer(void);
-    void          dispMatch(void);
+    void          dispMatch(std::string const& buffer);
 
   public:
-    void          dispIp(void);
-    std::string   nb255(size_t& i);
+    void          dispIp(std::string const& buffer);
+    std::string   nb255(std::string const& buffer, size_t& i);
+
+  public:
+    void          dispPhone(std::string const& buffer);
+    std::string   nbXX(std::string const& buffer, size_t& i);
 
   public:
     bool          scpNormal(void);
