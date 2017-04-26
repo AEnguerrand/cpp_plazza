@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:53 2017 Antoine Dury
-** Last update Wed Apr 26 16:31:25 2017 Antoine Dury
+** Last update Wed Apr 26 22:33:45 2017 Antoine Dury
 */
 
 #ifndef GRAPHIC_HPP_
@@ -23,12 +23,18 @@ class Graphic
     Graphic(void*);
     virtual ~Graphic(void);
 
-    void                      display(void);
+    void              display(void);
+    void              drawInterface(void);
+    void              drawResults(void);
+    void              getEvent(void);
 
   private:
-    sf::RenderWindow          _window;
-    sf::Font                  _font;
-    std::vector<std::string>  _results;
+    NamedPipe         _np;
+    sf::Font          _font;
+    sf::Text          _resultsSF;
+    sf::Text          _inputSF;
+    std::string       _input;
+    sf::RenderWindow  _window;
 };
 
 void *createDisplay(void *data);

@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:28:06 2017 Antoine Dury
-** Last update Wed Apr 26 16:16:04 2017 Antoine Dury
+** Last update Wed Apr 26 17:07:33 2017 Antoine Dury
 */
 
 #ifndef NAMEDPIPE_HPP

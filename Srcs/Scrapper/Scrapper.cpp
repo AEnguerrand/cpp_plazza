@@ -39,7 +39,6 @@ namespace plazza
   void                    Scrapper::dispResult(std::string const& str){
     char                  result[str.size()];
 
-    std::cout << str << std::endl;
     str.copy(result, str.size());
     this->_np.writeNP(result, str.size() * sizeof(char));
   }
