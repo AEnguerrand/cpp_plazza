@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Wed Apr 26 13:58:10 2017 Quentin Metge
-** Last update Wed Apr 26 15:32:22 2017 Quentin Metge
+** Last update Wed Apr 26 16:21:30 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -42,7 +42,7 @@ namespace plazza
           }
         }
         if (test && (i == buffer.size() || buffer[i] == ' ' || buffer[i] == '\t' || buffer[i] == '\n'))
-          std::cout << res << std::endl;
+          this->dispResult(res);
         else
           ++i;
       }
