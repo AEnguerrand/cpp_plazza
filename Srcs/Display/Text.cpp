@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 11:59:07 2017 Antoine Dury
-** Last update Tue Apr 25 12:02:49 2017 Antoine Dury
+** Last update Wed Apr 26 16:10:42 2017 Antoine Dury
 */
 
 #include <iostream>
@@ -13,6 +13,5 @@
 void *createDisplay(void *data)
 {
   (void)data;
-  std::cerr << "createDisplay TEXT called" << std::endl;
   return (NULL);
 }
