@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 25 20:40:19 2017 Quentin Metge
+** Last update Wed Apr 26 10:44:13 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -63,7 +63,7 @@ namespace plazza
             else if (std::string(order.type) == "EMAIL_ADDRESS")
               strcpy(order.regexp, "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
             else if (std::string(order.type) == "IP_ADDRESS")
-              strcpy(order.regexp, "(?:(?:0|1[\\d]{0,2}|2(?:[0-4]\\d?|5[0-5]?|[6-9])?|[3-9]\\d?)\\.){3}(?:0|1[\\d]{0,2}|2(?:[0-4]\\d?|5[0-5]?|[6-9])?|[3-9]\\d?)");
+              strcpy(order.regexp, "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b");
             else
               throw Error("This order is not known.");
             this->_orderList.push_back(order);
