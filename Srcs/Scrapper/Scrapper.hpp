@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Wed Apr 26 16:20:21 2017 Quentin Metge
+** Last update Wed Apr 26 16:27:04 2017 Antoine Dury
 */
 
 #ifndef SCRAPPER_HPP
@@ -14,6 +14,7 @@
 #include <regex>
 #include <cctype>
 #include "Order.hpp"
+#include "NamedPipe.hpp"
 
 namespace plazza
 {
@@ -49,6 +50,7 @@ namespace plazza
 
   private:
     Order*        _order;
+    NamedPipe     _np;
     std::string   _buffer = "";
 
   private:

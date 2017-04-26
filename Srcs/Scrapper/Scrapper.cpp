@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Wed Apr 26 16:20:46 2017 Quentin Metge
+** Last update Wed Apr 26 16:26:47 2017 Antoine Dury
 */
 
 #include "Scrapper.hpp"
@@ -16,7 +16,7 @@ namespace plazza
   /*****************/
   /*    Coplien    */
   /*****************/
-  Scrapper::Scrapper(Order* order) : _order(order){
+  Scrapper::Scrapper(Order* order) : _order(order), _np("scrapper"){
     bool        cyphered = true;
 
     if (this->initBuffer()){
@@ -33,7 +33,11 @@ namespace plazza
   /*    Actions    */
   /*****************/
   void                    Scrapper::dispResult(std::string const& str){
+    char                  result[str.size()];
+
     std::cout << str << std::endl;
+    str.copy(result, str.size());
+    this->_np.writeNP(result, str.size() * sizeof(char));
   }
 
   void                    Scrapper::dispMatch(std::string const& buffer){
