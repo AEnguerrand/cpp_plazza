@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 18:46:20 2017 Antoine Dury
+** Last update Thu Apr 27 19:42:01 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
@@ -79,6 +79,8 @@ void                  Graphic::drawInterface()
     this->_inputSF.setString(this->_input);
   this->_window.draw(this->_inputSF);
   this->_blinkCount++;
+
+  // Stats
 }
 
 void          Graphic::drawResults()

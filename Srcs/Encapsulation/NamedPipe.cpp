@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:54:09 2017 Antoine Dury
-** Last update Thu Apr 27 16:36:17 2017 Antoine Dury
+** Last update Thu Apr 27 19:24:20 2017 Antoine Dury
 */
 
 #include "NamedPipe.hpp"
@@ -38,7 +38,6 @@ void                NamedPipe::writeNP(void *data, size_t size)
 void                NamedPipe::readNP(void *data, size_t size)
 {
   read(this->_fd, reinterpret_cast<char*>(data), size);
-  usleep(450);
 }
 
 void                NamedPipe::destroy()
