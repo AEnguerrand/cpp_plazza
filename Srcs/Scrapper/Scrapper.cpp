@@ -42,7 +42,6 @@ namespace plazza
     char                  result[str.size()];
 
     str.copy(result, str.size());
-    std::cout << str << std::endl;
     this->_np.writeNP(result, str.size() * sizeof(char));
   }
 
