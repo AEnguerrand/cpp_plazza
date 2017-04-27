@@ -23,7 +23,7 @@ namespace plazza
   {
 
    private:
-    std::list<ThreadPoolWorker> _worker;
+    std::list<ThreadPoolWorker *> _worker;
     std::list<Order> 		_orders;
     IMutex 			*_mutex;
     //ICondVar			*_condVar;
@@ -31,7 +31,8 @@ namespace plazza
     ThreadPool(size_t nbWorker);
     virtual ~ThreadPool();
 
-    void addOrder(Order order);
+    void 	addOrder(Order order);
+    bool 	isEmpty();
   };
 }
 

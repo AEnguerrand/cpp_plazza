@@ -36,7 +36,8 @@ SRCS 			= 		./Srcs/main.cpp 	\
 
 SRCS 			+=		./Srcs/Process/ThreadPool.cpp 			\
 								./Srcs/Process/ThreadPoolWorker.cpp	\
-								./Srcs/Process/ProcessPlazza.cpp
+								./Srcs/Process/ProcessPlazza.cpp \
+								./Srcs/Process/ProcessChildPlazza.cpp
 
 SRCS 			+= 		./Srcs/ManagerProcess/ManagerProcess.cpp
 

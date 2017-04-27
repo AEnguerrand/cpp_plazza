@@ -11,14 +11,12 @@
 #include "ManagerProcess.hpp"
 
 plazza::ManagerProcess::ManagerProcess(size_t poolSize) :
-	_poolSize(poolSize)
+	_poolSize(poolSize * 2)
 {
-  std::cout << "CTOR ManagerProcess" << std::endl;
 }
 
 plazza::ManagerProcess::~ManagerProcess()
 {
-  std::cout << "DTOR ManagerProcess" << std::endl;
 }
 
 void plazza::ManagerProcess::addOrder(std::list<Order> orders)
@@ -34,7 +32,6 @@ void 		plazza::ManagerProcess::dispatch()
 {
   size_t 	process_nb = 1 + std::ceil(this->_orders.size() / this->_poolSize);
 
-  std::cout << "Nb Process: " << process_nb << std::endl;
   auto itOrderF = this->_orders.begin();
   auto itOrderL = this->_orders.begin();
   for (size_t i = 0; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
@@ -42,7 +39,7 @@ void 		plazza::ManagerProcess::dispatch()
     {
       std::list<Order> process_orders;
       process_orders.insert(process_orders.begin(), itOrderF, itOrderL);
-      this->_processes.push_back(new ProcessPlazza(process_orders));
+      this->_processes.push_back(new ProcessPlazza(process_orders, this->_poolSize));
       itOrderF = itOrderL;
       for (size_t i = 0 ; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
     }

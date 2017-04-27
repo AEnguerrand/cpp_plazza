@@ -18,7 +18,7 @@ static void		*scrapper(void *data)
 {
   plazza::Order 	*order = static_cast<plazza::Order*>(data);
 
-  plazza::Scrapper    scrapper(order);
+  plazza::Scrapper    	scrapper(order);
   return (NULL);
 }
 
@@ -29,20 +29,28 @@ static void		*scrapper(void *data)
 static void			*threadPool(void *data)
 {
   plazza::ThreadPoolWorker 	*tpw = static_cast<plazza::ThreadPoolWorker*>(data);
-  plazza::Order 		*order;
+  plazza::Order 		order;
 
-  tpw->setStatus(plazza::ThreadPoolWorker::STATUS::RUN);
-  tpw->setStatus(plazza::ThreadPoolWorker::STATUS::FREE);
   while (!tpw->isHalt())
     {
-      if (tpw->getStatus() == plazza::ThreadPoolWorker::STATUS::FREE)
+      if (tpw->getStatus() == plazza::ThreadPoolWorker::STATUS::FREE ||
+	  tpw->getStatus() == plazza::ThreadPoolWorker::STATUS::NOT_START)
 	{
 	  tpw->setStatus(plazza::ThreadPoolWorker::STATUS::RUN);
 	  tpw->_mutex->lock();
-	  order = &(*(tpw->_orders->begin()));
-	  tpw->_orders->pop_front();
-	  tpw->_mutex->unlock();
-	  scrapper(static_cast<void *>(&(order)));
+	  if (tpw->_orders->empty())
+	    {
+	      tpw->_mutex->unlock();
+	    }
+	  else
+	    {
+	      order = *(tpw->_orders->begin());
+	      tpw->_orders->pop_front();
+	      tpw->_mutex->unlock();
+
+	      scrapper(static_cast<void *>(&(order)));
+	    }
+
 	  tpw->setStatus(plazza::ThreadPoolWorker::STATUS::FREE);
 	}
     }
@@ -58,8 +66,9 @@ plazza::ThreadPoolWorker::ThreadPoolWorker(std::list<Order> *orders, IMutex *mut
   this->_orders = orders;
   this->_mutex = mutex;
   this->_status = ThreadPoolWorker::STATUS::NOT_START;
-  this->_thread = (new Thread(&threadPool, static_cast<void *>(this)));
   this->_halt = false;
+  this->_thread = new Thread(&threadPool, static_cast<void *>(this));
+  this->_thread->start();
 }
 
 plazza::ThreadPoolWorker::~ThreadPoolWorker()
