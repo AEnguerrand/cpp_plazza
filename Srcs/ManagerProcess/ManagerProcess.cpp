@@ -4,8 +4,8 @@
 ** Made by Enguerrand Allamel
 ** Login   <enguerrand.allamel@epitech.eu>
 **
-** Started on  Wed Apr 19 17:30:25 2017 Enguerrand Allamel
-** Last update Thu Apr 27 11:15:25 2017 Quentin Metge
+** Started on  Wed Apr 19 17:31:25 2017 Enguerrand Allamel
+** Last update Thu Apr 27 12:01:06 2017 Quentin Metge
 */
 
 #include "ManagerProcess.hpp"
