@@ -13,10 +13,11 @@
 
 #include <functional>
 #include <list>
+#include "Order.hpp"
 #include "Thread.hpp"
 #include "Process.hpp"
-#include "Order.hpp"
 #include "Scrapper.hpp"
+#include "ThreadPool.hpp"
 
 #define ONE_SEC        (1000000)
 
@@ -25,12 +26,17 @@ namespace plazza
   class ProcessPlazza
   {
    private:
+    size_t 		_id;
     std::list<Order>	_orders;
+    //ThreadPool		_thPool;
     std::list<IThread *>_threads;
     IProcess		*_process;
    public:
     ProcessPlazza(std::list<Order> orders);
     virtual ~ProcessPlazza();
+
+    void 	setId(size_t id);
+    size_t 	getId() const;
 
     void	start();
     void 	processLoop();

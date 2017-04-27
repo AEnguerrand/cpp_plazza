@@ -10,6 +10,7 @@
 
 #include "ProcessPlazza.hpp"
 
+
 /*
  * Function Scrapper
  */
@@ -31,8 +32,19 @@ plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders) :
 
 plazza::ProcessPlazza::~ProcessPlazza()
 {
+  // No kill process
   //delete this->_process;
   std::cout << "DTOR Process Plazza" << std::endl;
+}
+
+void plazza::ProcessPlazza::setId(size_t id)
+{
+  this->_id = id;
+}
+
+size_t plazza::ProcessPlazza::getId() const
+{
+  return this->_id;
 }
 
 void plazza::ProcessPlazza::start()
@@ -47,7 +59,8 @@ void plazza::ProcessPlazza::start()
     }
   else
     {
-     //this->_process->wait();
+      // No wait end of processs
+      // this->_process->wait();
     }
 }
 

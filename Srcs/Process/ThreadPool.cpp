@@ -10,16 +10,23 @@
 
 #include "ThreadPool.hpp"
 
-ThreadPool::ThreadPool(size_t nbWorker) :
-	_condVar(new CondVar())
+plazza::ThreadPool::ThreadPool(size_t nbWorker)
 {
+  this->_mutex = new Mutex();
   for (size_t i = 0 ; i < nbWorker ; i++)
     {
-      this->_worker.push_back(ThreadPoolWorker());
+      this->_worker.push_back(ThreadPoolWorker(&this->_orders, this->_mutex));
     }
 }
 
-ThreadPool::~ThreadPool()
+plazza::ThreadPool::~ThreadPool()
 {
+  delete this->_mutex;
+}
 
+void plazza::ThreadPool::addOrder(Order order)
+{
+  this->_mutex->lock();
+  this->_orders.push_back(order);
+  this->_mutex->unlock();
 }

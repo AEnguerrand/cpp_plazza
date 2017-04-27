@@ -11,21 +11,29 @@
 #ifndef CPP_PLAZZA_THREADPOOL_HPP
 #define CPP_PLAZZA_THREADPOOL_HPP
 
+#include "Order.hpp"
 #include "CondVar.hpp"
 #include "Thread.hpp"
+#include "Mutex.hpp"
 #include "ThreadPoolWorker.hpp"
 
-class ThreadPool
+namespace plazza
 {
- private:
-  std::list<ThreadPoolWorker>	_worker;
-  ICondVar			*_condVar;
- public:
-  ThreadPool(size_t nbWorker);
-  virtual ~ThreadPool();
+  class ThreadPool
+  {
 
-  void 		display();
-};
+   private:
+    std::list<ThreadPoolWorker> _worker;
+    std::list<Order> 		_orders;
+    IMutex 			*_mutex;
+    //ICondVar			*_condVar;
+   public:
+    ThreadPool(size_t nbWorker);
+    virtual ~ThreadPool();
+
+    void addOrder(Order order);
+  };
+}
 
 
 #endif //CPP_PLAZZA_THREADPOOL_HPP

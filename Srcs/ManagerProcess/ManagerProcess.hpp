@@ -14,8 +14,8 @@
 #include <iterator>
 #include <cmath>
 #include <list>
-#include "ProcessPlazza.hpp"
 #include "Order.hpp"
+#include "ProcessPlazza.hpp"
 
 namespace plazza {
   class ManagerProcess

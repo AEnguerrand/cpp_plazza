@@ -23,7 +23,7 @@ class Thread : public IThread
 
  public:
   Thread(void *(*ptr_func)(void *), void *data);
-  virtual ~Thread() {}
+  virtual ~Thread();
 
   virtual IThread::STATUS getStatus() const;
   virtual void start();

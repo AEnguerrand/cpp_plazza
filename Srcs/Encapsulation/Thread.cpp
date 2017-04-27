@@ -17,6 +17,10 @@ Thread::Thread(void *(*ptr_func)(void *), void *data)
   this->_status = IThread::STATUS::NOT_START;
 }
 
+Thread::~Thread()
+{
+}
+
 IThread::STATUS Thread::getStatus() const
 {
   return this->_status;

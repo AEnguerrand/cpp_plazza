@@ -11,26 +11,45 @@
 #ifndef CPP_PLAZZA_THREADPOOLWORKER_HPP
 #define CPP_PLAZZA_THREADPOOLWORKER_HPP
 
-#include "Plazza.hpp"
+#include <list>
+#include "Order.hpp"
+#include "IMutex.hpp"
 #include "ICondVar.hpp"
-#include "IThread.hpp"
+#include "Thread.hpp"
+#include "Scrapper.hpp"
 
-class ThreadPoolWorker
+namespace plazza
 {
- public:
-  enum class STATUS
+  class ThreadPoolWorker
   {
-    NOT_START,
-    RUN
+   public:
+    enum class STATUS
+    {
+      NOT_START,
+      RUN,
+      FREE,
+      HALT,
+    };
+
+   private:
+    ThreadPoolWorker::STATUS 	_status;
+    IThread 			*_thread;
+    bool 			_halt;
+   public:
+    IMutex 			*_mutex;
+    std::list<Order> 		*_orders;
+
+   public:
+    ThreadPoolWorker(std::list<Order> *orders, IMutex *mutex);
+
+    virtual ~ThreadPoolWorker();
+
+    void setStatus(ThreadPoolWorker::STATUS status);
+
+    ThreadPoolWorker::STATUS getStatus() const;
+
+    bool isHalt() const;
   };
- private:
-  plazza::Order			_order;
-  ThreadPoolWorker::STATUS 	_status;
- public:
-  ThreadPoolWorker();
-  virtual ~ThreadPoolWorker();
-
-};
-
+}
 
 #endif //CPP_PLAZZA_THREADPOOLWORKER_HPP
