@@ -5,10 +5,14 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 18 13:54:09 2017 Antoine Dury
-** Last update Wed Apr 26 23:29:51 2017 Antoine Dury
+** Last update Thu Apr 27 12:32:29 2017 Antoine Dury
 */
 
 #include "NamedPipe.hpp"
+
+NamedPipe::NamedPipe()
+{
+}
 
 NamedPipe::NamedPipe(std::string name)
 {
