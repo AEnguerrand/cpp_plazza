@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 20:27:28 2017 Quentin Metge
-** Last update Thu Apr 27 16:33:57 2017 Antoine Dury
+** Last update Thu Apr 27 18:21:35 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -28,7 +28,7 @@ namespace plazza
   {
   public:
     Plazza(void){}
-    Plazza(const int poolSize);
+    Plazza(const size_t poolSize);
     ~Plazza(void);
 
   public:
@@ -47,6 +47,7 @@ namespace plazza
     size_t                    _poolSize;
     std::vector<std::string>  _ordersType;
     std::list<Order>          _orderList;
+    ManagerProcess            _managerProcess;
   };
 
 }

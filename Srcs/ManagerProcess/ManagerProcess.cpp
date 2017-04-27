@@ -5,12 +5,12 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:31:25 2017 Enguerrand Allamel
-** Last update Thu Apr 27 16:49:42 2017 Quentin Metge
+** Last update Thu Apr 27 18:22:39 2017 Quentin Metge
 */
 
 #include "ManagerProcess.hpp"
 
-plazza::ManagerProcess::ManagerProcess(size_t poolSize) :
+plazza::ManagerProcess::ManagerProcess(size_t const poolSize) :
 	_poolSize(poolSize)
 {
 }

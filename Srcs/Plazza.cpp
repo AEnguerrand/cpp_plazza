@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Thu Apr 27 17:46:23 2017 Quentin Metge
+** Last update Thu Apr 27 18:22:06 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -16,7 +16,7 @@ namespace plazza
   /*****************/
   /*    Coplien    */
   /*****************/
-  Plazza::Plazza(const int poolSize) : _poolSize(poolSize){
+  Plazza::Plazza(const size_t poolSize) : _poolSize(poolSize), _managerProcess(poolSize){
     this->_ordersType.push_back("EMAIL_ADDRESS");
     this->_ordersType.push_back("IP_ADDRESS");
     this->_ordersType.push_back("PHONE_NUMBER");
@@ -81,14 +81,13 @@ namespace plazza
 
   void                  Plazza::mainLoop(void){
     std::string         buffer;
-    ManagerProcess      managerProcess(this->getPoolSize());
-    IThread             *thread = new Thread(&createDisplay, &managerProcess);
+    IThread             *thread = new Thread(&createDisplay, this);
 
     thread->start();
     while (getline(std::cin, buffer)){
     	this->getNextLine(buffer);
     	//this->displayOrderList();
-    	managerProcess.addOrder(this->_orderList);
+    	this->_managerProcess.addOrder(this->_orderList);
       this->_orderList.clear();
     }
     delete thread;
