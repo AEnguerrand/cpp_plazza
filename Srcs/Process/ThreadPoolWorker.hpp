@@ -34,10 +34,10 @@ namespace plazza
    private:
     ThreadPoolWorker::STATUS 	_status;
     IThread 			*_thread;
-    bool 			_halt;
    public:
     IMutex 			*_mutex;
     std::list<Order> 		*_orders;
+    bool 			_halt;
 
    public:
     ThreadPoolWorker(std::list<Order> *orders, IMutex *mutex);

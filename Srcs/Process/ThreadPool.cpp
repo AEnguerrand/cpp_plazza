@@ -40,7 +40,7 @@ bool plazza::ThreadPool::isEmpty()
     {
       if ((*it)->getStatus() == plazza::ThreadPoolWorker::STATUS::RUN ||
 	  (*it)->getStatus() == plazza::ThreadPoolWorker::STATUS::NOT_START)
-      	res = false;
+	res = false;
     }
   return (res);
 }

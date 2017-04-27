@@ -36,22 +36,23 @@ static void			*threadPool(void *data)
       if (tpw->getStatus() == plazza::ThreadPoolWorker::STATUS::FREE ||
 	  tpw->getStatus() == plazza::ThreadPoolWorker::STATUS::NOT_START)
 	{
-	  tpw->setStatus(plazza::ThreadPoolWorker::STATUS::RUN);
 	  tpw->_mutex->lock();
+	  if (tpw->getStatus() == plazza::ThreadPoolWorker::STATUS::NOT_START)
+	    tpw->setStatus(plazza::ThreadPoolWorker::STATUS::FREE);
 	  if (tpw->_orders->empty())
 	    {
 	      tpw->_mutex->unlock();
 	    }
 	  else
 	    {
+	      tpw->setStatus(plazza::ThreadPoolWorker::STATUS::RUN);
 	      order = *(tpw->_orders->begin());
 	      tpw->_orders->pop_front();
 	      tpw->_mutex->unlock();
 
 	      scrapper(static_cast<void *>(&(order)));
+	      tpw->setStatus(plazza::ThreadPoolWorker::STATUS::FREE);
 	    }
-
-	  tpw->setStatus(plazza::ThreadPoolWorker::STATUS::FREE);
 	}
     }
   return (NULL);
@@ -74,8 +75,9 @@ plazza::ThreadPoolWorker::ThreadPoolWorker(std::list<Order> *orders, IMutex *mut
 plazza::ThreadPoolWorker::~ThreadPoolWorker()
 {
   this->_status = ThreadPoolWorker::STATUS::HALT;
-  delete this->_thread;
   this->_halt = true;
+  this->_thread->wait();
+  delete this->_thread;
 }
 
 plazza::ThreadPoolWorker::STATUS plazza::ThreadPoolWorker::getStatus() const

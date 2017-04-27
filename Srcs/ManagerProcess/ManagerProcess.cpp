@@ -17,6 +17,10 @@ plazza::ManagerProcess::ManagerProcess(size_t const poolSize) :
 
 plazza::ManagerProcess::~ManagerProcess()
 {
+  for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
+    {
+      delete (*it);
+    }
 }
 
 void plazza::ManagerProcess::addOrder(std::list<Order> orders)
