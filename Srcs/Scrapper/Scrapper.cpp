@@ -5,11 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-<<<<<<< HEAD
-** Last update Wed Apr 26 22:45:41 2017 Quentin Metge
-=======
-** Last update Wed Apr 26 16:42:26 2017 Antoine Dury
->>>>>>> ddfe9204f4dd6f375933b19366cbae894273d74d
+** Last update Thu Apr 27 12:24:22 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -24,9 +20,7 @@ namespace plazza
     bool        cyphered = true;
 
     this->_order = dataScrapper.getOrder();
-    //this->_np = dataScrapper.getNp();
-    this->_np = NamedPipe("scrapper");
-    this->_np.create("WRITE");
+    this->_np = dataScrapper.getNp();
     if (this->initBuffer()){
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
       //this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
@@ -48,6 +42,7 @@ namespace plazza
   }
 
   void                    Scrapper::dispMatch(std::string const& buffer){
+    this->_np.create("WRITE");
     if (std::string(this->_order.type) == "IP_ADDRESS"){
       this->dispIp(buffer);
     }

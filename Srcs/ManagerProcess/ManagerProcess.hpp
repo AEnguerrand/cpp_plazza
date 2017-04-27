@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:31:25 2017 Enguerrand Allamel
-** Last update Thu Apr 27 12:01:11 2017 Quentin Metge
+** Last update Thu Apr 27 12:18:35 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_MANAGERPROCESS_HPP
@@ -24,6 +24,7 @@ namespace plazza {
     std::list<Order>		        _orders;
     std::list<ProcessPlazza *>	_processes;
     size_t 			                _poolSize;
+    NamedPipe                   _np;
    public:
     ManagerProcess(size_t poolSize);
     virtual ~ManagerProcess();
