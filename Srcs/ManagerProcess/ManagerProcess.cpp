@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:31:25 2017 Enguerrand Allamel
-** Last update Thu Apr 27 12:01:06 2017 Quentin Metge
+** Last update Thu Apr 27 12:05:56 2017 Quentin Metge
 */
 
 #include "ManagerProcess.hpp"
@@ -33,7 +33,7 @@ void 		plazza::ManagerProcess::dispatch()
 	NamedPipe		np;
   size_t 			process_nb = 1 + std::ceil(this->_orders.size() / this->_poolSize);
 
-	np.create("WRITE");
+	//np.create("WRITE");
   std::cout << "Nb Process: " << process_nb << std::endl;
   auto itOrderF = this->_orders.begin();
   auto itOrderL = this->_orders.begin();

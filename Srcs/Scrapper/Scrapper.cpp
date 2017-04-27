@@ -24,11 +24,13 @@ namespace plazza
     bool        cyphered = true;
 
     this->_order = dataScrapper.getOrder();
-    this->_np = dataScrapper.getNp();
+    //this->_np = dataScrapper.getNp();
+    this->_np = NamedPipe("scrapper");
+    this->_np.create("WRITE");
     if (this->initBuffer()){
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
         cyphered = this->_scrapperFct[i]();
       }
