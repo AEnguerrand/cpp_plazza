@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 17:40:48 2017 Antoine Dury
+** Last update Thu Apr 27 17:46:04 2017 Quentin Metge
 */
 
 #include "Graphic.hpp"
@@ -148,7 +148,16 @@ void          Graphic::getEvent()
     }
 }
 
-void Graphic::getResults(std::string results)
+void Graphic::getResults(std::string const& results)
 {
-  (void)results;
+  std::stringstream ss(results);
+  std::string       token;
+
+  if (ss.good())
+  {
+    while(std::getline(ss, token, '\n')){
+      if (!token.empty())
+        this->_results.push_back(token);
+    }
+  }
 }
