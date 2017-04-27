@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:53 2017 Antoine Dury
-** Last update Thu Apr 27 11:32:32 2017 Antoine Dury
+** Last update Thu Apr 27 16:44:38 2017 Antoine Dury
 */
 
 #ifndef GRAPHIC_HPP_
@@ -27,6 +27,7 @@ class Graphic
     void                      drawInterface(void);
     void                      drawResults(void);
     void                      getEvent(void);
+    void                      getResults(std::string);
 
   private:
     sf::Font                  _font;
