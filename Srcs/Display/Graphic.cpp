@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 17:09:40 2017 Quentin Metge
+** Last update Thu Apr 27 17:40:48 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
@@ -146,4 +146,9 @@ void          Graphic::getEvent()
                 this->_scroll += event.mouseWheel.delta;
           }
     }
+}
+
+void Graphic::getResults(std::string results)
+{
+  (void)results;
 }
