@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Wed Apr 26 16:27:04 2017 Antoine Dury
+** Last update Thu Apr 27 10:13:04 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -19,11 +19,23 @@
 namespace plazza
 {
 
+  class DataScrapper
+  {
+  public:
+    DataScrapper(void);
+    DataScrapper(Order const& order) : _order(order){}
+    virtual ~DataScrapper(void);
+
+  private:
+    Order       _order;
+    NamedPipe   _np;
+  };
+
   class Scrapper
   {
   public:
     Scrapper(void){};
-    Scrapper(Order* order);
+    Scrapper(DataScrapper* dataScrapper);
     virtual ~Scrapper(void){};
 
   public:
