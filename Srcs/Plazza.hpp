@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 20:27:28 2017 Quentin Metge
-** Last update Thu Apr 27 18:21:35 2017 Quentin Metge
+** Last update Thu Apr 27 18:41:41 2017 Antoine Dury
 */
 
 #ifndef PLAZZA_HPP_
@@ -42,6 +42,9 @@ namespace plazza
   public:
     size_t                    getPoolSize(void) const;
     std::vector<std::string>  getOrdersType(void) const;
+    std::list<Order>          getOrderList(void) const;
+    ManagerProcess            getManagerProcess(void) const;
+    void                      clearOrderList(void);
 
   private:
     size_t                    _poolSize;

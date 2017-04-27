@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Thu Apr 27 18:22:06 2017 Quentin Metge
+** Last update Thu Apr 27 18:42:11 2017 Antoine Dury
 */
 
 #include "Plazza.hpp"
@@ -88,7 +88,7 @@ namespace plazza
     	this->getNextLine(buffer);
     	//this->displayOrderList();
     	this->_managerProcess.addOrder(this->_orderList);
-      this->_orderList.clear();
+      this->clearOrderList();
     }
     delete thread;
   }
@@ -97,6 +97,11 @@ namespace plazza
     for (auto it = this->_orderList.begin(); it != this->_orderList.end(); it++){
        std::cerr << "Order:\t" << (*it).fileName << "\t->\t" << (*it).type << std::endl;
     }
+  }
+
+  void                  Plazza::clearOrderList(void)
+  {
+    this->_orderList.clear();
   }
 
   /*****************/
@@ -108,6 +113,14 @@ namespace plazza
 
   std::vector<std::string>    Plazza::getOrdersType(void) const{
     return (this->_ordersType);
+  }
+
+  ManagerProcess              Plazza::getManagerProcess(void) const{
+    return (this->_managerProcess);
+  }
+
+  std::list<Order>            Plazza::getOrderList(void) const{
+    return (this->_orderList);
   }
 
   /*****************/
