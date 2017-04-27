@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:31:25 2017 Enguerrand Allamel
-** Last update Thu Apr 27 12:24:31 2017 Quentin Metge
+** Last update Thu Apr 27 12:26:18 2017 Quentin Metge
 */
 
 #include "ManagerProcess.hpp"
@@ -40,7 +40,7 @@ void 		plazza::ManagerProcess::dispatch()
     {
       std::list<Order> process_orders;
       process_orders.insert(process_orders.begin(), itOrderF, itOrderL);
-      this->_processes.push_back(new ProcessPlazza(process_orders, this->_np));
+      this->_processes.push_back(new ProcessPlazza(process_orders, &this->_np));
       itOrderF = itOrderL;
       for (size_t i = 0 ; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
     }

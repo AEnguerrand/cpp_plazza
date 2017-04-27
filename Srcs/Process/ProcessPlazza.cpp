@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:49:39 2017 Enguerrand Allamel
-** Last update Thu Apr 27 11:23:58 2017 Quentin Metge
+** Last update Thu Apr 27 12:27:10 2017 Quentin Metge
 */
 
 #include "ProcessPlazza.hpp"
@@ -20,7 +20,7 @@ static void		*scrapper(void *data)
   return (NULL);
 }
 
-plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders, NamedPipe const& np) :
+plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders, NamedPipe* np) :
 	_orders(orders), _np(np)
 {
   this->_process = new Process();

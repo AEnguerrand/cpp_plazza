@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 27 12:24:22 2017 Quentin Metge
+** Last update Thu Apr 27 12:31:44 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -22,9 +22,9 @@ namespace plazza
     this->_order = dataScrapper.getOrder();
     this->_np = dataScrapper.getNp();
     if (this->initBuffer()){
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
         cyphered = this->_scrapperFct[i]();
       }
@@ -38,11 +38,11 @@ namespace plazza
     char                  result[str.size()];
 
     str.copy(result, str.size());
-    this->_np.writeNP(result, str.size() * sizeof(char));
+    this->_np->writeNP(result, str.size() * sizeof(char));
   }
 
   void                    Scrapper::dispMatch(std::string const& buffer){
-    this->_np.create("WRITE");
+    this->_np->create("WRITE");
     if (std::string(this->_order.type) == "IP_ADDRESS"){
       this->dispIp(buffer);
     }
@@ -158,7 +158,7 @@ namespace plazza
     return (this->_order);
   }
 
-  NamedPipe       DataScrapper::getNp(void) const{
+  NamedPipe*      DataScrapper::getNp(void) const{
     return (this->_np);
   }
 
@@ -167,10 +167,6 @@ namespace plazza
   /*****************/
   void              DataScrapper::setOrder(Order const& order){
     this->_order = order;
-  }
-
-  void              DataScrapper::setNp(NamedPipe const& np){
-    this->_np = np;
   }
 
 }

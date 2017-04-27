@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Thu Apr 27 11:18:32 2017 Quentin Metge
+** Last update Thu Apr 27 12:29:40 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -23,20 +23,19 @@ namespace plazza
   {
   public:
     DataScrapper(void){}
-    DataScrapper(NamedPipe np) : _np(np){}
+    DataScrapper(NamedPipe* np) : _np(np){}
     virtual ~DataScrapper(void){}
 
   public:
     Order         getOrder(void) const;
-    NamedPipe     getNp(void) const;
+    NamedPipe*    getNp(void) const;
 
   public:
     void          setOrder(Order const& order);
-    void          setNp(NamedPipe const& np);
 
   private:
     Order       _order;
-    NamedPipe   _np;
+    NamedPipe*  _np;
   };
 
   class Scrapper
@@ -70,7 +69,7 @@ namespace plazza
 
   private:
     Order         _order;
-    NamedPipe     _np;
+    NamedPipe*    _np;
     std::string   _buffer = "";
 
   private:
