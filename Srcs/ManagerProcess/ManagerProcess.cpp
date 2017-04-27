@@ -13,6 +13,7 @@
 plazza::ManagerProcess::ManagerProcess(size_t const poolSize) :
 	_poolSize(poolSize * 2)
 {
+  this->_c_start = std::clock();
 }
 
 plazza::ManagerProcess::~ManagerProcess()
@@ -57,6 +58,13 @@ void 		plazza::ManagerProcess::dispatch()
     }
   this->_processes.clear();
   this->_orders.clear();
+}
+
+bool plazza::ManagerProcess::isFinish()
+{
+  if ((std::clock() - this->_c_start) < (ONE_SEC * 5))
+    return false;
+  return true;
 }
 
 std::list<plazza::Order> 		plazza::ManagerProcess::getOrders(void) const{

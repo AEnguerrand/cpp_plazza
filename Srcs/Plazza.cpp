@@ -84,10 +84,11 @@ namespace plazza
     IThread             *thread = new Thread(&createDisplay, this);
 
     thread->start();
-    while (getline(std::cin, buffer) && buffer != "exit"){
-      this->getNextLine(buffer);
-      this->_managerProcess.addOrder(this->_orderList);
-      this->clearOrderList();
+    while ((getline(std::cin, buffer) && buffer != "exit") || !this->_managerProcess.isFinish()){
+	this->getNextLine(buffer);
+	if (!this->_orderList.empty())
+	  this->_managerProcess.addOrder(this->_orderList);
+      	this->clearOrderList();
     }
     delete thread;
   }

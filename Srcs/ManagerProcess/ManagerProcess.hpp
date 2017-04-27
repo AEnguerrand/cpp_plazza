@@ -22,8 +22,9 @@ namespace plazza {
   {
    private:
     std::list<Order>		        _orders;
-    std::list<ProcessPlazza *>	_processes;
-    size_t 			                _poolSize;
+    std::list<ProcessPlazza *>		_processes;
+    size_t 			       	_poolSize;
+    std::clock_t  			_c_start;
    public:
     ManagerProcess(void){}
     ManagerProcess(size_t const poolSize);
@@ -31,6 +32,8 @@ namespace plazza {
 
     void	addOrder(std::list<Order> orders);
     void	dispatch();
+
+    bool	isFinish();
   public:
     std::list<Order> getOrders(void) const;
   };
