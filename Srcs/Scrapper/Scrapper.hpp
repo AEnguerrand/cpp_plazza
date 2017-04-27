@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Thu Apr 27 12:29:40 2017 Quentin Metge
+** Last update Thu Apr 27 13:34:24 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -71,6 +71,7 @@ namespace plazza
     Order         _order;
     NamedPipe*    _np;
     std::string   _buffer = "";
+    std::string   _error = "";
 
   private:
     std::vector<std::function<bool (void)>> _scrapperFct;

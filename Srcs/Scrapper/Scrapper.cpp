@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 27 12:31:44 2017 Quentin Metge
+** Last update Thu Apr 27 13:45:19 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -35,10 +35,16 @@ namespace plazza
   /*    Actions    */
   /*****************/
   void                    Scrapper::dispResult(std::string const& str){
-    char                  result[str.size()];
+    std::string           res;
 
-    str.copy(result, str.size());
-    this->_np->writeNP(result, str.size() * sizeof(char));
+    if (!this->_error.empty())
+      res = "[CE]" + this->_error;
+    else
+      res = "[CO]" + str;
+    char                  result[res.size()];
+
+    str.copy(result, res.size());
+    this->_np->writeNP(result, res.size() * sizeof(char));
   }
 
   void                    Scrapper::dispMatch(std::string const& buffer){
@@ -68,7 +74,7 @@ namespace plazza
 
     ss.open(this->_order.fileName);
     if (!ss.is_open()){
-      std::cerr << "Unable to open file " << this->_order.fileName << "." << std::endl;
+      //std::cerr << "Unable to open file " << this->_order.fileName << "." << std::endl;
       return false;
     }
     std::string           line;
