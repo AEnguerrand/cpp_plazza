@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 27 16:32:05 2017 Antoine Dury
+** Last update Thu Apr 27 16:39:24 2017 Antoine Dury
 */
 
 #include "Scrapper.hpp"
@@ -69,7 +69,7 @@ namespace plazza
 
     ss.open(this->_order.fileName);
     if (!ss.is_open()){
-      std::cerr << "Unable to open file " << this->_order.fileName << "." << std::endl;
+      //std::cerr << "Unable to open file " << this->_order.fileName << "." << std::endl;
       return false;
     }
     std::string           line;
