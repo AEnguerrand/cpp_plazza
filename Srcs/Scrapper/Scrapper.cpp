@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 27 13:52:30 2017 Quentin Metge
+** Last update Thu Apr 27 16:32:05 2017 Antoine Dury
 */
 
 #include "Scrapper.hpp"
@@ -21,6 +21,7 @@ namespace plazza
 
     this->_order = dataScrapper.getOrder();
     this->_np = dataScrapper.getNp();
+    this->_np->create("WRITE");
     if (this->initBuffer()){
       //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
@@ -29,6 +30,7 @@ namespace plazza
         cyphered = this->_scrapperFct[i]();
       }
     }
+    this->_np->destroy();
   }
 
   /*****************/
@@ -42,7 +44,6 @@ namespace plazza
   }
 
   void                    Scrapper::dispMatch(std::string const& buffer){
-    this->_np->create("WRITE");
     if (std::string(this->_order.type) == "IP_ADDRESS"){
       this->dispIp(buffer);
     }

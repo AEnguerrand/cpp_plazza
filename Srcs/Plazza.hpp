@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 20:27:28 2017 Quentin Metge
-** Last update Thu Apr 27 12:00:55 2017 Quentin Metge
+** Last update Thu Apr 27 16:33:57 2017 Antoine Dury
 */
 
 #ifndef PLAZZA_HPP_
@@ -29,7 +29,7 @@ namespace plazza
   public:
     Plazza(void){}
     Plazza(const int poolSize);
-    ~Plazza(void){}
+    ~Plazza(void);
 
   public:
     TokenType   getTypeOfToken(std::string token);

@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 13:20:40 2017 Antoine Dury
+** Last update Thu Apr 27 16:30:44 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
@@ -94,7 +94,7 @@ void   Graphic::drawResults()
   this->_np.readNP(result, BUFFER_SIZE);
   if (strlen(result) > 0)
     {
-      // Get result by Quentin
+      // Get result à stocker dans _results
     }
 
   for (size_t i = 0; i < 17; i++)
@@ -125,6 +125,7 @@ void          Graphic::getEvent()
                 {
                   if (!this->_input.empty())
                     {
+                      // Envoi des commandes au manager
                       std::cout << this->_input << std::endl;
                       this->_input.clear();
                     }

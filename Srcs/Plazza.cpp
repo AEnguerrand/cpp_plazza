@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Thu Apr 27 12:00:48 2017 Quentin Metge
+** Last update Thu Apr 27 16:34:20 2017 Antoine Dury
 */
 
 #include "Plazza.hpp"
@@ -21,6 +21,10 @@ namespace plazza
     this->_ordersType.push_back("IP_ADDRESS");
     this->_ordersType.push_back("PHONE_NUMBER");
     this->mainLoop();
+  }
+
+  Plazza::~Plazza(){
+    unlink("/tmp/*.fifo");
   }
 
   /*****************/
