@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:30:25 2017 Enguerrand Allamel
-** Last update Wed Apr 26 16:10:07 2017 Antoine Dury
+** Last update Thu Apr 27 11:15:25 2017 Quentin Metge
 */
 
 #include "ManagerProcess.hpp"
@@ -30,8 +30,10 @@ void plazza::ManagerProcess::addOrder(std::list<Order> orders)
 
 void 		plazza::ManagerProcess::dispatch()
 {
-  size_t 	process_nb = 1 + std::ceil(this->_orders.size() / this->_poolSize);
+	NamedPipe		np;
+  size_t 			process_nb = 1 + std::ceil(this->_orders.size() / this->_poolSize);
 
+	np.create("WRITE");
   std::cout << "Nb Process: " << process_nb << std::endl;
   auto itOrderF = this->_orders.begin();
   auto itOrderL = this->_orders.begin();
@@ -40,7 +42,7 @@ void 		plazza::ManagerProcess::dispatch()
     {
       std::list<Order> process_orders;
       process_orders.insert(process_orders.begin(), itOrderF, itOrderL);
-      this->_processes.push_back(new ProcessPlazza(process_orders));
+      this->_processes.push_back(new ProcessPlazza(process_orders, np));
       itOrderF = itOrderL;
       for (size_t i = 0 ; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
     }

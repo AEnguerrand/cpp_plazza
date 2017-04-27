@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:30:25 2017 Enguerrand Allamel
-** Last update Tue Apr 25 14:55:44 2017 Quentin Metge
+** Last update Thu Apr 27 11:14:58 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_MANAGERPROCESS_HPP
@@ -15,7 +15,7 @@
 #include <cmath>
 #include <list>
 #include "ProcessPlazza.hpp"
-#include "Order.hpp"
+#include "Scrapper.hpp"
 
 namespace plazza {
   class ManagerProcess

@@ -20,15 +20,15 @@ namespace plazza
   /*****************/
   /*    Coplien    */
   /*****************/
-  Scrapper::Scrapper(DataScrapper* dataScrapper){
+  Scrapper::Scrapper(DataScrapper const& dataScrapper){
     bool        cyphered = true;
 
-    this->_order = dataScrapper->getOrder();
-    this->_np = _np(dataScrapper->getNp();
+    this->_order = dataScrapper.getOrder();
+    this->_np = dataScrapper.getNp();
     if (this->initBuffer()){
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
         cyphered = this->_scrapperFct[i]();
       }
@@ -47,12 +47,13 @@ namespace plazza
   }
 
   void                    Scrapper::dispMatch(std::string const& buffer){
-    if (std::string(this->_order->type) == "IP_ADDRESS"){
+    if (std::string(this->_order.type) == "IP_ADDRESS"){
       this->dispIp(buffer);
     }
-    else if (std::string(this->_order->type) == "PHONE_NUMBER"){
+    else if (std::string(this->_order.type) == "PHONE_NUMBER"){
       this->dispPhone(buffer);
     }
+    // With regexp
     /*else{
       std::regex            regex(this->_order->regexp);
       std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
@@ -69,9 +70,9 @@ namespace plazza
   bool                    Scrapper::initBuffer(void){
     std::ifstream         ss;
 
-    ss.open(this->_order->fileName);
+    ss.open(this->_order.fileName);
     if (!ss.is_open()){
-      std::cerr << "Unable to open file " << this->_order->fileName << "." << std::endl;
+      std::cerr << "Unable to open file " << this->_order.fileName << "." << std::endl;
       return false;
     }
     std::string           line;
@@ -157,11 +158,23 @@ namespace plazza
   /*****************/
   /*     Getter    */
   /*****************/
+  Order           DataScrapper::getOrder(void) const{
+    return (this->_order);
+  }
 
+  NamedPipe       DataScrapper::getNp(void) const{
+    return (this->_np);
+  }
 
   /*****************/
   /*     Setter    */
   /*****************/
+  void              DataScrapper::setOrder(Order const& order){
+    this->_order = order;
+  }
 
+  void              DataScrapper::setNp(NamedPipe const& np){
+    this->_np = np;
+  }
 
 }
