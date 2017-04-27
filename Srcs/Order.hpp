@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 23:29:34 2017 Enguerrand Allamel
-** Last update Tue Apr 25 10:23:34 2017 Quentin Metge
+** Last update Thu Apr 27 10:04:19 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_ORDER_HPP
@@ -16,7 +16,7 @@
 #include <sstream>
 #include "Error.hpp"
 
-#define BUFFER_SIZE (512)
+#define BUFFER_SIZE 4096
 
 namespace plazza
 {

@@ -4,8 +4,8 @@
 ** Made by Quentin Metge
 ** Login   <metge_q@epitech.net>
 **
-** Started on  Mon Apr 17 19:27:28 2017 Quentin Metge
-** Last update Thu Apr 20 15:40:02 2017 Quentin Metge
+** Started on  Mon Apr 17 20:27:28 2017 Quentin Metge
+** Last update Thu Apr 27 18:21:35 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <vector>
 #include <list>
+#include <cstring>
 #include "Error.hpp"
 #include "Order.hpp"
 #include "ManagerProcess.hpp"
@@ -27,8 +28,8 @@ namespace plazza
   {
   public:
     Plazza(void){}
-    Plazza(const int poolSize);
-    ~Plazza(void){}
+    Plazza(const size_t poolSize);
+    ~Plazza(void);
 
   public:
     TokenType   getTypeOfToken(std::string token);
@@ -46,8 +47,11 @@ namespace plazza
     size_t                    _poolSize;
     std::vector<std::string>  _ordersType;
     std::list<Order>          _orderList;
+    ManagerProcess            _managerProcess;
   };
 
 }
+
+void *createDisplay(void*);
 
 #endif

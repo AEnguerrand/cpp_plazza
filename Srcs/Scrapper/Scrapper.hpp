@@ -5,14 +5,16 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Tue Apr 25 10:39:04 2017 Quentin Metge
+** Last update Thu Apr 27 16:53:40 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
 # define SCRAPPER_HPP
 
 #include <regex>
+#include <cctype>
 #include "Order.hpp"
+#include "NamedPipe.hpp"
 
 namespace plazza
 {
@@ -21,11 +23,21 @@ namespace plazza
   {
   public:
     Scrapper(void){};
-    Scrapper(Order* order);
+    Scrapper(Order *order);
     virtual ~Scrapper(void){};
 
   public:
     bool          initBuffer(void);
+    void          dispMatch(std::string const& buffer);
+    void          dispResult(std::string const& str);
+
+  public:
+    void          dispIp(std::string const& buffer);
+    std::string   nb255(std::string const& buffer, size_t& i);
+
+  public:
+    void          dispPhone(std::string const& buffer);
+    std::string   nbXX(std::string const& buffer, size_t& i);
 
   public:
     bool          scpNormal(void);
@@ -38,6 +50,7 @@ namespace plazza
 
   private:
     Order*        _order;
+    NamedPipe     _np;
     std::string   _buffer = "";
 
   private:

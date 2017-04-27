@@ -26,7 +26,7 @@ CPPFLAGS 	+=		-I./Srcs  							\
 
 LDFLAGS 	= 		-lpthread
 
-GUIFLAGS	=			-lsfml-graphics	\
+UIFLAGS		=			-lsfml-graphics	\
 								-lsfml-window		\
 								-lsfml-system		\
 								-lsfml-audio
@@ -47,23 +47,29 @@ SRCS 			+=		./Srcs/Encapsulation/Mutex.cpp 			\
 								./Srcs/Encapsulation/NamedPipe.cpp	\
 								./Srcs/Encapsulation/CondVar.cpp
 
-SRCS			+=		./Srcs/Scrapper/Scrapper.cpp
+SRCS			+=		./Srcs/Scrapper/Scrapper.cpp				\
+								./Srcs/Scrapper/Phone.cpp						\
+								./Srcs/Scrapper/Ip.cpp
 
-SRCS_GUI	=			./Srcs/Graphic/Graphic.cpp
+SRCS_TXT 	= 		./Srcs/Display/Text.cpp
+
+SRCS_UI		=			./Srcs/Display/Graphic.cpp
 
 OBJ    		= 		$(SRCS:.cpp=.o)
 
-OBJ_GUI		=			$(SRCS_GUI:.cpp=.o)
+OBJ_TXT		=			$(SRCS_TXT:.cpp=.o)
+
+OBJ_UI		=			$(SRCS_UI:.cpp=.o)
 
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	  $(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
+$(NAME): $(OBJ) $(OBJ_TXT)
+	  $(CC) $(OBJ) $(OBJ_TXT) -o $(NAME) $(LDFLAGS)
 	  @printf "\033[0;32mPlazza compiled successfully !\n\033[0m"
 
-gui: $(OBJ) $(OBJ_GUI)
-		$(CC) $(OBJ) $(OBJ_GUI) -o $(NAME) $(LDFLAGS) $(GUIFLAGS)
+ui: $(OBJ) $(OBJ_UI)
+		$(CC) $(OBJ) $(OBJ_UI) -o $(NAME) $(LDFLAGS) $(UIFLAGS)
 		@printf "\033[0;32mPlazza (GUI) compiled successfully !\n\033[0m"
 
 clean:

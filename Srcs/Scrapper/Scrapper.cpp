@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Tue Apr 25 10:39:07 2017 Quentin Metge
+** Last update Thu Apr 27 17:21:06 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -16,28 +16,58 @@ namespace plazza
   /*****************/
   /*    Coplien    */
   /*****************/
-  Scrapper::Scrapper(Order* order) : _order(order){
+  Scrapper::Scrapper(Order *order) : _order(order), _np("scrapper"){
     bool        cyphered = true;
 
+    this->_np.create("WRITE");
     if (this->initBuffer()){
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
         cyphered = this->_scrapperFct[i]();
       }
     }
+    this->_np.destroy();
   }
 
   /*****************/
   /*    Actions    */
   /*****************/
+  void                    Scrapper::dispResult(std::string const& str){
+    char                  result[str.size()];
+
+    str.copy(result, str.size());
+    this->_np.writeNP(result, str.size() * sizeof(char));
+  }
+
+  void                    Scrapper::dispMatch(std::string const& buffer){
+    if (std::string(this->_order->type) == "IP_ADDRESS"){
+      this->dispIp(buffer);
+    }
+    else if (std::string(this->_order->type) == "PHONE_NUMBER"){
+      this->dispPhone(buffer);
+    }
+    // With regexp
+    /*else{
+      std::regex            regex(this->_order->regexp);
+      std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
+      std::sregex_iterator  end;
+
+      while (next != end){
+        std::smatch match = *next;
+        std::cout << match.str() << std::endl;
+        next++;
+      }
+    }*/
+  }
+
   bool                    Scrapper::initBuffer(void){
     std::ifstream         ss;
 
     ss.open(this->_order->fileName);
     if (!ss.is_open()){
-      std::cerr << "Unable to open file " << this->_order->fileName << "." << std::endl;
+      //std::cerr << "Unable to open file " << this->_order.fileName << "." << std::endl;
       return false;
     }
     std::string           line;
@@ -49,18 +79,8 @@ namespace plazza
   }
 
   bool                    Scrapper::scpNormal(void){
-
-    std::cerr << "-> Normal: " << std::endl;
     try{
-      std::regex            regex(this->_order->regexp);
-      std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
-      std::sregex_iterator  end;
-
-      while (next != end){
-        std::smatch match = *next;
-        std::cout << match.str() << std::endl;
-        next++;
-      }
+      this->dispMatch(this->_buffer);
     }
     catch(std::exception const& e){
       std::cerr << "Error : Regexp." << std::endl;
@@ -83,7 +103,6 @@ namespace plazza
     std::string           key = "00";
     std::string           buffer = "";
 
-    std::cerr << "-> Xor: " << std::endl;
     try{
       key[0] = 0;
       key[1] = 0;
@@ -92,15 +111,7 @@ namespace plazza
           key[0] = i1;
           key[1] = i2;
           buffer = this->decryptXOR(this->_buffer, key);
-          std::regex            regex(this->_order->regexp);
-          std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
-          std::sregex_iterator  end;
-
-          while (next != end){
-            std::smatch match = *next;
-            std::cout << match.str() << std::endl;
-            next++;
-          }
+          this->dispMatch(buffer);
         }
       }
     }
@@ -125,21 +136,11 @@ namespace plazza
     std::string           key = "0";
     std::string           buffer = "";
 
-    std::cerr << "-> Caesar: " << std::endl;
     try{
-      key[0] = 0;
-      for (int i = 0; i < 256; i++){
+      for (int i = 1; i <= 255; i++){
         key[0] = i;
         buffer = this->decryptCaesar(this->_buffer, key);
-        std::regex            regex(this->_order->regexp);
-        std::sregex_iterator  next(buffer.begin(), buffer.end(), regex);
-        std::sregex_iterator  end;
-
-        while (next != end){
-          std::smatch match = *next;
-          std::cout << match.str() << std::endl;
-          next++;
-        }
+        this->dispMatch(buffer);
       }
     }
     catch(std::exception const& e){
@@ -153,10 +154,8 @@ namespace plazza
   /*     Getter    */
   /*****************/
 
-
   /*****************/
   /*     Setter    */
   /*****************/
-
 
 }

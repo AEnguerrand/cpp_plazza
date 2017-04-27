@@ -4,11 +4,10 @@
 ** Made by Quentin Metge
 ** Login   <metge_q@epitech.net>
 **
-** Started on  Mon Apr 17 19:27:33 2017 Quentin Metge
-** Last update Tue Apr 25 10:56:37 2017 Quentin Metge
+** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
+** Last update Thu Apr 27 18:22:06 2017 Quentin Metge
 */
 
-#include <cstring>
 #include "Plazza.hpp"
 
 namespace plazza
@@ -17,11 +16,15 @@ namespace plazza
   /*****************/
   /*    Coplien    */
   /*****************/
-  Plazza::Plazza(const int poolSize) : _poolSize(poolSize){
+  Plazza::Plazza(const size_t poolSize) : _poolSize(poolSize), _managerProcess(poolSize){
     this->_ordersType.push_back("EMAIL_ADDRESS");
     this->_ordersType.push_back("IP_ADDRESS");
     this->_ordersType.push_back("PHONE_NUMBER");
     this->mainLoop();
+  }
+
+  Plazza::~Plazza(){
+    unlink("/tmp/*.fifo");
   }
 
   /*****************/
@@ -56,6 +59,7 @@ namespace plazza
           for (size_t i = 0; i < fileTab.size(); i++){
             Order       order;
 
+            memset(&order, 0, sizeof(struct Order));
             strcpy(order.fileName, fileTab[i].c_str());
             strcpy(order.type, type.c_str());
             if (std::string(order.type) == "PHONE_NUMBER")
@@ -63,7 +67,7 @@ namespace plazza
             else if (std::string(order.type) == "EMAIL_ADDRESS")
               strcpy(order.regexp, "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
             else if (std::string(order.type) == "IP_ADDRESS")
-              strcpy(order.regexp, "([1-9]?[0-9]?[0-9]\\.){3}[1-9]?[0-9]?[0-9]");
+              strcpy(order.regexp, "(?:(?:0|1[\\d]{0,2}|2(?:[0-4]\\d?|5[0-5]?|[6-9])?|[3-9]\\d?)\\.){3}(?:0|1[\\d]{0,2}|2(?:[0-4]\\d?|5[0-5]?|[6-9])?|[3-9]\\d?)");
             else
               throw Error("This order is not known.");
             this->_orderList.push_back(order);
@@ -77,14 +81,16 @@ namespace plazza
 
   void                  Plazza::mainLoop(void){
     std::string         buffer;
-    ManagerProcess	managerProcess(this->getPoolSize());
+    IThread             *thread = new Thread(&createDisplay, this);
 
+    thread->start();
     while (getline(std::cin, buffer)){
     	this->getNextLine(buffer);
     	//this->displayOrderList();
-    	managerProcess.addOrder(this->_orderList);
+    	this->_managerProcess.addOrder(this->_orderList);
       this->_orderList.clear();
     }
+    delete thread;
   }
 
   void                  Plazza::displayOrderList(void){

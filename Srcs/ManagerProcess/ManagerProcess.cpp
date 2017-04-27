@@ -10,7 +10,7 @@
 
 #include "ManagerProcess.hpp"
 
-plazza::ManagerProcess::ManagerProcess(size_t poolSize) :
+plazza::ManagerProcess::ManagerProcess(size_t poolSize const) :
 	_poolSize(poolSize * 2)
 {
 }
@@ -30,7 +30,7 @@ void plazza::ManagerProcess::addOrder(std::list<Order> orders)
 
 void 		plazza::ManagerProcess::dispatch()
 {
-  size_t 	process_nb = 1 + std::ceil(this->_orders.size() / this->_poolSize);
+  size_t 			process_nb = 1 + std::ceil(this->_orders.size() / this->_poolSize);
 
   auto itOrderF = this->_orders.begin();
   auto itOrderL = this->_orders.begin();
@@ -53,4 +53,8 @@ void 		plazza::ManagerProcess::dispatch()
     }
   this->_processes.clear();
   this->_orders.clear();
+}
+
+std::list<plazza::Order> 		plazza::ManagerProcess::getOrders(void) const{
+	return (this->_orders);
 }

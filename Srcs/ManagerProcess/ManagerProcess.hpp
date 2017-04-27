@@ -4,8 +4,8 @@
 ** Made by Enguerrand Allamel
 ** Login   <enguerrand.allamel@epitech.eu>
 **
-** Started on  Wed Apr 19 17:30:25 2017 Enguerrand Allamel
-** Last update Wed Apr 19 17:30:25 2017 Enguerrand Allamel
+** Started on  Wed Apr 19 17:31:25 2017 Enguerrand Allamel
+** Last update Thu Apr 27 18:23:36 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_MANAGERPROCESS_HPP
@@ -14,22 +14,25 @@
 #include <iterator>
 #include <cmath>
 #include <list>
-#include "Order.hpp"
 #include "ProcessPlazza.hpp"
+#include "Scrapper.hpp"
 
 namespace plazza {
   class ManagerProcess
   {
    private:
-    std::list<Order>		_orders;
+    std::list<Order>		        _orders;
     std::list<ProcessPlazza *>	_processes;
-    size_t 			_poolSize;
+    size_t 			                _poolSize;
    public:
-    ManagerProcess(size_t poolSize);
+    ManagerProcess(void){}
+    ManagerProcess(size_t const poolSize);
     virtual ~ManagerProcess();
 
     void	addOrder(std::list<Order> orders);
     void	dispatch();
+  public:
+    std::list<Order> getOrders(void) const;
   };
 }
 
