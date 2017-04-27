@@ -5,16 +5,14 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 17:46:04 2017 Quentin Metge
+** Last update Thu Apr 27 18:46:20 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
 
 Graphic::Graphic(void *data) : _np("scrapper"), _scroll(0), _blink(true), _blinkCount(0)
 {
-  plazza::ManagerProcess  *mp = static_cast<plazza::ManagerProcess*>(data);
-
-  (void)mp;
+  this->_plazza = static_cast<plazza::Plazza*>(data);
   this->_np.create("READ");
   if (!this->_font.loadFromFile("Srcs/Display/Quicksand.otf"))
     std::cerr << "Unable to load font" << std::endl;
@@ -28,9 +26,6 @@ Graphic::Graphic(void *data) : _np("scrapper"), _scroll(0), _blink(true), _blink
   this->_inputSF.setCharacterSize(25);
   this->_inputSF.setFillColor(sf::Color(0, 0, 0));
   this->_inputSF.setPosition(70, 55);
-
-  for (size_t i = 0; i <= 150; i++)
-    this->_results.push_back("RESULTAT " + std::to_string(i));
 }
 
 Graphic::~Graphic()
@@ -86,15 +81,17 @@ void                  Graphic::drawInterface()
   this->_blinkCount++;
 }
 
-void   Graphic::drawResults()
+void          Graphic::drawResults()
 {
-  char result[BUFFER_SIZE];
+  char        tmp[BUFFER_SIZE];
+  std::string results;
 
-  memset(result, 0, BUFFER_SIZE);
-  this->_np.readNP(result, BUFFER_SIZE);
-  if (strlen(result) > 0)
+  memset(tmp, 0, BUFFER_SIZE);
+  this->_np.readNP(tmp, BUFFER_SIZE);
+  if (strlen(tmp) > 0)
     {
-      // Get result à stocker dans _results
+      results = tmp;
+      getResults(results);
     }
 
   for (size_t i = 0; i < 17; i++)
@@ -119,25 +116,23 @@ void          Graphic::getEvent()
             this->_window.close();
         else if (event.type == sf::Event::TextEntered)
           {
-            if (event.text.unicode < 128)
-            {
-              if (event.text.unicode == 13)
-                {
-                  if (!this->_input.empty())
-                    {
-                      // Envoi des commandes au manager
-                      std::cout << this->_input << std::endl;
-                      this->_input.clear();
-                    }
-                }
-              else if (event.text.unicode == 8)
-                {
-                  if (this->_input.size() > 0)
-                    this->_input.resize(this->_input.size() - 1);
-                }
-              else if (this->_input.size() < 54)
-                this->_input += static_cast<char>(event.text.unicode);
-            }
+            if (event.text.unicode == 13)
+              {
+                if (!this->_input.empty())
+                  {
+                    this->_plazza->getNextLine(this->_input);
+                    this->_plazza->getManagerProcess().addOrder(this->_plazza->getOrderList());
+                    this->_plazza->clearOrderList();
+                    this->_input.clear();
+                  }
+              }
+            else if (event.text.unicode == 8)
+              {
+                if (this->_input.size() > 0)
+                  this->_input.resize(this->_input.size() - 1);
+              }
+            else if (event.text.unicode < 128 && this->_input.size() < 54)
+              this->_input += static_cast<char>(event.text.unicode);
           }
         else if (event.type == sf::Event::MouseWheelMoved)
           {
@@ -148,14 +143,14 @@ void          Graphic::getEvent()
     }
 }
 
-void Graphic::getResults(std::string const& results)
+void                Graphic::getResults(std::string const& results)
 {
   std::stringstream ss(results);
   std::string       token;
 
   if (ss.good())
   {
-    while(std::getline(ss, token, '\n')){
+    while (std::getline(ss, token, '\n')){
       if (!token.empty())
         this->_results.push_back(token);
     }

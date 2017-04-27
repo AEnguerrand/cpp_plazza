@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:53 2017 Antoine Dury
-** Last update Thu Apr 27 17:45:43 2017 Quentin Metge
+** Last update Thu Apr 27 18:46:24 2017 Antoine Dury
 */
 
 #ifndef GRAPHIC_HPP_
@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "ManagerProcess.hpp"
+#include "Plazza.hpp"
 #include "NamedPipe.hpp"
 
 class Graphic
@@ -35,6 +35,7 @@ class Graphic
     sf::Text                  _inputSF;
     sf::RenderWindow          _window;
 
+    plazza::Plazza            *_plazza;
     NamedPipe                 _np;
     int                       _scroll;
     bool                      _blink;
