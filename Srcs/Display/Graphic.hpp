@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:53 2017 Antoine Dury
-** Last update Thu Apr 27 18:46:24 2017 Antoine Dury
+** Last update Thu Apr 27 19:44:50 2017 Antoine Dury
 */
 
 #ifndef GRAPHIC_HPP_
@@ -33,6 +33,10 @@ class Graphic
     sf::Font                  _font;
     sf::Text                  _resultsSF;
     sf::Text                  _inputSF;
+    sf::Text                  _statusTasks;
+    sf::Text                  _statusProcess;
+    sf::Text                  _statusThreads;
+    sf::Text                  _statusOrders;
     sf::RenderWindow          _window;
 
     plazza::Plazza            *_plazza;

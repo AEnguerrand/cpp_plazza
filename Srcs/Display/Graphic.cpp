@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 19:42:01 2017 Antoine Dury
+** Last update Thu Apr 27 19:59:43 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
@@ -19,13 +19,29 @@ Graphic::Graphic(void *data) : _np("scrapper"), _scroll(0), _blink(true), _blink
   this->_window.create(sf::VideoMode(900, 685), "Plazza");
 
   // Init text
-  this->_resultsSF.setFont(this->_font);
-  this->_resultsSF.setCharacterSize(25);
-  this->_resultsSF.setFillColor(sf::Color(255, 255, 255));
   this->_inputSF.setFont(this->_font);
+  this->_resultsSF.setFont(this->_font);
+  this->_statusTasks.setFont(this->_font);
+  this->_statusProcess.setFont(this->_font);
+  this->_statusThreads.setFont(this->_font);
+  this->_statusOrders.setFont(this->_font);
+  this->_resultsSF.setCharacterSize(25);
   this->_inputSF.setCharacterSize(25);
-  this->_inputSF.setFillColor(sf::Color(0, 0, 0));
+  this->_statusTasks.setCharacterSize(25);
+  this->_statusProcess.setCharacterSize(25);
+  this->_statusThreads.setCharacterSize(25);
+  this->_statusOrders.setCharacterSize(25);
+  this->_resultsSF.setFillColor(sf::Color::White);
+  this->_inputSF.setFillColor(sf::Color::Black);
+  this->_statusTasks.setFillColor(sf::Color::White);
+  this->_statusProcess.setFillColor(sf::Color::White);
+  this->_statusThreads.setFillColor(sf::Color::White);
+  this->_statusOrders.setFillColor(sf::Color::White);
   this->_inputSF.setPosition(70, 55);
+  this->_statusTasks.setPosition(620, 130);
+  this->_statusProcess.setPosition(585, 160);
+  this->_statusThreads.setPosition(586, 190);
+  this->_statusOrders.setPosition(601, 220);
 }
 
 Graphic::~Graphic()
@@ -81,6 +97,14 @@ void                  Graphic::drawInterface()
   this->_blinkCount++;
 
   // Stats
+  this->_statusTasks.setString("Current tasks : 5");
+  this->_statusProcess.setString("Current process : 3");
+  this->_statusThreads.setString("Current threads : 2");
+  this->_statusOrders.setString("Current orders : 9");
+  this->_window.draw(this->_statusTasks);
+  this->_window.draw(this->_statusProcess);
+  this->_window.draw(this->_statusThreads);
+  this->_window.draw(this->_statusOrders);
 }
 
 void          Graphic::drawResults()
