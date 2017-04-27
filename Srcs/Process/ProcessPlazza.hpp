@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:49:39 2017 Enguerrand Allamel
-** Last update Thu Apr 27 12:26:47 2017 Quentin Metge
+** Last update Thu Apr 27 16:49:52 2017 Quentin Metge
 */
 
 #ifndef CPP_PLAZZA_PROCESSPLAZZA_HPP
@@ -25,11 +25,10 @@ namespace plazza
   {
    private:
     std::list<Order>      _orders;
-    NamedPipe*            _np;
     std::list<IThread *>  _threads;
     IProcess*		          _process;
    public:
-    ProcessPlazza(std::list<Order> orders, NamedPipe *np);
+    ProcessPlazza(std::list<Order> orders);
     virtual ~ProcessPlazza();
 
     void	start();

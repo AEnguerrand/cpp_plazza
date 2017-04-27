@@ -5,7 +5,7 @@
 ** Login   <enguerrand.allamel@epitech.eu>
 **
 ** Started on  Wed Apr 19 17:49:39 2017 Enguerrand Allamel
-** Last update Thu Apr 27 12:27:10 2017 Quentin Metge
+** Last update Thu Apr 27 16:51:13 2017 Quentin Metge
 */
 
 #include "ProcessPlazza.hpp"
@@ -16,12 +16,12 @@
 
 static void		*scrapper(void *data)
 {
-  plazza::Scrapper    scrapper(*static_cast<plazza::DataScrapper*>(data));
+  plazza::Scrapper    scrapper(static_cast<plazza::Order*>(data));
   return (NULL);
 }
 
-plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders, NamedPipe* np) :
-	_orders(orders), _np(np)
+plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders) :
+	_orders(orders)
 {
   this->_process = new Process();
   std::cout << "CTOR Process Plazza" << std::endl;
@@ -53,15 +53,13 @@ void plazza::ProcessPlazza::processLoop()
 {
   std::clock_t            c_start;
   bool                    end = true;
-  plazza::DataScrapper    dataScrapper(this->_np);
 
   while (end)
     {
       std::cout << "PASS NOT END" << std::endl;
       for (auto it = this->_orders.begin(); it != this->_orders.end(); ++it)
 	{
-    dataScrapper.setOrder(*it);
-	  this->_threads.push_back(new Thread(&scrapper, &dataScrapper));
+	  this->_threads.push_back(new Thread(&scrapper, &(*it)));
 	}
       for (auto it = this->_threads.begin(); it != this->_threads.end(); ++it)
 	{
