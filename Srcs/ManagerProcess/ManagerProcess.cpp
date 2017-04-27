@@ -10,7 +10,7 @@
 
 #include "ManagerProcess.hpp"
 
-plazza::ManagerProcess::ManagerProcess(size_t poolSize const) :
+plazza::ManagerProcess::ManagerProcess(size_t const poolSize) :
 	_poolSize(poolSize * 2)
 {
 }
