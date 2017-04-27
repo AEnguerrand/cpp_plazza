@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 16:53:37 2017 Antoine Dury
+** Last update Thu Apr 27 17:09:40 2017 Quentin Metge
 */
 
 #include "Graphic.hpp"
@@ -86,18 +86,15 @@ void                  Graphic::drawInterface()
   this->_blinkCount++;
 }
 
-void          Graphic::drawResults()
+void   Graphic::drawResults()
 {
-  char        tmp[BUFFER_SIZE];
-  std::string results;
+  char result[BUFFER_SIZE];
 
-  memset(tmp, 0, BUFFER_SIZE);
-  this->_np.readNP(tmp, BUFFER_SIZE);
-  if (strlen(tmp) > 0)
+  memset(result, 0, BUFFER_SIZE);
+  this->_np.readNP(result, BUFFER_SIZE);
+  if (strlen(result) > 0)
     {
-      results = tmp;
       // Get result à stocker dans _results
-      // getResults(results);
     }
 
   for (size_t i = 0; i < 17; i++)
@@ -149,9 +146,4 @@ void          Graphic::getEvent()
                 this->_scroll += event.mouseWheel.delta;
           }
     }
-}
-
-void Graphic::getResults(std::string results)
-{
-  (void)results;
 }

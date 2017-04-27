@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Wed Apr 26 11:53:48 2017 Quentin Metge
-** Last update Wed Apr 26 16:21:03 2017 Quentin Metge
+** Last update Thu Apr 27 17:19:21 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -30,8 +30,13 @@ namespace plazza
       bool                test = true;
       std::string         res = "";
 
-      if ((i == 0 || buffer[i - 1] == ' ' || buffer[i - 1] == '\t' || buffer[i - 1] == '\n') && isdigit(buffer[i]))
-        res = res + this->nb255(buffer, i);
+      if ((i == 0 || buffer[i - 1] == ' ' || buffer[i - 1] == '\t' || buffer[i - 1] == '\n') && isdigit(buffer[i])){
+        std::string   tmp = this->nb255(buffer, i);
+        if (tmp.empty())
+          test = false;
+        else
+          res = res + tmp;
+      }
       else
         test = false;
       for (int j = 0; j < 3; ++j){
@@ -41,8 +46,13 @@ namespace plazza
         }
         else
           test = false;
-        if (res != "" && isdigit(buffer[i]))
-          res = res + this->nb255(buffer, i);
+        if (res != "" && isdigit(buffer[i])){
+          std::string tmp = this->nb255(buffer, i);
+          if (tmp.empty())
+            test = false;
+          else
+            res = res + tmp;
+        }
         else
           test = false;
       }
