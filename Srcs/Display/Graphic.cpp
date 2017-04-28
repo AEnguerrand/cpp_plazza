@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Thu Apr 27 19:59:43 2017 Antoine Dury
+** Last update Fri Apr 28 13:44:10 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
@@ -97,10 +97,10 @@ void                  Graphic::drawInterface()
   this->_blinkCount++;
 
   // Stats
-  this->_statusTasks.setString("Current tasks : 5");
-  this->_statusProcess.setString("Current process : 3");
-  this->_statusThreads.setString("Current threads : 2");
-  this->_statusOrders.setString("Current orders : 9");
+  this->_statusTasks.setString("Current tasks : " + std::to_string(this->_plazza->getManagerProcess()._status.tasks));
+  this->_statusProcess.setString("Current process : " + std::to_string(this->_plazza->getManagerProcess()._status.process));
+  this->_statusThreads.setString("Current threads : " + std::to_string(this->_plazza->getManagerProcess()._status.threads));
+  this->_statusOrders.setString("Current orders : " + std::to_string(this->_plazza->getManagerProcess()._status.orders));
   this->_window.draw(this->_statusTasks);
   this->_window.draw(this->_statusProcess);
   this->_window.draw(this->_statusThreads);
