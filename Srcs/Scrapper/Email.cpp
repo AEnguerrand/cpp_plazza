@@ -5,62 +5,53 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Fri Apr 28 10:15:04 2017 Quentin Metge
-** Last update Fri Apr 28 12:07:34 2017 Quentin Metge
+** Last update Fri Apr 28 15:57:58 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
 
 namespace plazza
 {
-  std::string       printable = "0123456789abcdefghijklmnopqrstuvwxyz_-.";
 
-  std::string       Scrapper::isWord(std::string const& buffer, size_t& i){
-    std::string     res = "";
+  std::string       Scrapper::beforeAt(std::string const& buffer, int i){
+    std::string     word = "";
 
-    if (printable.find_first_of(buffer[i]) != std::string::npos){
-      res = res + buffer[i++];
-      while (printable.find_first_of(buffer[i]) != std::string::npos){
-        res = res + buffer[i++];
+    if (i - 1 >= 0 && this->_printable.find_first_of(buffer[--i]) != std::string::npos){
+      for (int j = 0; i >= 0 && j < 65 && this->_printable.find_first_of(buffer[i]) != std::string::npos; j++){
+        word += buffer[i--];
       }
     }
     else
       return ("");
-    return (res);
+    return (std::string(word.rbegin(), word.rend()));
+  }
+
+  std::string       Scrapper::afterAt(std::string const& buffer, size_t i){
+    std::string     word = "";
+
+    if (buffer[i + 1] && this->_printable.find_first_of(buffer[++i]) != std::string::npos){
+      word += buffer[i++];
+      for (int j = 0; buffer[i] && j < 256 && this->_printable.find_first_of(buffer[i]) != std::string::npos; j++){
+        word += buffer[i++];
+      }
+    }
+    else
+      return ("");
+    return (word);
   }
 
   void              Scrapper::dispEmail(std::string const& buffer){
-    for (size_t i = 0; i < buffer.size();){
-      bool                test = true;
-      std::string         res = "";
-      std::string         word;
+    std::string         wordBefore = "";
+    std::string         wordAfter = "";
+    size_t              found = buffer.find_first_of('@');
 
-      if ((i == 0 || buffer[i - 1] == ' ' || buffer[i - 1] == '\t' || buffer[i - 1] == '\n') && printable.find_first_of(buffer[i]) != std::string::npos){
-        word = this->isWord(buffer, i);
-        if (!word.empty()){
-          res = res + word;
-          if (buffer[i] == '@'){
-            res = res + buffer[i++];
-            word = this->isWord(buffer, i);
-            if (!word.empty()){
-              res = res + word;
-              if (res.find_first_of('.') == std::string::npos)
-                test = false;
-            }
-            else
-              test = false;
+    while (found != std::string::npos){
+      if (!(wordBefore = beforeAt(buffer, found)).empty()){
+          if (!(wordAfter = afterAt(buffer, found)).empty()){
+            this->dispResult(wordBefore + '@' + wordAfter);
           }
-          else
-            test = false;
-        }
-        else
-          test = false;
-        ++i;
-        //if (test && (i == buffer.size() || buffer[i] == ' ' || buffer[i] == '\t' || buffer[i] == '\n'))
-        if (test)
-          this->dispResult(res);
       }
-      else
-        ++i;
+      found = buffer.find_first_of('@', found + 1);
     }
   }
 

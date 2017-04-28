@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 28 12:10:28 2017 Quentin Metge
+** Last update Fri Apr 28 16:03:38 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -24,7 +24,7 @@ namespace plazza
       this->_typeFct["PHONE_NUMBER"] = [&](std::string const& buffer){this->dispPhone(buffer);};
       this->_typeFct["EMAIL_ADDRESS"] = [&](std::string const& buffer){this->dispEmail(buffer);};
       this->_typeFct["IP_ADDRESS"] = [&](std::string const& buffer){this->dispIp(buffer);};
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
@@ -48,7 +48,6 @@ namespace plazza
     std::string           type = std::string(this->_order->type);
 
     this->_typeFct[type](buffer);
-    // With regexp
     /*else{
       std::regex            regex(this->_order->regexp);
       std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
@@ -137,13 +136,11 @@ namespace plazza
     std::string           buffer = "";
 
     try{
-      std::cerr << "in" << std::endl;
       for (int i = 1; i <= 2; i++){
         key[0] = i;
         buffer = this->decryptCaesar(this->_buffer, key);
         this->dispMatch(buffer);
       }
-      std::cerr << "out" << std::endl;
     }
     catch(std::exception const& e){
       std::cerr << "Error : Regexp." << std::endl;
