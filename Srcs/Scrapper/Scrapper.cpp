@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 28 12:09:09 2017 Quentin Metge
+** Last update Fri Apr 28 12:10:28 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -24,9 +24,9 @@ namespace plazza
       this->_typeFct["PHONE_NUMBER"] = [&](std::string const& buffer){this->dispPhone(buffer);};
       this->_typeFct["EMAIL_ADDRESS"] = [&](std::string const& buffer){this->dispEmail(buffer);};
       this->_typeFct["IP_ADDRESS"] = [&](std::string const& buffer){this->dispIp(buffer);};
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
         cyphered = this->_scrapperFct[i]();
       }
