@@ -11,6 +11,5 @@ a.out
 .DS_Store
 index.htm
 compagny.csv
-files
-test
-command
+tests
+commands

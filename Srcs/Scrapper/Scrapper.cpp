@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 28 12:10:28 2017 Quentin Metge
+** Last update Fri Apr 28 13:15:18 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -137,13 +137,11 @@ namespace plazza
     std::string           buffer = "";
 
     try{
-      std::cerr << "in" << std::endl;
       for (int i = 1; i <= 2; i++){
         key[0] = i;
         buffer = this->decryptCaesar(this->_buffer, key);
         this->dispMatch(buffer);
       }
-      std::cerr << "out" << std::endl;
     }
     catch(std::exception const& e){
       std::cerr << "Error : Regexp." << std::endl;
