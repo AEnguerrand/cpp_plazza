@@ -24,7 +24,7 @@ namespace plazza
       this->_typeFct["PHONE_NUMBER"] = [&](std::string const& buffer){this->dispPhone(buffer);};
       this->_typeFct["EMAIL_ADDRESS"] = [&](std::string const& buffer){this->dispEmail(buffer);};
       this->_typeFct["IP_ADDRESS"] = [&](std::string const& buffer){this->dispIp(buffer);};
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
