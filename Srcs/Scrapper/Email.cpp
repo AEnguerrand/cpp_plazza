@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Fri Apr 28 10:15:04 2017 Quentin Metge
-** Last update Fri Apr 28 12:07:34 2017 Quentin Metge
+** Last update Fri Apr 28 13:19:16 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -43,7 +43,7 @@ namespace plazza
             word = this->isWord(buffer, i);
             if (!word.empty()){
               res = res + word;
-              if (res.find_first_of('.') == std::string::npos)
+              if (word.find_first_of('.') == std::string::npos && word[0] != '.' && word[res.size() - 1] != '.')
                 test = false;
             }
             else
