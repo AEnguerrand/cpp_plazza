@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Wed Apr 26 11:53:48 2017 Quentin Metge
-** Last update Fri Apr 28 10:52:20 2017 Quentin Metge
+** Last update Fri Apr 28 15:45:09 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -13,54 +13,70 @@
 namespace plazza
 {
 
-  std::string             Scrapper::nb255(std::string const& buffer, size_t& i){
-    std::string           test = "";
+  std::string           Scrapper::beforePoint(std::string const& buffer, int i){
+    std::string         word = "";
+    std::string         res = "";
 
-    for (int j = 0; j < 3 && isdigit(buffer[i]) && i < buffer.size(); j++){
-        test = test + buffer[i];
-        ++i;
+    if (i - 1 >= 0 && this->_numerical.find_first_of(buffer[--i]) != std::string::npos){
+      for (int j = 0; i >= 0 && j < 3 && this->_numerical.find_first_of(buffer[i]) != std::string::npos; j++){
+        word += buffer[i--];
+      }
     }
-    if (test != "" && std::stoi(test) <= 255)
-      return (test);
-    return ("");
+    else
+      return ("");
+    res = std::string(word.rbegin(), word.rend());
+    return (std::stoi(res) <= 255 ? res : "");
   }
 
-  void                    Scrapper::dispIp(std::string const& buffer){
-    for (size_t i = 0; i < buffer.size();){
-      bool                test = true;
-      std::string         res = "";
+  std::string           Scrapper::afterPoint(std::string const& buffer, size_t i){
+    std::string         word = "";
+    std::string         res = "";
+    std::string         tmp = "";
 
-      if ((i == 0 || buffer[i - 1] == ' ' || buffer[i - 1] == '\t' || buffer[i - 1] == '\n') && isdigit(buffer[i])){
-        std::string   tmp = this->nb255(buffer, i);
-        if (tmp.empty())
-          test = false;
-        else
-          res = res + tmp;
+    if (buffer[i + 1] && this->_numerical.find_first_of(buffer[++i]) != std::string::npos){
+      for (int j = 0; buffer[i] && j < 3 && this->_numerical.find_first_of(buffer[i]) != std::string::npos; j++){
+        tmp += buffer[i++];
       }
+      if (std::stoi(tmp) <= 255 && buffer[i] && buffer[i] == '.')
+        word += tmp + buffer[i++];
       else
-        test = false;
-      for (int j = 0; j < 3; ++j){
-        if (res != "" && buffer[i] == '.'){
-          ++i;
-          res = res + ".";
-        }
-        else
-          test = false;
-        if (res != "" && isdigit(buffer[i])){
-          std::string tmp = this->nb255(buffer, i);
-          if (tmp.empty())
-            test = false;
-          else
-            res = res + tmp;
-        }
-        else
-          test = false;
+        return ("");
+      tmp.clear();
+      for (int j = 0; buffer[i] && j < 3 && this->_numerical.find_first_of(buffer[i]) != std::string::npos; j++){
+        tmp += buffer[i++];
       }
-      if (test && (i == buffer.size() || buffer[i] == ' ' || buffer[i] == '\t' || buffer[i] == '\n'))
-        this->dispResult(res);
+      if (std::stoi(tmp) <= 255 && buffer[i] && buffer[i] == '.')
+        word += tmp + buffer[i++];
       else
-        ++i;
+        return ("");
+      tmp.clear();
+      for (int j = 0; buffer[i] && j < 3 && this->_numerical.find_first_of(buffer[i]) != std::string::npos; j++){
+        tmp += buffer[i++];
+      }
+      if (std::stoi(tmp) <= 255)
+        word += tmp;
+      else
+        return ("");
+    }
+    else
+      return ("");
+    return (word);
+  }
+
+  void                  Scrapper::dispIp(std::string const& buffer){
+    std::string         wordBefore = "";
+    std::string         wordAfter = "";
+    size_t              found = buffer.find_first_of('.');
+
+    while (found != std::string::npos){
+      if (!(wordBefore = beforePoint(buffer, found)).empty()){
+          if (!(wordAfter = afterPoint(buffer, found)).empty()){
+            this->dispResult(wordBefore + '.' + wordAfter);
+          }
+      }
+      found = buffer.find_first_of('.', found + 1);
     }
   }
+
 
 }

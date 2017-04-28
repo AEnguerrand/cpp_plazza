@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Fri Apr 28 14:43:34 2017 Quentin Metge
+** Last update Fri Apr 28 15:40:27 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -37,7 +37,8 @@ namespace plazza
 
   public:
     void          dispIp(std::string const& buffer);
-    std::string   nb255(std::string const& buffer, size_t& i);
+    std::string   beforePoint(std::string const& buffer, int i);
+    std::string   afterPoint(std::string const& buffer, size_t i);
 
   public:
     void          dispPhone(std::string const& buffer);
@@ -45,7 +46,7 @@ namespace plazza
 
   public:
     void          dispEmail(std::string const& buffer);
-    std::string   beforeAt(std::string const& buffer, size_t i);
+    std::string   beforeAt(std::string const& buffer, int i);
     std::string   afterAt(std::string const& buffer, size_t i);
 
   public:
@@ -62,6 +63,7 @@ namespace plazza
     NamedPipe     _np;
     std::string   _buffer = "";
     std::string   _printable = "0123456789abcdefghijklmnopqrstuvwxyz_-.";
+    std::string   _numerical = "0123456789";
 
   private:
     std::vector<std::function<bool (void)>>                                     _scrapperFct;

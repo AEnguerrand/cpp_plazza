@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Fri Apr 28 10:15:04 2017 Quentin Metge
-** Last update Fri Apr 28 14:43:54 2017 Quentin Metge
+** Last update Fri Apr 28 15:57:58 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -13,12 +13,11 @@
 namespace plazza
 {
 
-  std::string       Scrapper::beforeAt(std::string const& buffer, size_t i){
+  std::string       Scrapper::beforeAt(std::string const& buffer, int i){
     std::string     word = "";
 
-    if (this->_printable.find_first_of(buffer[--i]) != std::string::npos){
-      word += buffer[i--];
-      for (int j = 0; j < 65 && this->_printable.find_first_of(buffer[i]) != std::string::npos; j++){
+    if (i - 1 >= 0 && this->_printable.find_first_of(buffer[--i]) != std::string::npos){
+      for (int j = 0; i >= 0 && j < 65 && this->_printable.find_first_of(buffer[i]) != std::string::npos; j++){
         word += buffer[i--];
       }
     }
@@ -30,9 +29,9 @@ namespace plazza
   std::string       Scrapper::afterAt(std::string const& buffer, size_t i){
     std::string     word = "";
 
-    if (this->_printable.find_first_of(buffer[++i]) != std::string::npos){
+    if (buffer[i + 1] && this->_printable.find_first_of(buffer[++i]) != std::string::npos){
       word += buffer[i++];
-      for (int j = 0; j < 256 && this->_printable.find_first_of(buffer[i]) != std::string::npos; j++){
+      for (int j = 0; buffer[i] && j < 256 && this->_printable.find_first_of(buffer[i]) != std::string::npos; j++){
         word += buffer[i++];
       }
     }

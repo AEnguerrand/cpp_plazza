@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Fri Apr 28 14:40:34 2017 Quentin Metge
+** Last update Fri Apr 28 16:03:38 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -21,11 +21,10 @@ namespace plazza
 
     this->_np.create("WRITE");
     if (this->initBuffer()){
-      std::cerr << this->_buffer.size() << std::endl;
       this->_typeFct["PHONE_NUMBER"] = [&](std::string const& buffer){this->dispPhone(buffer);};
       this->_typeFct["EMAIL_ADDRESS"] = [&](std::string const& buffer){this->dispEmail(buffer);};
       this->_typeFct["IP_ADDRESS"] = [&](std::string const& buffer){this->dispIp(buffer);};
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
@@ -49,7 +48,6 @@ namespace plazza
     std::string           type = std::string(this->_order->type);
 
     this->_typeFct[type](buffer);
-    // With regexp
     /*else{
       std::regex            regex(this->_order->regexp);
       std::sregex_iterator  next(this->_buffer.begin(), this->_buffer.end(), regex);
@@ -108,7 +106,6 @@ namespace plazza
       key[0] = 0;
       key[1] = 0;
       for (int i1 = 0; i1 < 256; i1++){
-        std::cerr << "-->" << i1 << std::endl;
         for (int i2 = 0; i2 < 256; i2++){
           key[0] = i1;
           key[1] = i2;
