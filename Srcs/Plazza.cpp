@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Thu Apr 27 19:33:27 2017 Antoine Dury
+** Last update Fri Apr 28 20:27:27 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -84,12 +84,14 @@ namespace plazza
     IThread             *thread = new Thread(&createDisplay, this);
 
     thread->start();
-    while ((getline(std::cin, buffer) && buffer != "exit") || !this->_managerProcess.isFinish()){
+    while (getline(std::cin, buffer) && buffer != "exit"){
 	this->getNextLine(buffer);
 	if (!this->_orderList.empty())
 	  this->_managerProcess.addOrder(this->_orderList);
       	this->clearOrderList();
     }
+    while (!this->_managerProcess.isFinish());
+    usleep(1);
     delete thread;
   }
 
