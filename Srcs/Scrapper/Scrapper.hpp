@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:29 2017 Quentin Metge
-** Last update Fri Apr 28 12:07:05 2017 Quentin Metge
+** Last update Fri Apr 28 14:43:34 2017 Quentin Metge
 */
 
 #ifndef SCRAPPER_HPP
@@ -15,6 +15,7 @@
 #include <cctype>
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 #include <functional>
 #include "Order.hpp"
 #include "NamedPipe.hpp"
@@ -44,7 +45,8 @@ namespace plazza
 
   public:
     void          dispEmail(std::string const& buffer);
-    std::string   isWord(std::string const& buffer, size_t& i);
+    std::string   beforeAt(std::string const& buffer, size_t i);
+    std::string   afterAt(std::string const& buffer, size_t i);
 
   public:
     bool          scpNormal(void);
@@ -59,6 +61,7 @@ namespace plazza
     Order*        _order;
     NamedPipe     _np;
     std::string   _buffer = "";
+    std::string   _printable = "0123456789abcdefghijklmnopqrstuvwxyz_-.";
 
   private:
     std::vector<std::function<bool (void)>>                                     _scrapperFct;
