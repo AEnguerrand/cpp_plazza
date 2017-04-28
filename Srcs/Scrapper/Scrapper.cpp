@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Thu Apr 20 14:31:28 2017 Quentin Metge
-** Last update Thu Apr 27 17:21:06 2017 Quentin Metge
+** Last update Fri Apr 28 12:09:09 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -21,9 +21,12 @@ namespace plazza
 
     this->_np.create("WRITE");
     if (this->initBuffer()){
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
-      this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
+      this->_typeFct["PHONE_NUMBER"] = [&](std::string const& buffer){this->dispPhone(buffer);};
+      this->_typeFct["EMAIL_ADDRESS"] = [&](std::string const& buffer){this->dispEmail(buffer);};
+      this->_typeFct["IP_ADDRESS"] = [&](std::string const& buffer){this->dispIp(buffer);};
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
+      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
         cyphered = this->_scrapperFct[i]();
       }
@@ -42,12 +45,9 @@ namespace plazza
   }
 
   void                    Scrapper::dispMatch(std::string const& buffer){
-    if (std::string(this->_order->type) == "IP_ADDRESS"){
-      this->dispIp(buffer);
-    }
-    else if (std::string(this->_order->type) == "PHONE_NUMBER"){
-      this->dispPhone(buffer);
-    }
+    std::string           type = std::string(this->_order->type);
+
+    this->_typeFct[type](buffer);
     // With regexp
     /*else{
       std::regex            regex(this->_order->regexp);
@@ -137,11 +137,13 @@ namespace plazza
     std::string           buffer = "";
 
     try{
-      for (int i = 1; i <= 255; i++){
+      std::cerr << "in" << std::endl;
+      for (int i = 1; i <= 2; i++){
         key[0] = i;
         buffer = this->decryptCaesar(this->_buffer, key);
         this->dispMatch(buffer);
       }
+      std::cerr << "out" << std::endl;
     }
     catch(std::exception const& e){
       std::cerr << "Error : Regexp." << std::endl;

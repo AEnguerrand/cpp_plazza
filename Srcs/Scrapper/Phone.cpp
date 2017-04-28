@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Wed Apr 26 13:58:10 2017 Quentin Metge
-** Last update Thu Apr 27 00:02:20 2017 Quentin Metge
+** Last update Fri Apr 28 11:49:07 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -33,12 +33,15 @@ namespace plazza
       if ((i == 0 || buffer[i - 1] == ' ' || buffer[i - 1] == '\t' || buffer[i - 1] == '\n') && isdigit(buffer[i])){
         for (int j = 0; j < 5 && test; ++j){
           std::string tmp = nbXX(buffer, i);
-          if (tmp == "")
+          if (!tmp.empty()){
+            res = res + tmp;
+            if (test && buffer[i] && j < 4 && buffer[i] == ' '){
+              res = res + buffer[i];
+              ++i;
+            }
+          }
+          else{
             test = false;
-          res = res + tmp;
-          if (test && buffer[i] && j < 4 && buffer[i] == ' '){
-            res = res + buffer[i];
-            ++i;
           }
         }
         if (test && (i == buffer.size() || buffer[i] == ' ' || buffer[i] == '\t' || buffer[i] == '\n'))
