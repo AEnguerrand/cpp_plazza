@@ -26,7 +26,7 @@ namespace plazza
       this->_typeFct["IP_ADDRESS"] = [&](std::string const& buffer){this->dispIp(buffer);};
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpNormal, this));
       this->_scrapperFct.push_back(std::bind(&Scrapper::scpCaesar, this));
-      //this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
+      this->_scrapperFct.push_back(std::bind(&Scrapper::scpXor, this));
       for (size_t i = 0; cyphered && i < this->_scrapperFct.size(); i++){
         cyphered = this->_scrapperFct[i]();
       }

@@ -39,6 +39,7 @@ void 		plazza::ManagerProcess::dispatch()
 
   auto itOrderF = this->_orders.begin();
   auto itOrderL = this->_orders.begin();
+  this->_status.orders += this->_orders.size();
   for (size_t i = 0; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
   for (size_t i = 0 ; i < process_nb ; i++)
     {
@@ -47,6 +48,9 @@ void 		plazza::ManagerProcess::dispatch()
       ProcessPlazza *processPlazza = new ProcessPlazza(process_orders, this->_poolSize);
       processPlazza->start();
       this->_processes.push_back(processPlazza);
+      this->_status.process += 1;
+      this->_status.threads += this->_poolSize / 2;
+      this->_status.tasks += this->_poolSize;
       itOrderF = itOrderL;
       for (size_t i = 0 ; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
     }
@@ -55,7 +59,7 @@ void 		plazza::ManagerProcess::dispatch()
 
 bool plazza::ManagerProcess::isFinish()
 {
-  if ((std::clock() - this->_c_start) < (ONE_SEC * 1))
+  if ((std::clock() - this->_c_start) < (ONE_SEC * 2.5))
     return false;
   return true;
 }

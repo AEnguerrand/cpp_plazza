@@ -27,7 +27,6 @@ namespace plazza
    private:
     size_t 		_id;
     std::list<Order>	_orders;
-    //std::list<IThread *>_threads;
     IProcess		*_process;
     size_t 		_poolSize;
     bool 		_start;
