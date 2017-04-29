@@ -44,25 +44,18 @@ void 		plazza::ManagerProcess::dispatch()
     {
       std::list<Order> process_orders;
       process_orders.insert(process_orders.begin(), itOrderF, itOrderL);
-      this->_processes.push_back(new ProcessPlazza(process_orders, this->_poolSize));
+      ProcessPlazza *processPlazza = new ProcessPlazza(process_orders, this->_poolSize);
+      processPlazza->start();
+      this->_processes.push_back(processPlazza);
       itOrderF = itOrderL;
       for (size_t i = 0 ; itOrderL != this->_orders.end() && i < this->_poolSize ; ++itOrderL);
     }
-  for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
-    {
-      (*it)->start();
-    }
-  for (auto it = this->_processes.begin() ; it != this->_processes.end() ; ++it)
-    {
-      delete (*it);
-    }
-  this->_processes.clear();
   this->_orders.clear();
 }
 
 bool plazza::ManagerProcess::isFinish()
 {
-  if ((std::clock() - this->_c_start) < (ONE_SEC * 5))
+  if ((std::clock() - this->_c_start) < (ONE_SEC * 1))
     return false;
   return true;
 }

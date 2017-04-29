@@ -12,7 +12,8 @@
 
 plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders, size_t poolSize) :
 	_orders(orders),
-	_poolSize(poolSize)
+	_poolSize(poolSize),
+	_start(false)
 {
   this->_process = new Process();
 }
@@ -20,7 +21,7 @@ plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders, size_t poolSize) :
 plazza::ProcessPlazza::~ProcessPlazza()
 {
   // No kill process
-  //delete this->_process;
+  delete this->_process;
 }
 
 void plazza::ProcessPlazza::setId(size_t id)
@@ -35,6 +36,7 @@ size_t plazza::ProcessPlazza::getId() const
 
 void plazza::ProcessPlazza::start()
 {
+  this->_start = true;
   this->_process->start();
   if (this->_process->isChild())
     {

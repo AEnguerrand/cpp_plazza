@@ -30,6 +30,7 @@ namespace plazza
     //std::list<IThread *>_threads;
     IProcess		*_process;
     size_t 		_poolSize;
+    bool 		_start;
    public:
     ProcessPlazza(std::list<Order> orders, size_t poolSize);
     virtual ~ProcessPlazza();
