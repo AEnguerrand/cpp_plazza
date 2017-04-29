@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 20:27:28 2017 Quentin Metge
-** Last update Thu Apr 27 18:41:41 2017 Antoine Dury
+** Last update Sat Apr 29 15:22:22 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -23,6 +23,13 @@
 
 namespace plazza
 {
+
+  enum Information
+  {
+    PHONE_NUMBER,
+    EMAIL_ADDRESS,
+    IP_ADDRESS
+  };
 
   class Plazza
   {
