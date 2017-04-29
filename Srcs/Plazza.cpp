@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Fri Apr 28 20:27:27 2017 Quentin Metge
+** Last update Sat Apr 29 15:15:15 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -52,9 +52,9 @@ namespace plazza
       type = token;
       if (!fileTab.empty() && !type.empty()){
         if (fileTab.empty())
-          throw Error("Need file for this order: " + type + ".");
+          throw Error("");//throw Error("Need file for this order: " + type + ".");
         else if (type.empty())
-          throw Error("Need order for this file: " + fileTab[0] + ".");
+          throw Error("");//throw Error("Need order for this file: " + fileTab[0] + ".");
         if (std::find(this->_ordersType.begin(), this->_ordersType.end(), type) != this->_ordersType.end()){
           for (size_t i = 0; i < fileTab.size(); i++){
             Order       order;
@@ -69,12 +69,12 @@ namespace plazza
             else if (std::string(order.type) == "IP_ADDRESS")
               strcpy(order.regexp, "(?:(?:0|1[\\d]{0,2}|2(?:[0-4]\\d?|5[0-5]?|[6-9])?|[3-9]\\d?)\\.){3}(?:0|1[\\d]{0,2}|2(?:[0-4]\\d?|5[0-5]?|[6-9])?|[3-9]\\d?)");
             else
-              throw Error("This order is not known.");
+              throw Error("");//("This order is not known.");
             this->_orderList.push_back(order);
           }
         }
-        else
-          std::cerr << "Error : This order doesn't exist: " << type << "." << std::endl;
+        //else
+          //std::cerr << "Error : This order doesn't exist: " << type << "." << std::endl;
       }
     }
   }

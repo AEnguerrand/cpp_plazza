@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Fri Apr 28 10:15:04 2017 Quentin Metge
-** Last update Fri Apr 28 15:57:58 2017 Quentin Metge
+** Last update Sat Apr 29 14:31:12 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
