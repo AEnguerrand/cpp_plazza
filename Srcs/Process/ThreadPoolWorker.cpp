@@ -62,10 +62,11 @@ static void			*threadPool(void *data)
  * CTOR / DTOR
  */
 
-plazza::ThreadPoolWorker::ThreadPoolWorker(std::list<Order> *orders, IMutex *mutex)
+plazza::ThreadPoolWorker::ThreadPoolWorker(std::list<Order> *orders, IMutex *mutex, ICondVar *condVar)
 {
   this->_orders = orders;
   this->_mutex = mutex;
+  this->_condVar = condVar;
   this->_status = ThreadPoolWorker::STATUS::NOT_START;
   this->_halt = false;
   this->_thread = new Thread(&threadPool, static_cast<void *>(this));
@@ -76,6 +77,7 @@ plazza::ThreadPoolWorker::~ThreadPoolWorker()
 {
   this->_status = ThreadPoolWorker::STATUS::HALT;
   this->_halt = true;
+  this->_condVar->wake();
   this->_thread->wait();
   delete this->_thread;
 }

@@ -26,7 +26,7 @@ namespace plazza
     std::list<ThreadPoolWorker *> _worker;
     std::list<Order> 		_orders;
     IMutex 			*_mutex;
-    //ICondVar			*_condVar;
+    ICondVar			*_condVar;
    public:
     ThreadPool(size_t nbWorker);
     virtual ~ThreadPool();

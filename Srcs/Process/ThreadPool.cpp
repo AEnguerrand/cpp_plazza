@@ -15,7 +15,7 @@ plazza::ThreadPool::ThreadPool(size_t nbWorker)
   this->_mutex = new Mutex();
   for (size_t i = 0 ; i < nbWorker ; i++)
     {
-      this->_worker.push_back(new ThreadPoolWorker(&this->_orders, this->_mutex));
+      this->_worker.push_back(new ThreadPoolWorker(&this->_orders, this->_mutex, this->_condVar));
     }
 }
 

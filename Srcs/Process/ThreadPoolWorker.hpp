@@ -37,10 +37,11 @@ namespace plazza
    public:
     IMutex 			*_mutex;
     std::list<Order> 		*_orders;
+    ICondVar			*_condVar;
     bool 			_halt;
 
    public:
-    ThreadPoolWorker(std::list<Order> *orders, IMutex *mutex);
+    ThreadPoolWorker(std::list<Order> *orders, IMutex *mutex, ICondVar *condVar);
 
     virtual ~ThreadPoolWorker();
 
