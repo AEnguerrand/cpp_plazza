@@ -21,8 +21,8 @@ plazza::ThreadPool::ThreadPool(size_t nbWorker)
 
 plazza::ThreadPool::~ThreadPool()
 {
-  for (auto it = this->_orders.begin() ; it != this->_orders.end() ; ++it)
-    delete &(*it);
+  for (auto it = this->_worker.begin() ; it != this->_worker.end() ; ++it)
+    delete (*it);
   delete this->_mutex;
 }
 
