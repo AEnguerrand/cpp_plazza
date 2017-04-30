@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 20:27:28 2017 Quentin Metge
-** Last update Sun Apr 30 16:06:05 2017 Quentin Metge
+** Last update Sun Apr 30 16:19:04 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -52,6 +52,7 @@ namespace plazza
     std::vector<std::string>  getOrdersType(void) const;
     std::list<Order>          getOrderList(void) const;
     ManagerProcess            getManagerProcess(void) const;
+    Status                    getStatus(void) const;
     void                      clearOrderList(void);
 
   private:

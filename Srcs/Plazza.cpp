@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Sun Apr 30 16:06:21 2017 Quentin Metge
+** Last update Sun Apr 30 16:18:41 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -127,6 +127,10 @@ namespace plazza
 
   std::list<Order>            Plazza::getOrderList(void) const{
     return (this->_orderList);
+  }
+
+  Status                      Plazza::getStatus(void) const{
+    return (this->_managerProcess._status);
   }
 
   /*****************/
