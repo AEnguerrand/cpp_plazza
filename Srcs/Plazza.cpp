@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Sat Apr 29 15:15:15 2017 Quentin Metge
+** Last update Sun Apr 30 15:52:10 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -30,13 +30,13 @@ namespace plazza
   /*****************/
   /*    Actions    */
   /*****************/
-  plazza::TokenType     Plazza::getTypeOfToken(std::string token){
+  plazza::TokenType     Plazza::getTypeOfToken(std::string const& token){
     if (std::find(this->_ordersType.begin(), this->_ordersType.end(), token) != this->_ordersType.end())
       return (TokenType::ORDER);
     return (TokenType::DEFAULT);
   }
 
-  void                  Plazza::getNextLine(std::string buffer){
+  void                  Plazza::getNextLine(std::string const& buffer){
     std::string         token;
     std::string         substr;
 
@@ -79,17 +79,20 @@ namespace plazza
     }
   }
 
+  void                  Plazza::sendLine(std::string const& buffer){
+    this->getNextLine(buffer);
+    if (!this->_orderList.empty())
+      this->_managerProcess.addOrder(this->_orderList);
+    this->clearOrderList();
+  }
+
   void                  Plazza::mainLoop(void){
     std::string         buffer = " ";
     IThread             *thread = new Thread(&createDisplay, this);
 
     thread->start();
-    this->_managerProcess.startProcessInfoPipe();
     while ((getline(std::cin, buffer) && buffer != "exit")){
-	this->getNextLine(buffer);
-	if (!this->_orderList.empty())
-	  this->_managerProcess.addOrder(this->_orderList);
-      	this->clearOrderList();
+    	this->sendLine(buffer);
     }
     while (!this->_managerProcess.isFinish());
     usleep(1);

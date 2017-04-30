@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 20:27:28 2017 Quentin Metge
-** Last update Sat Apr 29 15:22:22 2017 Quentin Metge
+** Last update Sun Apr 30 15:52:00 2017 Quentin Metge
 */
 
 #ifndef PLAZZA_HPP_
@@ -39,8 +39,9 @@ namespace plazza
     ~Plazza(void);
 
   public:
-    TokenType   getTypeOfToken(std::string token);
-    void        getNextLine(std::string buffer);
+    TokenType   getTypeOfToken(std::string const& token);
+    void        getNextLine(std::string const& buffer);
+    void        sendLine(std::string const& buffer);
     void        mainLoop(void);
 
   public:
