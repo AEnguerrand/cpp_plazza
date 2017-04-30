@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Sun Apr 30 15:52:10 2017 Quentin Metge
+** Last update Sun Apr 30 15:55:29 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -99,7 +99,7 @@ namespace plazza
     delete thread;
   }
 
-  void                  Plazza::displayOrderList(void){
+  void                  Plazza::displayOrderList(void) const{
     for (auto it = this->_orderList.begin(); it != this->_orderList.end(); it++){
        std::cerr << "Order:\t" << (*it).fileName << "\t->\t" << (*it).type << std::endl;
     }
