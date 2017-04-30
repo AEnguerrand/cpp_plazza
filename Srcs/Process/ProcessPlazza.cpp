@@ -21,7 +21,6 @@ plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders, size_t poolSize) :
 
 plazza::ProcessPlazza::~ProcessPlazza()
 {
-  // No kill process
   delete this->_process;
 }
 
@@ -44,10 +43,5 @@ void plazza::ProcessPlazza::start()
       ProcessChildPlazza processChildPlazza = ProcessChildPlazza(this->_orders, this->_poolSize, this->_id);
       processChildPlazza.run();
       exit(0);
-    }
-  else
-    {
-      // No wait end of processs
-      // this->_process->wait();
     }
 }

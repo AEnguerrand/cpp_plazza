@@ -19,7 +19,6 @@ void			*processInfoPipe(void *data)
   NamedPipe   		np("processInfoPipe");
   plazza::ProcessInfo	processInfo;
 
-  (void)data;
   np.create("READ");
   while (true)
     {

@@ -17,7 +17,7 @@ void          *createDisplay(void *data)
   char        result[BUFFER_SIZE];
   std::string res;
 
-  (void)data;
+  data = static_cast<void *>(data);
   np.create("READ");
   while (true)
   {
