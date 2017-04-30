@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Mon Apr 17 22:27:33 2017 Quentin Metge
-** Last update Sun Apr 30 15:55:29 2017 Quentin Metge
+** Last update Sun Apr 30 16:00:07 2017 Quentin Metge
 */
 
 #include "Plazza.hpp"
@@ -16,7 +16,7 @@ namespace plazza
   /*****************/
   /*    Coplien    */
   /*****************/
-  Plazza::Plazza(const size_t poolSize) : _poolSize(poolSize), _managerProcess(poolSize){
+  Plazza::Plazza(const size_t poolSize) : _poolSize(poolSize), _managerProcess(new ManagerProcess(poolSize)){
     this->_ordersType.push_back("EMAIL_ADDRESS");
     this->_ordersType.push_back("IP_ADDRESS");
     this->_ordersType.push_back("PHONE_NUMBER");
@@ -82,7 +82,7 @@ namespace plazza
   void                  Plazza::sendLine(std::string const& buffer){
     this->getNextLine(buffer);
     if (!this->_orderList.empty())
-      this->_managerProcess.addOrder(this->_orderList);
+      this->_managerProcess->addOrder(this->_orderList);
     this->clearOrderList();
   }
 
@@ -94,7 +94,7 @@ namespace plazza
     while ((getline(std::cin, buffer) && buffer != "exit")){
     	this->sendLine(buffer);
     }
-    while (!this->_managerProcess.isFinish());
+    while (!this->_managerProcess->isFinish());
     usleep(1);
     delete thread;
   }
@@ -121,7 +121,7 @@ namespace plazza
     return (this->_ordersType);
   }
 
-  ManagerProcess              Plazza::getManagerProcess(void) const{
+  ManagerProcess*             Plazza::getManagerProcess(void) const{
     return (this->_managerProcess);
   }
 
