@@ -5,7 +5,7 @@
 ** Login   <metge_q@epitech.net>
 **
 ** Started on  Wed Apr 26 13:58:10 2017 Quentin Metge
-** Last update Fri Apr 28 11:49:07 2017 Quentin Metge
+** Last update Sun Apr 30 14:09:21 2017 Quentin Metge
 */
 
 #include "Scrapper.hpp"
@@ -17,6 +17,10 @@ namespace plazza
     std::string           test = "";
 
     for (int j = 0; j < 2 && buffer[i]; ++j){
+      if (buffer[i] && j != 0 && buffer[i] == ' '){
+        test = test + buffer[i];
+        ++i;
+      }
       if (!isdigit(buffer[i]))
         return ("");
       test += buffer[i];
