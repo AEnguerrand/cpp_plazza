@@ -5,7 +5,7 @@
 ** Login   <antoine.dury@epitech.eu>
 **
 ** Started on  Tue Apr 25 14:05:45 2017 Antoine Dury
-** Last update Sun Apr 30 16:22:01 2017 Antoine Dury
+** Last update Sun Apr 30 16:38:44 2017 Antoine Dury
 */
 
 #include "Graphic.hpp"
@@ -147,10 +147,6 @@ void          Graphic::getEvent()
                 if (!this->_input.empty())
                   {
                     this->_plazza->sendLine(this->_input);
-                    // this->_plazza->getNextLine(this->_input);
-                    // if (!this->_plazza->getOrderList().empty())
-                    //   this->_plazza->getManagerProcess().addOrder(this->_plazza->getOrderList());
-                    // this->_plazza->clearOrderList();
                     this->_input.clear();
                   }
               }
