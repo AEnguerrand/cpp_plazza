@@ -10,17 +10,25 @@
 
 #include "Plazza.hpp"
 
-int                 main(int ac, char** av)
+int main(int ac, char **av)
 {
-  try {
-    if (ac != 2){
-      std::cerr << "Usage : " + std::string(av[0]) + " <Number of threads per process>" << std::endl;
-      return (EXIT_FAILURE);
+  try
+    {
+      if (ac != 2)
+	{
+	  std::cerr << "Usage : " + std::string(av[0]) + " <Number of threads per process>" << std::endl;
+	  return (EXIT_FAILURE);
+	}
+      if (std::stoi(av[1]) <= 0)
+	{
+	  std::cerr << "Number of threads per process is only > 0." << std::endl;
+	  return (EXIT_FAILURE);
+	}
+      plazza::Plazza plazza(std::stoi(av[1]));
     }
-    plazza::Plazza    plazza(std::stoi(av[1]));
-  }
-  catch (std::exception const& e) {
-    std::cerr << "Error : " << e.what() << std::endl;
-  }
+  catch (std::exception const &e)
+    {
+      std::cerr << "Error : " << e.what() << std::endl;
+    }
   return (0);
 }
