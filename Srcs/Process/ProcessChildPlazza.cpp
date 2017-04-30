@@ -14,6 +14,7 @@ plazza::ProcessChildPlazza::ProcessChildPlazza(std::list<Order> orders, size_t p
 	_orders(orders),
 	_poolSize(poolSize)
 {
+  this->_lastNbOrders = orders.size();
 }
 
 plazza::ProcessChildPlazza::~ProcessChildPlazza()
@@ -24,6 +25,7 @@ void plazza::ProcessChildPlazza::run()
 {
   std::clock_t  c_start;
   bool 		end = true;
+  bool 		infoSend = false;
   ThreadPool	thPool(this->_poolSize);
 
   while (end)
@@ -32,8 +34,26 @@ void plazza::ProcessChildPlazza::run()
 	thPool.addOrder(*it);
       this->_orders.clear();
       c_start = std::clock();
-      while (!thPool.isEmpty() || ((std::clock() - c_start) < (ONE_SEC * 5)));
-      if (thPool.isEmpty())
-	end = false;
+      while (!thPool.isEmpty() || ((std::clock() - c_start) < (ONE_SEC * 5)))
+	{
+	  if (thPool.isEmpty() && !infoSend)
+	    {
+	      this->processInfoPipe();
+	      infoSend = true;
+	      end = false;
+	    }
+	}
     }
+}
+
+void plazza::ProcessChildPlazza::processInfoPipe()
+{
+  NamedPipe   		np("processInfoPipe");
+  plazza::ProcessInfo	processInfo;
+
+  np.create("WRITE");
+  memset(&processInfo, 0, sizeof(processInfo));
+  processInfo.orderNb = 12;
+  processInfo.isEmpty = true;
+  np.writeNP(&processInfo, sizeof(processInfo));
 }

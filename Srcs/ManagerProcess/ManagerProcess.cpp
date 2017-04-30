@@ -10,9 +10,34 @@
 
 #include "ManagerProcess.hpp"
 
+/*
+ * Function check is Finish
+ */
+void			*processInfoPipe(void *data)
+{
+  plazza::ProcessManagerInfo* pmi = static_cast<plazza::ProcessManagerInfo*>(data);
+  NamedPipe   		np("processInfoPipe");
+  plazza::ProcessInfo	processInfo;
+
+  (void)data;
+  np.create("READ");
+  while (true)
+    {
+      memset(&processInfo, 0, sizeof(processInfo));
+      np.readNP(&processInfo, sizeof(processInfo));
+      if (processInfo.orderNb != 0 && processInfo.isEmpty == 1)
+      	pmi->nbIsEmpty += 1;
+    }
+  return (NULL);
+}
+
+/*
+ * CTOR / DTOR
+ */
 plazza::ManagerProcess::ManagerProcess(size_t const poolSize) :
 	_poolSize(poolSize * 2)
 {
+  this->_processInfos.nbIsEmpty = 0;
   this->_c_start = std::clock();
 }
 
@@ -59,11 +84,20 @@ void 		plazza::ManagerProcess::dispatch()
 
 bool plazza::ManagerProcess::isFinish()
 {
-  if ((std::clock() - this->_c_start) < (ONE_SEC * 2.5))
+  if (this->_processInfos.nbIsEmpty < this->_processes.size() &&
+	  (std::clock() - this->_c_start) < (ONE_SEC * 0.5))
     return false;
   return true;
 }
 
 std::list<plazza::Order> 		plazza::ManagerProcess::getOrders(void) const{
 	return (this->_orders);
+}
+
+void plazza::ManagerProcess::startProcessInfoPipe()
+{
+  IThread             *thread = new Thread(&processInfoPipe, &this->_processInfos);
+
+  thread->start();
+  delete thread;
 }

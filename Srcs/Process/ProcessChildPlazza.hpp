@@ -18,6 +18,7 @@
 #include "Process.hpp"
 #include "Scrapper.hpp"
 #include "ThreadPool.hpp"
+#include "ProcessInfo.hpp"
 
 #define ONE_SEC        (1000000)
 
@@ -28,9 +29,12 @@ namespace plazza
    private:
     std::list<Order>	_orders;
     size_t 		_poolSize;
+    size_t 		_lastNbOrders;
    public:
     ProcessChildPlazza(std::list<Order> orders, size_t poolSize);
     virtual ~ProcessChildPlazza();
+
+    void	processInfoPipe();
 
     void run();
   };

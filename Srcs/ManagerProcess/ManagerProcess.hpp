@@ -16,6 +16,7 @@
 #include <list>
 #include "ProcessPlazza.hpp"
 #include "Scrapper.hpp"
+#include "ProcessInfo.hpp"
 
 namespace plazza {
 
@@ -25,6 +26,11 @@ namespace plazza {
     size_t  process = 0;
     size_t  threads = 0;
     size_t  orders = 0;
+  };
+
+  struct ProcessManagerInfo
+  {
+    size_t nbIsEmpty = 0;
   };
 
   class ManagerProcess
@@ -43,10 +49,14 @@ namespace plazza {
     void	addOrder(std::list<Order> orders);
     void	dispatch();
 
+    void	startProcessInfoPipe();
+
     bool	isFinish();
   public:
-    std::list<Order>  getOrders(void) const;
-    Status            _status;
+    std::list<Order>  	getOrders(void) const;
+    Status            	_status;
+    bool 		_isFinish;
+    ProcessManagerInfo	_processInfos;
   };
 }
 
