@@ -91,6 +91,7 @@ namespace plazza
     IThread             *thread = new Thread(&createDisplay, this);
 
     thread->start();
+    this->_managerProcess.startProcessInfoPipe();
     while ((getline(std::cin, buffer) && buffer != "exit")){
     	this->sendLine(buffer);
     }

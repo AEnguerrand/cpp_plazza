@@ -15,6 +15,7 @@ plazza::ProcessPlazza::ProcessPlazza(std::list<Order> orders, size_t poolSize) :
 	_poolSize(poolSize),
 	_start(false)
 {
+  this->_id = 20;
   this->_process = new Process();
 }
 
@@ -40,7 +41,7 @@ void plazza::ProcessPlazza::start()
   this->_process->start();
   if (this->_process->isChild())
     {
-      ProcessChildPlazza processChildPlazza = ProcessChildPlazza(this->_orders, this->_poolSize);
+      ProcessChildPlazza processChildPlazza = ProcessChildPlazza(this->_orders, this->_poolSize, this->_id);
       processChildPlazza.run();
       exit(0);
     }

@@ -33,7 +33,7 @@ void plazza::ThreadPool::addOrder(Order order)
   this->_mutex->unlock();
 }
 
-bool plazza::ThreadPool::isEmpty()
+bool plazza::ThreadPool::isEmpty() const
 {
   bool res = true;
   for (auto it = this->_worker.begin() ; it != this->_worker.end() ; ++it)
@@ -43,4 +43,14 @@ bool plazza::ThreadPool::isEmpty()
 	res = false;
     }
   return (res);
+}
+
+bool plazza::ThreadPool::isFull() const
+{
+  this->_mutex->lock();
+  size_t nb = this->_orders.size();
+  this->_mutex->unlock();
+  if (nb < this->_worker.size() * 2)
+    return false;
+  return true;
 }

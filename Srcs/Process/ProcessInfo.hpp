@@ -15,8 +15,11 @@ namespace plazza
 {
   struct	ProcessInfo
   {
+    size_t 	type;
+    size_t 	id;
     size_t 	orderNb;
     bool 	isEmpty;
+    bool	isFull;
   };
 }
 

@@ -31,8 +31,10 @@ namespace plazza
     ThreadPool(size_t nbWorker);
     virtual ~ThreadPool();
 
+    bool	isFull() const;
+
     void 	addOrder(Order order);
-    bool 	isEmpty();
+    bool 	isEmpty() const;
   };
 }
 
