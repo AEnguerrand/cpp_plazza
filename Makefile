@@ -15,7 +15,7 @@ CC      	= 		g++
 RM      	= 		rm -f
 
 CPPFLAGS  += 		-W -Wall -Wextra -Werror -std=c++11 	\
-								--pipe -o3
+								--pipe
 
 CPPFLAGS 	+=		-I./Srcs  							\
 								-I./Srcs/Encapsulation 	\
